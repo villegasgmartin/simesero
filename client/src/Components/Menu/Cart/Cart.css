@@ -1,0 +1,167 @@
+/*PERDIR PEDIDO ESTILO*/
+
+div.submit-order-container button{
+	margin: auto;
+   max-width: 150px;
+   border-color:#FFA003;
+   background-color: #FFA003;
+   color: #fff;
+   border-radius: 10px;
+   padding: 5px 10px;
+}
+
+
+
+.cart-container {
+   padding-top: 80px;
+   padding-bottom: 100px;
+   text-align: center;
+}
+
+.minicart-product {
+   display: flex;
+   justify-content: space-evenly;
+}
+
+.minicart-prod-img {
+   width: 81px;
+   height: 78px;
+   flex-shrink: 0;
+}
+
+.minicart-prod-name {
+   color: #000;
+   font-family: Outfit;
+   font-size: 14px;
+   font-style: normal;
+   font-weight: 500;
+   line-height: normal;
+   width: 116px;
+   height: 19px;
+
+   text-align: center;
+}
+
+.minicart-prod-price {
+   color: #000;
+   text-align: center;
+   font-family: Outfit;
+   font-size: 12px;
+   font-style: normal;
+   font-weight: 700;
+   line-height: normal;
+}
+
+.minicart-total-price {
+   text-align: center;
+   color: orange;
+}
+
+.cart-quit-btn {
+   display: flex;
+   justify-content: center;
+   width: 20px;
+   height: 20px;
+}
+
+.comment-area-container {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   color: #000;
+}
+
+.comment-area-container h4 {
+   width: 280px;
+   height: 110px;
+   flex-shrink: 0;
+   border-radius: 15px;
+   background: #f4eeee;
+   box-shadow: 0px 2.76726px 2.21381px 0px rgba(0, 0, 0, 0.02),
+	   0px 6.6501px 5.32008px 0px rgba(0, 0, 0, 0.03),
+	   0px 12.52155px 10.01724px 0px rgba(0, 0, 0, 0.04),
+	   0px 22.33631px 17.86905px 0px rgba(0, 0, 0, 0.04),
+	   0px 41.77761px 33.42209px 0px rgba(0, 0, 0, 0.05),
+	   0px 100px 80px 0px rgba(0, 0, 0, 0.07);
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   margin-bottom: 30px;
+}
+
+.comment-area {
+   background-color: #f1f1f1;
+   color: #000;
+   border-radius: 10px;
+}
+
+.submit-order-container {
+   color: #000;
+   text-align: center;
+   margin-top: 20px;
+}
+
+.name-area-container {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   color: #000;
+}
+
+.name-area-container h4 {
+   width: 280px;
+   height: 110px;
+   flex-shrink: 0;
+   border-radius: 15px;
+   background: #f4eeee;
+   box-shadow: 0px 2.76726px 2.21381px 0px rgba(0, 0, 0, 0.02),
+	   0px 6.6501px 5.32008px 0px rgba(0, 0, 0, 0.03),
+	   0px 12.52155px 10.01724px 0px rgba(0, 0, 0, 0.04),
+	   0px 22.33631px 17.86905px 0px rgba(0, 0, 0, 0.04),
+	   0px 41.77761px 33.42209px 0px rgba(0, 0, 0, 0.05),
+	   0px 100px 80px 0px rgba(0, 0, 0, 0.07);
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   margin-bottom: 30px;
+   text-align: center;
+}
+
+.name-area-container input {
+   background-color: #f1f1f1;
+   margin-bottom: 30px;
+   height: 30px;
+   border: 1px solid #000;
+   border-radius: 10px;
+   width: 250px;
+   color: #000;
+}
+
+.estadopedido{
+   background-color: orange;
+	color: white;
+	font-weight: bold;
+	padding: 2px 2px;
+	border: solid 2px orange;
+	border-radius: 10px;
+	padding: 10px 10px;
+	margin: 5px auto;
+}
+.pedido-state{
+   color:#000;
+   text-align: center;
+}
+.minicart-product{
+   align-items: center;
+   border-bottom: 1px solid #FFA003;
+   padding-bottom:21px;
+}
+.minicart-product button{
+   background-color: rgb(49,192,49);
+   border:1px solid rgb(49,192,49);
+   color:#fff;
+}

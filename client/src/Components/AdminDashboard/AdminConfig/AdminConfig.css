@@ -1,0 +1,196 @@
+.tablas {
+	display: flex;
+	margin-top: 147px;
+	justify-content: space-around;
+	padding: 0 30px;
+}
+
+.admin-config-info {
+	height: 50%;
+	width: 450px;
+	display: flex;
+	flex-direction: column;
+	margin-left: 50px;
+}
+.admin-config-info div {
+	display: flex;
+	color: #fff;
+	font-size: 16px;
+	font-style: normal;
+	line-height: normal;
+	margin-bottom: 20px;
+}
+.primer-pago,
+.pago-plan {
+	border: 1px solid #fff;
+	padding: 10px;
+	margin-bottom: 30px;
+}
+
+.admin-config-info h3 {
+	width: 100px;
+}
+
+.admin-config-info h4 {
+	color: white;
+	margin-left: 6em;
+}
+
+.admin-functions-panel {
+	border: orange solid 2px;
+	background-color: orange;
+	color: #000;
+	width: 100%;
+	max-width: 700px;
+	height: 100%;
+	max-height: 600px;
+	border-radius: 20px;
+	display: flex;
+	margin: 0 auto 60px auto;
+}
+
+.admin-functions-panel-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+}
+
+.admin-changedata {
+	width: 100%;
+
+	height: fit-content;
+	background-color: #f1c883;
+	border: none;
+	border-radius: 15px;
+	color: #000;
+	text-align: center;
+	font-size: 16px;
+	font-weight: 700;
+	margin-top: 20px;
+	padding-bottom: 20px;
+}
+
+.admin-changedata input {
+	color: #000;
+	text-align: center;
+}
+
+.admin-functions-btn:hover {
+	background-color: white;
+	cursor: pointer;
+}
+
+.activate-btn {
+	width: 112px;
+	height: 112px;
+	flex-shrink: 0;
+	border-radius: 100%;
+	background-color: #fff;
+	color: orange;
+	font-size: 50px;
+	font-weight: 900;
+	margin-right: 60px;
+}
+.act-table th {
+	text-align: start;
+	background-color: #fff;
+	color: #ffa500;
+	padding: 5px;
+}
+.act-table-body button {
+	color: #fff;
+	background-color: #ffa500;
+	padding: 10px 15px;
+	border: none;
+	border-radius: 10px;
+}
+.act-table-body button:hover {
+	background-color: #fff;
+	color: #ffa500;
+}
+.suspend-btn {
+	width: 112px;
+	height: 112px;
+	flex-shrink: 0;
+	border-radius: 100%;
+	background-color: #fff;
+	color: red;
+	font-size: 50px;
+	font-weight: 900;
+}
+
+.manage-user {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.manage-btn {
+	display: flex;
+	flex-direction: row;
+}
+
+.manage-input {
+	width: 491px;
+	height: 77px;
+	text-align: center;
+	background-color: #f1c883;
+	border-radius: 15px;
+	margin-bottom: 30px;
+}
+
+.manage-input select {
+	background-color: #f1c883;
+	color: #000;
+	width: 60%;
+	height: 30px;
+	margin-top: 5px;
+}
+
+.admin-config-submit-btn {
+	margin-top: 10px;
+	background-color: orange;
+	color: white;
+	font-weight: bold;
+	padding: 2px 2px;
+	border: solid 2px orange;
+	border-radius: 10px;
+	padding: 10px 20px;
+}
+
+@media screen and (max-width: 850px) {
+	.tablas {
+		flex-direction: column;
+		margin-top: 100px;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.admin-config-info {
+		height: 50%;
+		width: auto;
+		display: flex;
+		flex-direction: column;
+		align-items: start;
+		text-align: center;
+		margin-left: 0;
+	}
+	.admin-config-info div {
+		margin-bottom: 10px;
+	}
+
+	.admin-config-info h3 {
+		width: auto;
+	}
+
+	.admin-config-info h4 {
+		margin-left: 20px;
+	}
+
+	.admin-functions-panel {
+		padding-bottom: 30px;
+	}
+}

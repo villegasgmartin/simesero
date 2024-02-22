@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+html{
+	overflow-x: hidden;
+}
+h1 {
+	font-family: 'Montserrat', sans-serif;
+	text-transform: uppercase;
+	font-weight: 500;
+	font-size: 100px;
+}
+h2 {
+	font-family: 'Montserrat', sans-serif;
+	text-transform: uppercase;
+	font-weight: 400;
+	font-size: 50px;
+}
+h3 {
+	font-family: 'Montserrat', sans-serif;
+	text-transform: uppercase;
+	font-weight: 400;
+	font-size: 25px;
+	text-transform: uppercase;
+}
+h4 {
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 400;
+	font-size: 22px;
+}
+@media only screen and (max-width: 768px) {
+	h1 {
+		font-size: 30px;
+		text-align: center;
+	}
+	h2 {
+		font-size: 20px;
+		text-align: center;
+	}
+	h3,
+	h4 {
+		font-size: 18px;
+		text-transform: uppercase;
+		text-align: center;
+	}
+	p{
+		text-align: start;
+	}
+}
+p,
+span,
+div,
+a {
+	font-family: 'Montserrat', sans-serif;
+	font-size: 16px;
+	font-weight: 300;
+}
+:root {
+	/* font-family: 'Outfit', sans-serif; */
+	/* line-height: 1.5; */
+	/* font-weight: 400; */
+
+	color-scheme: light dark;
+	color: white;
+	background-color: black;
+
+	/* font-synthesis: none;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-text-size-adjust: 100%; */
+}
+html {
+	scroll-behavior: smooth;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+button:hover, a:hover{
+	cursor: pointer;
+}
+body {
+	margin: 0;
+	/* display: flex; */
+	/* place-items: center; */
+	/* min-width: 320px;
+	min-height: 100vh; */
+}
+
+/* 
+h1 {
+	font-size: 3.2em;
+	line-height: 1.1;
+}
+
+button {
+	border-radius: 8px;
+	border: 1px solid transparent;
+	padding: 0.6em 1.2em;
+	font-size: 1em;
+	font-weight: 500;
+	font-family: inherit;
+	background-color: #1a1a1a;
+	cursor: pointer;
+	transition: border-color 0.25s;
+}
+button:hover {
+	border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+	outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+	:root {
+		color: #213547;
+		background-color: #ffffff;
+	}
+	a:hover {
+		color: #747bff;
+	}
+	button {
+		background-color: #f9f9f9;
+	}
+} */
+
+/*inputs form */
+
+input {
+	width: 95%;
+	height: 35px;
+	background-color: #f1f1f1;
+	color: #000;
+	border: 1px solid #f1f1f1;
+	border-radius: 8px;
+}
+
+select {
+	width: 95%;
+	height: 35px;
+}

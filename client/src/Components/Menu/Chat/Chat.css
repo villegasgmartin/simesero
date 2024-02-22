@@ -1,0 +1,97 @@
+/*estilos chat*/
+
+
+ul#divChatbox li{
+   
+    
+    column-gap: 15px;
+}
+ul#divChatbox{
+    padding-bottom: 110px;
+    padding-left: 0px;
+    height: 100%;
+    max-height:45vh;
+    overflow-y: scroll;
+}
+h5{
+    margin:0px;
+    color: rgb(17,197,17);
+    text-transform: uppercase;
+    
+}
+form#formEnviar{
+    position: absolute;
+    max-height: 110px;
+    bottom: 35px;
+    left: 0;
+    right: 0;
+}
+div.container-fluid{
+    position: relative;
+    margin: 0 20px;
+}
+div.card{
+    min-height: 60vh;
+}
+ul.chat-list{
+    min-height: 60vh;
+}
+h3.box-title{
+    color:#000;
+    text-align: center;
+    padding-top:30px;
+}
+div.row{
+    background-color: #f1f1f1;
+}
+
+input.chat-input{
+    background-color: #ccc;
+}
+button.chat-btn{
+    background-color:#FFA101;
+    border-color:#FFA101;
+    color:#fff;
+    padding:10px 20px;
+    
+}
+div.col-4{
+    text-align: center;
+    padding-bottom: 30px;
+}
+div.col-8{
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+div.chat-rbox .reverse.me{
+    justify-content:end;
+}
+
+/*chat mesa o local color */
+.chat-local{
+    background-color:#0469A2;
+    color:#fff;
+    padding: 10px 20px;
+    margin:10px;
+    width: 300px;
+    border-radius: 10px;
+    float: left;
+    clear: both;
+}
+.chat-mesa{
+    background-color:#242424;
+    color:#fff;
+    padding: 10px 20px;
+    margin:10px;
+    width: 300px;
+    
+    border-radius: 10px;
+    float: right;
+    clear: both;
+    text-align: end;
+}
+.hora-chat{
+    font-size: 12px;
+    color:rgba(255, 255, 255, 0.6)
+}

@@ -1,0 +1,53 @@
+/* #root {
+	max-width: 1280px;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+}
+
+
+
+@keyframes logo-spin {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	a:nth-of-type(2) .logo {
+		animation: logo-spin infinite 20s linear;
+	}
+}
+
+.card {
+	padding: 2em;
+}
+
+.read-the-docs {
+	color: #888;
+} */
+.App {
+	scroll-behavior: smooth;
+}
+.admin-dashboard {
+	display: grid;
+	grid-auto-flow: column;
+	grid-template-columns: max-content;
+}
+.admin-menu-title {
+	position: absolute;
+	height: 52px;
+	flex-shrink: 0;
+	left: 387px;
+	top: 3%;
+	color: #fff;
+	text-align: center;
+	font-family: Outfit;
+	font-size: 32px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: normal;
+}

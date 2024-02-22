@@ -1,0 +1,261 @@
+/*menu comensal estilo*/
+.menu-mobile-admin-btn{
+    margin:0 5px;
+    width:auto;
+    min-width:100px; 
+    padding: 5px 15px;
+    border:none;
+    font-weight: 300;
+    text-transform: capitalize;
+    
+}
+.menu-mobile-admin-categories button{
+	font-weight: 400;
+	text-transform: uppercase;
+	
+}
+.product-add button{
+    background-color: rgb(49,192,49);
+    border:1px solid rgb(49,192,49);
+    color:#fff;
+}
+
+.footer-container{
+    background-color: #ffa101;
+    
+}
+footer{
+    background-color: #ffa101;
+    border-radius: 0;
+}
+.footer-container path{
+	filter: invert(1);
+}
+.menu-container{
+    background-color: #fff;
+}
+.products-container{
+    background-color: #fff;
+}
+
+.products-container {
+	padding-top: 20px;
+	padding-bottom: 200px;
+}
+
+.menu-mobile-admin-categories {
+	width: 100%;
+	min-width: 100vw;
+	display: flex;
+	overflow-x: scroll;
+}
+
+.menu-mobile-admin-btn {
+	border-radius: 5px;
+
+	background: #dedcdc;
+	width: fit-content;
+	color: #000;
+	font-family: Outfit;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: normal;
+}
+
+/* Estilo para la página principal */
+.products-container {
+	font-family: Arial, sans-serif;
+	background-color: #fff;
+	margin: 0;
+}
+
+/* Estilo para cada categoría */
+
+.category-title {
+	color: #000;
+
+	font-size: 20px;
+	font-style: normal;
+	font-weight: 300;
+	line-height: normal;
+	margin-left: 20px;
+	text-transform: uppercase;
+}
+
+/* Estilo para cada subcategoría */
+/* Estilo para la lista de productos */
+.products-list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+/* Estilo para cada producto */
+/* li {
+	display: flex;
+	flex-direction: column;
+	background-color: #fff;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	margin-bottom: 10px;
+	padding: 10px;
+	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+} */
+
+.product-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+}
+.product-name {
+	color: #000;
+
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: normal;
+	width: 116px;
+	height: auto;
+	text-transform: uppercase;
+	
+}
+.product-description{
+	color: #575454;
+
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 500;
+	line-height: normal;
+	width: 116px;
+	height: 19px;
+
+	text-align: center;
+	padding: 5px 0;
+    text-transform: capitalize;
+}
+
+.product-price {
+	color: #000;
+	text-align: center;
+	padding: 5px 10px;
+	font-size: 12px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
+	border: 2px solid #ffa101;
+	border-radius: 10px;
+}
+
+.ver-desc{
+    color:#000;
+    font-size:11px;
+    display: block;
+    width: 100%;
+    padding-top: 5px;
+    text-decoration: underline;
+    text-decoration-color: rgba(0,0,0,0.4);
+    
+    
+}
+
+
+li.product-container {
+    border: 1px solid #fff;
+    border-radius: 10px;
+    box-shadow: 5px 2px 5px 3px rgba(0,0,0,0.3);
+    margin:25px;
+}
+/* Estilo para la imagen del producto */
+
+.product-img {
+	width: 81px;
+	height: 78px;
+	flex-shrink: 0;
+}
+
+.product-info {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+/* Estilo para el nombre del producto */
+
+.product-add {
+	display: flex;
+	width: 24px;
+	height: 24px;
+	flex-shrink: 0;
+	margin-top: 30px;
+}
+
+.selected-category {
+	border-radius: 5px;
+	background: #ffa101;
+	color: #fff; /* Cambia esto al color deseado */
+}
+.confirmation-symbol {
+	background-color: #00800021;
+}
+.q-products {
+	position: fixed;
+	top: 80px;
+	right: 20px;
+	color: #000;
+	border: solid 1px black;
+	background-color: green;
+	padding: 8px;
+	border-radius: 50%;
+}
+
+.product-container div{
+	display: flex;
+	align-items: start;
+}
+div.product-info p{
+	margin: 0;
+	
+}
+p.product-price{
+    text-align: center;
+}
+
+
+li.product-container{
+	padding: 15px 0;
+}
+
+/*img subcategoria*/
+div.subcategory-container{
+	position: relative;
+	height: 70px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #ffa101;
+}
+div.subcategory-container img.subcategory-img{
+	width: 100%;
+	height: 100%;
+	max-height: 70px;
+	object-fit: cover;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 0;
+	filter: brightness(65%);
+}
+
+h2.subcategory-title{
+	
+	font-weight: 200;
+	text-transform: uppercase;
+	margin: auto;
+	color:#fff;
+	font-weight: 700;
+	font-size: 22px;
+	z-index: 99;
+	
+}

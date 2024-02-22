@@ -1,0 +1,149 @@
+.login {
+	background-color: rgba(255, 255, 255, 1);
+	color: #000;
+	height: 100%;
+	padding: 30px 0;
+	position: relative;
+	width: 700px;
+}
+
+.login span {
+	color: orange;
+	margin-left: 10px;
+	font-size: 28px;
+}
+
+.login-close-btn {
+	position: absolute;
+	top: 1rem;
+	left: 1rem;
+	background-color: orange;
+	border-radius: 50px;
+	border: 1px solid orange;
+	width: 30px;
+	height: 30px;
+}
+
+.login-container {
+	display: flex;
+
+	height: 100%;
+	margin-left: 30px;
+}
+
+.login-img {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 340px;
+	height: 100%;
+	object-fit: cover;
+}
+
+.login-input {
+	height: 100%;
+	margin-right: 30px;
+}
+
+.login-input p {
+	font-size: 13px;
+	font-weight: 300;
+	line-height: 39px;
+	padding-right: 20px;
+}
+
+.remember {
+	margin-top: 10px;
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	font-size: 10px;
+	font-weight: 300;
+}
+
+.remember div {
+	display: flex;
+	align-items: center;
+}
+
+.login-btn {
+	border: solid orange;
+	background-color: orange;
+	color: #fff;
+	padding: 5px 15px;
+	font-weight: bold;
+	border-radius: 5px;
+}
+
+.login-btn:hover {
+	box-shadow: 0 0 20px rgb(234, 128, 7);
+	transition-property: box-shadow;
+	transition-duration: 1s;
+	cursor: pointer;
+}
+.login-to-register {
+	display: flex;
+	align-items: center;
+	font-size: 13px;
+}
+.login-to-register a {
+	margin-left: 5px;
+	color: orange;
+}
+.new-password {
+	background-color: transparent;
+	border: none;
+	color: orange;
+	text-decoration: none;
+}
+
+/*mensaje error cuando esta suspendido o no pago*/
+p.mensajes-error{
+    width: 90%;
+    background-color: rgb(195,7,7);
+    color:#fff;
+    text-transform: uppercase;
+    max-width: 300px;
+    text-align: center;
+    margin-right: 0;
+    padding: 0 10px 0 10px;
+    
+}
+
+@media (max-width: 768px) {
+	.login {
+		background-color: rgba(255, 255, 255, 1);
+		color: #000;
+		width: 100%;
+		padding-left: 0;
+		height: 100%;
+	}
+
+	.login-img {
+		display: none;
+	}
+	.login-input {
+		display: flex;
+		flex-direction: column;
+		align-items: start;
+		margin-right: 0;
+		width: 100%;
+	}
+
+	.remember {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: start;
+		margin-bottom: 30px;
+	}
+	.remember a {
+		font-size: 12px;
+	}
+	.login-input input{
+		width: 250px;
+	}
+	div.remember input{
+		width: auto;
+	}
+}

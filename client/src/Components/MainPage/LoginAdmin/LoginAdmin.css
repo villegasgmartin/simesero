@@ -1,0 +1,90 @@
+.loginAdmin {
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding: 0px 10px 50px;
+	text-align: center;
+}
+
+div.form-loginadmin {
+	display: flex;
+	justify-content: center;
+}
+div.login-img-container {
+	background-image: url('../../../assets/logos/Logo2.png');
+	background-repeat: no-repeat;
+	background-size: contain;
+	height: 100px;
+	width: 350px;
+	margin: 0 auto 20px;
+}
+h2.h2-login {
+	display: flex;
+	justify-content: center;
+	color: #000;
+	text-transform: uppercase;
+}
+
+img.login-img {
+	width: 300px;
+	height: 100%;
+	border: none;
+}
+
+button.submit-login {
+	border: 1px solid #ffa101;
+	background-color: transparent;
+	text-decoration: none;
+	color: #ffa101;
+	padding: 12px 42px;
+	font-size: 16px;
+	border-radius: 10px;
+	text-transform: uppercase;
+}
+button.submit-login:hover {
+	background-color: #ffa101;
+	border-color: #ffa101;
+	color: #fff;
+}
+
+form {
+	display: flex;
+	flex-direction: column;
+	background-color: #fff;
+	padding: 40px;
+	border-radius: 20px;
+	max-width: 600px;
+	min-width: 400px;
+}
+@media only screen and (max-width: 768px) {
+	form {
+		min-width: 250px;
+	}
+}
+input {
+	max-width: 700px;
+	width: 100%;
+	height: 50px;
+	border-radius: 10px;
+	background-color: #f1f1f1;
+	color: #000;
+	margin: 10px auto 20px;
+}
+input:focus {
+	border: 2px solid #ffa101;
+}
+input:focus-visible {
+	border: 2px solid #ffa101;
+}
+label {
+	max-width: 700px;
+	text-align: start;
+	text-transform: uppercase;
+	margin: auto;
+	color: #ffa101;
+}
+button.submit-login {
+	width: 200px;
+	margin: auto;
+}

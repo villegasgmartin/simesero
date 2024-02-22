@@ -1,0 +1,350 @@
+.client-config {
+	margin-top: 180px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+}
+
+.backdrop {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(
+		0,
+		0,
+		0,
+		0.5
+	); /* Cambia el color y la opacidad según tus preferencias */
+	backdrop-filter: blur(
+		10px
+	); /* Ajusta el valor de desenfoque según tus preferencias */
+	/* Asegúrate de que esté por encima del contenido */
+}
+.h4-plan {
+	background-color: #fff;
+	color: #ffa101;
+	width: 250px;
+	height: 250px;
+	text-transform: uppercase;
+	margin-bottom: 50px;
+	text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+button {
+	cursor: pointer;
+}
+.client-config-container {
+	height: 400px;
+	display: flex;
+	justify-content: space-around;
+	text-transform: uppercase;
+}
+.client-config-qr-container {
+	height: 400px;
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	margin-bottom: 50px;
+}
+
+.client-config-personal {
+	display: flex;
+	flex-direction: column;
+	align-items: normal;
+	justify-content: space-around;
+}
+
+.client-config-personal h3 {
+	color: #fff;
+	text-transform: uppercase;
+
+	font-style: normal;
+
+	line-height: normal;
+}
+
+.client-config-personal h4 {
+	color: #fff;
+	font-family: Outfit;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 200;
+	line-height: normal;
+	margin: 0;
+}
+
+.client-config-plan {
+	height: 400px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	text-align: center;
+	margin-bottom: 50px;
+}
+
+.qr {
+	width: 221px;
+	height: 205px;
+	flex-shrink: 0;
+	background-color: aliceblue;
+}
+
+.client-config-btn {
+	width: 100%;
+	padding: 15px 20px;
+	flex-shrink: 0;
+	border-radius: 18px;
+	background: #ffa101;
+	color: #fff;
+	text-transform: uppercase;
+	border: none;
+}
+.client-config-btn:hover {
+	background-color: #fff;
+	color: #ffa101;
+}
+
+.client-config-qr {
+	width: 200px;
+	margin-bottom: 50px;
+}
+
+.client-config-qr-label {
+	color: #fff;
+	font-family: Outfit;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 200;
+	line-height: normal;
+	max-width: 172px;
+	margin-top: 10px;
+}
+
+.client-config-qr-input {
+	background-color: transparent;
+	margin-top: 10px;
+	margin-bottom: 20px;
+}
+
+.client-data-popup {
+	background-color: rgba(255, 255, 255, 1);
+	border-radius: 10%;
+	border: solid 4px orange;
+	color: #000;
+	width: 100%;
+    min-width: 20px;
+    max-width: 400px;
+    margin: 10px;
+	height: auto;
+    max-height: 700px;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+	background-color: rgba(
+		0,
+		0,
+		0,
+		0.5
+	); /* Cambia el color y la opacidad según tus preferencias */
+	backdrop-filter: blur(10px);
+}
+.client-data-popup-btn button{
+    background: #FFA500;
+    color:#fff;
+    border:0;
+    width:30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.client-data-popup-container select{
+    width: 100%;
+    max-width: 300px;
+    height: 30px;
+    border-radius: 8px;
+    
+}
+.submit-btn{
+margin-top:21px; 
+}
+
+.popup-hidden {
+	display: none;
+}
+
+.client-data-popup-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin-top: 0px;
+}
+
+.client-data-popup-container input {
+	width: 300px;
+	height: 30px;
+	margin-top: 10px;
+	margin-bottom: 20px;
+}
+
+.client-data-popup-container {
+	color: white;
+}
+
+.client-data-popup-btn {
+	position: absolute;
+	left: 10px;
+	top: 15px;
+}
+
+.submit-btn {
+	padding: 4px 6px;
+	border: orange solid;
+	border-radius: 5px;
+	outline: none;
+	background-color: orange;
+	color: white;
+}
+
+.client-plan-select {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 20px;
+}
+
+.client-plan-select select {
+	width: 200px;
+	height: 30px;
+	text-align: center;
+	font-size: large;
+}
+.subs-btn-container-plan div {
+	color: #fff;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	margin: auto;
+}
+
+.client-plan-popup {
+	background-color: rgba(255, 255, 255, 1);
+	border-radius: 10%;
+	border: solid 4px orange;
+	color: #000;
+	width: 400px;
+	height: auto;
+	max-height: 200px;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;
+	background-color: rgba(
+		0,
+		0,
+		0,
+		0.5
+	); /* Cambia el color y la opacidad según tus preferencias */
+	backdrop-filter: blur(10px);
+}
+.plan-btn {
+	display: flex;
+	justify-content: center;
+	margin-top: 20px;
+}
+.submit-plan-btn {
+	padding: 4px 6px;
+	border: orange solid;
+	border-radius: 5px;
+	outline: none;
+	background-color: orange;
+	color: white;
+	display: flex;
+	justify-content: center;
+}
+.precios-planes {
+	display: flex;
+	width: 100%;
+	max-width: 600px;
+	justify-content: space-around;
+	position: absolute;
+	bottom: 20px;
+}
+.precios-planes p {
+	font-size: 12px;
+}
+
+.subs-btn-newPlan {
+	background-color: #ffa101;
+	padding: 12px 0;
+	border: none;
+	color: #fff;
+	width: 100%;
+	min-width: 150px;
+	text-align: center;
+	margin-top: 10px;
+	border-radius: 10px;
+}
+.subs-btn-newPlan:hover {
+	background-color: #fff;
+	color: #ffa101;
+}
+.subs-btn, .subs-btn-newPlan{
+	background-color: orange;
+	color: white;
+	font-weight: bold;
+	padding: 2px 2px;
+	border: solid 2px orange;
+	border-radius: 10px;
+	padding: 10px 10px;
+	margin: 21px auto 0;
+	max-width: 230px;
+	min-width: 180px;
+
+}
+.subs-btn:hover, .subs-btn-newPlan:hover{
+	background-color: transparent;
+	color: orange;
+}
+
+
+/*mobile css */
+@media only screen and (max-width: 768px) {
+	.client-config{
+		display: block;
+		margin-top:80px;
+	}
+	.client-config-container{
+		padding-bottom:64px;
+
+	}
+	.client-config-plan{
+		padding: 64px 0;
+		background-color: #f1f1f1;
+	
+	}
+	.client-config-plan h3{
+		color:#000
+	}
+	.client-config-plan h4{
+		margin:auto;
+	}
+	img.client-config-qr{
+		margin:auto
+	}
+	.client-data-popup-container button{
+		width: 90%;
+		margin:  0 auto;
+		max-width: 240px;;
+	}
+	
+}

@@ -1,0 +1,204 @@
+.pay-container {
+	padding-top: 80px;
+	color: #000;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	overflow-y: scroll;
+	margin-bottom: 60px;
+}
+
+.pay-username {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding-bottom: 20px;
+}
+
+.pay-username label {
+	width: 280px;
+	height: 60px;
+	flex-shrink: 0;
+	border-radius: 15px;
+	background: #f4eeee;
+	box-shadow: 0px 2.76726px 2.21381px 0px rgba(0, 0, 0, 0.02),
+		0px 6.6501px 5.32008px 0px rgba(0, 0, 0, 0.03),
+		0px 12.52155px 10.01724px 0px rgba(0, 0, 0, 0.04),
+		0px 22.33631px 17.86905px 0px rgba(0, 0, 0, 0.04),
+		0px 41.77761px 33.42209px 0px rgba(0, 0, 0, 0.05),
+		0px 100px 80px 0px rgba(0, 0, 0, 0.07);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 20px;
+	padding: 10px;
+	color: #000;
+}
+
+.pay-username input {
+	width: 280px;
+	height: 30px;
+	flex-shrink: 0;
+	border-radius: 15px;
+	background: #f4eeee;
+	box-shadow: 0px 2.76726px 2.21381px 0px rgba(0, 0, 0, 0.02),
+		0px 6.6501px 5.32008px 0px rgba(0, 0, 0, 0.03),
+		0px 12.52155px 10.01724px 0px rgba(0, 0, 0, 0.04),
+		0px 22.33631px 17.86905px 0px rgba(0, 0, 0, 0.04),
+		0px 41.77761px 33.42209px 0px rgba(0, 0, 0, 0.05),
+		0px 100px 80px 0px rgba(0, 0, 0, 0.07);
+	color: #000;
+	text-align: center;
+	font-family: Outfit;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 300;
+	line-height: normal;
+	border: #000 solid 1px;
+}
+.pay-square {
+	width: 280px;
+	height: 110px;
+	flex-shrink: 0;
+	border-radius: 15px;
+	background: #f4eeee;
+	box-shadow: 0px 2.76726px 2.21381px 0px rgba(0, 0, 0, 0.02),
+		0px 6.6501px 5.32008px 0px rgba(0, 0, 0, 0.03),
+		0px 12.52155px 10.01724px 0px rgba(0, 0, 0, 0.04),
+		0px 22.33631px 17.86905px 0px rgba(0, 0, 0, 0.04),
+		0px 41.77761px 33.42209px 0px rgba(0, 0, 0, 0.05),
+		0px 100px 80px 0px rgba(0, 0, 0, 0.07);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.pay-square p {
+	margin: 40px;
+	text-align: center;
+	line-height: 30px;
+	font-size: 16px;
+}
+
+.amount-dinners {
+	padding-top: 20px;
+	display: flex;
+	align-items: center;
+}
+
+.amount-dinners button {
+	background: none;
+	border: none;
+}
+
+.amount-dinners h1 {
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+.dinner-btn {
+	width: 30px;
+	height: 29px;
+	flex-shrink: 0;
+	color: #000;
+}
+
+.payment-type-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.payment-type-container h2 {
+	color: #000;
+	text-align: center;
+	font-size: 22px;
+
+	font-weight: 300;
+}
+
+.payment-type-container select {
+	width: 310px;
+	height: 49px;
+	flex-shrink: 0;
+	border-radius: 15px;
+	background: #f4eeee;
+	box-shadow: 0px 2.76726px 2.21381px 0px rgba(0, 0, 0, 0.02),
+		0px 6.6501px 5.32008px 0px rgba(0, 0, 0, 0.03),
+		0px 12.52155px 10.01724px 0px rgba(0, 0, 0, 0.04),
+		0px 22.33631px 17.86905px 0px rgba(0, 0, 0, 0.04),
+		0px 41.77761px 33.42209px 0px rgba(0, 0, 0, 0.05),
+		0px 100px 80px 0px rgba(0, 0, 0, 0.07);
+	color: #000;
+	text-align: center;
+	font-family: Outfit;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 300;
+	line-height: normal;
+}
+
+.payment-total-container {
+	display: flex;
+	padding-top: 40px;
+}
+
+.payment-total-container h3 {
+	margin-right: 30px;
+	color: #000;
+
+	font-size: 14px;
+	line-height: 35px;
+	font-weight: 700;
+}
+
+.payment-total-container h4 {
+	color: #000;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: normal;
+}
+
+
+
+.payment-btn {
+	background-color: orange;
+	color: white;
+	font-weight: bold;
+	padding: 2px 2px;
+	border: solid 2px orange;
+	border-radius: 10px;
+	padding: 10px 10px;
+	margin: 25px auto;
+}
+.payment-btn:hover{
+	background-color: transparent;
+	color: orange;
+}
+
+.payment-type-container input{
+	width: 310px;
+	height: 49px;
+	flex-shrink: 0;
+	border-radius: 15px;
+	background: #f4eeee;
+	box-shadow: 0px 2.76726px 2.21381px 0px rgba(0, 0, 0, 0.02),
+		0px 6.6501px 5.32008px 0px rgba(0, 0, 0, 0.03),
+		0px 12.52155px 10.01724px 0px rgba(0, 0, 0, 0.04),
+		0px 22.33631px 17.86905px 0px rgba(0, 0, 0, 0.04),
+		0px 41.77761px 33.42209px 0px rgba(0, 0, 0, 0.05),
+		0px 100px 80px 0px rgba(0, 0, 0, 0.07);
+	color: #000;
+	text-align: center;
+	font-family: Outfit;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 300;
+	line-height: normal;
+}

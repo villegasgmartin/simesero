@@ -1,0 +1,138 @@
+.testimonials {
+	margin-bottom: 40px;
+	height: 80vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.testimonials h2,
+h3 {
+	display: block;
+	text-align: center;
+	margin: 10px 0;
+}
+
+.test-container {
+	width: 100%;
+	max-width: 1300px;
+	margin: 0 auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.test-testimonial {
+	width: 50%;
+}
+
+.test-circles {
+	display: flex;
+}
+.test-circle {
+	border: 2px solid white;
+	background-color: white;
+	border-radius: 100%;
+	width: 20px;
+	height: 20px;
+	margin-left: 20px;
+	margin-top: 20px;
+}
+
+div.test-circle.active{
+    border: 2px solid orange;
+    background-color: orange;
+    border-radius: 100%;
+    width: 20px;
+    height: 20px;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+div.test-circle{
+    cursor:pointer;
+}
+
+.text-img {
+	width: 150px;
+	border-radius: 50% 50% 50% 0%;
+}
+
+.test-img-container {
+	margin-left: 30px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 330px;
+	height: auto;
+	border-radius: 40% 40% 40% 0%;
+}
+
+@media screen and (max-width: 850px) {
+	.testimonials {
+		margin-top: 30px;
+		margin-bottom: 40px;
+		height: 100vh;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.testimonials h2,
+	h1 {
+		display: flex;
+		justify-content: center;
+	}
+
+	.testimonials h1 {
+		margin-bottom: 40px;
+	}
+
+	.test-container {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+
+	.test-testimonial {
+		width: 300px;
+		font-size: 14px;
+		text-align: center;
+	}
+
+	.test-testimonial p {
+		background-color: orange;
+		padding: 45px 50px 45px 20px;
+		border-radius: 150px 150px 150px 0%;
+	}
+
+	.test-testimonial h4 {
+		text-align: start;
+	}
+
+	.test-circles {
+		display: flex;
+		justify-content: space-around;
+	}
+	.test-circle {
+		border: 2px solid white;
+		background-color: white;
+		border-radius: 100%;
+		width: 20px;
+		height: 20px;
+		margin-left: 20px;
+		margin-top: 20px;
+	}
+
+	
+
+	.text-img {
+		width: 150px;
+		border-radius: 50% 50% 50% 0%;
+	}
+
+	.test-img-container {
+		display: none;
+	}
+}

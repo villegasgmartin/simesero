@@ -1,0 +1,39 @@
+.gracias {
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding: 0 10px;
+	text-align: center;
+}
+
+h2.h2-gracias {
+	display: flex;
+	justify-content: center;
+	color: #fff;
+}
+
+img.gracias-img {
+	width: 100%;
+	max-width: 700px;
+	height: auto;
+	border: none;
+}
+
+a.buton-home {
+	border: 1px solid #ffa101;
+	text-decoration: none;
+	background-color: #ffa101;
+	color: #fff;
+	padding: 12px 42px;
+	font-size: 16px;
+	border-radius: 10px;
+	text-transform: uppercase;
+	max-width: 200px;
+	margin: 0 auto;
+}
+a.buton-home:hover {
+	background-color: transparent;
+	border-color: #ffa101;
+	color: #ffa101;
+}

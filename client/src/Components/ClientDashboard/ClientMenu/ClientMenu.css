@@ -1,0 +1,236 @@
+.client-create-menu-container {
+	margin-top: 159px;
+	width: 100%;
+	display: flex;
+	justify-content: space-around;
+}
+
+.h4-menu {
+	margin: 20px 0 20px;
+	text-align: center;
+	background-color: #ffa101;
+	color: #fff;
+	font-size: 18px;
+	padding: 10px 0;
+}
+.h4-menu-borrar{
+	margin: 20px 0 20px;
+	text-align: center;
+	background-color: rgb(155, 2, 2);
+	color: #fff;
+	font-size: 18px;
+	padding: 10px 0;
+}
+.create-menu-container {
+	width: 600px;
+}
+
+.create-menu-tittle {
+	color: #fff;
+	text-align: start;
+	font-family: Outfit;
+	font-size: 32px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: normal;
+}
+
+.create-menu-input {
+	text-align: start;
+	color: #fff;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 200;
+	line-height: normal;
+	margin-bottom: 20px;
+}
+
+.btn-agregar {
+	width: 40px;
+	height: 40px;
+	background-color: #fff;
+	border-radius: 50%;
+	cursor: pointer;
+}
+.btn-agregar:hover {
+	background-color: #ffa101;
+}
+
+.section-form {
+	display: flex;
+	align-items: center;
+}
+.section-form input {
+	margin: 0;
+}
+.create-menu-input label {
+	margin-right: 20px;
+}
+
+.create-menu-select {
+	display: flex;
+	justify-content: space-between;
+	align-items: end;
+}
+.create-menu-select div {
+	width: 100%;
+}
+
+.create-menu-delete-btn {
+	background-color: #fff;
+	border-radius: 50%;
+	width: 40px;
+	height: 40px;
+	border: none;
+	cursor: pointer;
+}
+.create-menu-delete-btn:hover {
+	background-color: #ffa101;
+}
+.create-menu-delete-btn path {
+	fill: #000;
+}
+
+.create-menu-delete-icon {
+	font-size: 25px;
+}
+
+.create-menu-add-btn {
+	color: #000;
+	text-align: center;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: normal;
+}
+
+.create-menu-add-icon {
+	font-size: 20px;
+	background-color: #000;
+	color: white;
+}
+
+.menu-mobile-admin {
+	width: 344px;
+	height: 640px;
+	flex-shrink: 0;
+	background-color: white;
+	border-radius: 0px;
+}
+
+.menu-mobile-admin h1 {
+	color: #000;
+}
+
+.menu-mobile-admin-categories {
+	max-width: 344px;
+	display: flex;
+	overflow-x: scroll;
+}
+
+.create-menu-add-subcateg {
+	display: flex;
+	width: 100%;
+	max-width: 200px;
+	margin: 20px auto;
+	padding: 10px 35px;
+	background-color: #fff;
+	border-radius: 10px;
+	cursor: pointer;
+}
+.create-menu-add-subcateg:hover {
+	background-color: #ffa101;
+}
+.create-menu-add-subcateg:hover span {
+	color: #fff;
+}
+
+.menu-mobile-admin-btn {
+	margin-bottom: 20px;
+	width: 71px;
+	height: 33px;
+	flex-shrink: 0;
+	margin-left: 10px;
+	margin-right: 10px;
+	border-radius: 18px;
+	background: #d9d9d9;
+	font-size: 10px;
+	color: #000;
+}
+.create-menu-add-product {
+	width: 100%;
+	max-width: 230px;
+	margin: 0 auto;
+	padding: 10px 35px;
+	background-color: #fff;
+	border-radius: 10px;
+	cursor: pointer;
+	margin-top:10px;
+	margin-bottom: 30px;
+}
+.create-menu-add-product:hover {
+	background-color: #ffa101;
+}
+.create-menu-add-product:hover span {
+	color: #fff;
+}
+.btn-add-product {
+	width: 100%;
+	
+	margin-bottom: 50px;
+}
+
+/*editar productos*/
+
+.product-edit-popup input{
+    background: #fff;
+}
+.product-edit-popup label{
+    font-weight: 700;
+}
+.product-edit-popup button{
+    background: orange;
+    border:none;
+    color:#fff;
+    padding: 3px 10px;
+    border-radius: 2px;
+    margin-bottom: 4px;
+    margin-top: 3px;
+}
+.product-edit-popup{
+    text-align: center;
+}
+.create-menu-add-subcateg{
+	padding: 10px 20px;
+	 border-radius: 10px;
+	 margin-top: 20px;
+	 
+	 
+ }
+ .create-menu-add-subcateg:hover{
+	 background-color: #FFA101;
+	 color:#fff;
+ }
+ .cambiar-imagen-sub{
+    background: #ccc;
+    padding: 15px;
+    border-radius: 10px;
+}
+.cambiar-imagen-sub label, p{
+    color:#000;
+}
+@media only screen and (max-width: 768px) {
+	.client-create-menu-container{
+		display: block;
+		width: 90vw;
+		margin: auto;
+	}
+	.create-menu-container{
+		width: 100%;
+	}
+	.menu-mobile-admin{
+		margin:0 auto 40px ;
+	}
+
+}
+
