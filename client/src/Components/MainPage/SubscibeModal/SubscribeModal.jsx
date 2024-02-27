@@ -113,73 +113,7 @@ export default function SubscribeModal({
 		);
 	};
 
-	// Función de ejecutar el control de errores y el registro
-	const handleSubmitStandar = (e) => {
-		e.preventDefault();
-
-		// Regular expression para validación de el email
-		const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
-
-		// Chequeo de errores
-
-		if (input.name.trim() === '') {
-			alert('Por favor complete su nombre');
-			return;
-		} else if (input.address.trim() === '') {
-			alert('Por favor complete su dirección');
-			return;
-		} else if (input.storeName.trim() === '') {
-			alert('Por favor indique el nombre de su local');
-			return;
-		} else if (input.email.trim() === '') {
-			alert('Por favor ingrese su email');
-			return;
-		} else if (!emailRegex.test(input.email)) {
-			alert('Email no válido');
-			return;
-		} else if (input.cp.trim() === '') {
-			alert('Ingrese su código postal');
-			return;
-		} else if (input.password.trim() === '') {
-			alert('Ingrese una contraseña');
-			return;
-		} else if (input.password.trim() !== repeatPass) {
-			alert('Las contraseñas no coinciden');
-			return;
-		} else if (input.telefono.trim() === '') {
-			alert('Ingrese su teléfono');
-			return;
-		} else if (input.pais.trim() === '') {
-			alert('Ingrese su país');
-		} else if (input.localidad.trim() === '') {
-			alert('Ingrese su localidad');
-		}
-
-		// Si no hay errores, despachar la acción de registrar el usuario
-		dispatch(createUser(input));
-
-		// Limpiar los input después de ejecutar la función
-		setInput({
-			img: '',
-			name: '',
-			storeName: '',
-			email: '',
-			password: '',
-			address: '',
-			cp: '',
-			plan: '',
-			telefono: '',
-			pais: '',
-			localidad: '',
-			tipo: ''
-		});
-		setRepeatPass('');
-		dispatch(handleCloseSubscribe);
-		window.open(
-			'https://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=2c9380848ae746f0018af1220de80617',
-			'_blank'
-		);
-	};
+	
 
 	const handleSubmitBasicUser = (e) => {
 		e.preventDefault();
@@ -389,51 +323,14 @@ export default function SubscribeModal({
 							<select name="plan" onClick={handleChange}>
 								<option value="">-</option>
 								<option value="basic">Básico</option>
-								<option value="standard">Estándar</option>
+								
 								<option value="premium">Premium</option>
 							</select>
 						</div>
 					</div>
 					<p>* campos obligatorios</p>
 					<div className="subs-btn-container">
-						{input.plan === 'standard' ? (
-							<div>
-								<button className="subs-btn" onClick={handleSubmitStandar}>
-									Standard
-								</button>
-								<script type="text/javascript">
-									{(function () {
-										function $MPC_load() {
-											window.$MPC_loaded !== true &&
-												(function () {
-													var s = document.createElement('script');
-													s.type = 'text/javascript';
-													s.async = true;
-													s.src =
-														document.location.protocol +
-														'//secure.mlstatic.com/mptools/render.js';
-													var x = document.getElementsByTagName('script')[0];
-													x.parentNode.insertBefore(s, x);
-													window.$MPC_loaded = true;
-												})();
-										}
-										window.$MPC_loaded !== true
-											? window.attachEvent
-												? window.attachEvent('onload', $MPC_load)
-												: window.addEventListener('load', $MPC_load, false)
-											: null;
-									})()}
-									{/* ;  // to receive event with message when closing modal from
-									congrants back to site function $MPC_message(event){' '}
-									{
-										// onclose modal ->CALLBACK FUNCTION
-										// !!!!!!!!FUNCTION_CALLBACK HERE Received message: {event.data} preapproval_id !!!!!!!!
-									}
-									window.$MPC_loaded !== true ?
-									(window.addEventListener("message", $MPC_message)) : null;  */}
-								</script>
-							</div>
-						) : input.plan === 'basic' ? (
+					{input.plan === 'basic' ? (
 							<div>
 								<button className="subs-btn" onClick={handleSubmitBasicUser}>
 									Básico

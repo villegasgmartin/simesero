@@ -219,6 +219,8 @@
 .cambiar-imagen-sub label, p{
     color:#000;
 }
+
+
 @media only screen and (max-width: 768px) {
 	.client-create-menu-container{
 		display: block;

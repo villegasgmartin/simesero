@@ -12,6 +12,7 @@ import {
 	deleteCategory,
 	deleteSubCategory,
 	getCategories,
+	getLocalData,
 	getSubCategories
 } from '../../../redux/actions';
 import swal from 'sweetalert';
@@ -26,7 +27,9 @@ export default function ClientMenu() {
 	const userEmail = searchParams.get('email');
 	useEffect(() => {
 		dispatch(getCategories());
+		dispatch(getLocalData(userEmail));
 	}, []);
+	const user = useSelector((state) => state.localData.usuario);
 	const categories = useSelector((state) => state.localCategories.categorias);
 
 	const [newCategory, setNewCategory] = useState('');
@@ -38,7 +41,7 @@ export default function ClientMenu() {
 
 	const handleCreateCateg = (e) => {
 		const inputCategory = document.querySelector('.input-category');
-		if(inputCategory.value === ''){
+		if (inputCategory.value === '') {
 			return alert('Debe ingresar una categoria');
 		}
 		e.preventDefault();
@@ -143,11 +146,9 @@ export default function ClientMenu() {
 				swal({ text: 'no se ha modificado la imagen', icon: 'info' });
 			}
 		});
-		
 	};
 
 	const handleCreateSubCategory = () => {
-		
 		const formData = new FormData();
 		formData.append('subcategoria', newSubCategory);
 		formData.append('categoria', categorySelected);
@@ -292,7 +293,7 @@ export default function ClientMenu() {
 								type="text"
 								value={newCategory}
 								onChange={handleChangeCategory}
-								className='input-category'
+								className="input-category"
 							/>
 							<button className="btn-agregar" onClick={handleCreateCateg}>
 								<MdAddCircle className="create-menu-add-icon" />
@@ -367,9 +368,15 @@ export default function ClientMenu() {
 							<span>Agregar</span>
 						</button>
 					</div>
-					<button className="create-menu-add-product" onClick={handleOpenSubcatImgPopUp}> <span>Cambiar Imagen</span></button>
+					<button
+						className="create-menu-add-product"
+						onClick={handleOpenSubcatImgPopUp}
+					>
+						{' '}
+						<span>Cambiar imagen de subcategoria</span>
+					</button>
 					{subCategImgPopUp === true ? (
-						<div className='cambiar-imagen-sub'>
+						<div className="cambiar-imagen-sub">
 							<div>
 								<label htmlFor="">Titulo de la categoria: </label>
 								<select name="" id="" onChange={handleselectCategoryToSub}>
@@ -404,7 +411,12 @@ export default function ClientMenu() {
 								accept="img/*"
 								onChange={handleNewSubcategImg}
 							/>
-							<button className="create-menu-add-product" onClick={handleChangeSubcategImg}><span>Cambiar</span></button>
+							<button
+								className="create-menu-add-product"
+								onClick={handleChangeSubcategImg}
+							>
+								<span>Cambiar</span>
+							</button>
 						</div>
 					) : (
 						<></>
@@ -474,7 +486,6 @@ export default function ClientMenu() {
 						</select>{' '}
 					</div>
 					<div className="create-menu-input">
-
 						<label htmlFor="">Nombre:</label>
 						<p className="max-length-input">*Maximo 40 caracteres</p>
 
@@ -506,16 +517,21 @@ export default function ClientMenu() {
 							maxLength={50}
 						/>
 					</div>
-					<div className="create-menu-input">
-						<label htmlFor="">Imagen:</label>
-						<p className="max-length-input">*Formato .jpg/.png</p>
-						<input
-							type="file"
-							id="newImg"
-							accept="img/*"
-							onChange={handleChangeImg}
-						/>
-					</div>
+					{user?.plan === 'premium' ? (
+						<div className="create-menu-input">
+							<label htmlFor="">Imagen:</label>
+							<p className="max-length-input">*Formato .jpg/.png</p>
+							<input
+								type="file"
+								id="newImg"
+								accept="img/*"
+								onChange={handleChangeImg}
+							/>
+						</div>
+					) : (
+						<div>Actualice su plan para poder agregar imagenes</div>
+					)}
+
 					<div className="btn-add-product">
 						<button
 							className="create-menu-add-product"

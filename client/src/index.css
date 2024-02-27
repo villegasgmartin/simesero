@@ -82,6 +82,10 @@ a {
 button:hover, a:hover{
 	cursor: pointer;
 }
+button, button span{
+	text-transform: uppercase;
+	font-size: 13px;
+}
 body {
 	margin: 0;
 	/* display: flex; */

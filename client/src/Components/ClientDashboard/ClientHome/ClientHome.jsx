@@ -6,7 +6,8 @@ import {
 	deletePedido,
 	getPedidos,
 	changePedidoState,
-	resetAlerts
+	resetAlerts,
+	getLocalData
 } from '../../../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import alertSound from '../../../assets/audio/new-ticket.mp3';
@@ -89,6 +90,7 @@ export default function ClientHome() {
 
 	useEffect(() => {
 		dispatch(getPedidos());
+		dispatch(getLocalData(userEmail));
 		const storedCheckedItems =
 			JSON.parse(localStorage.getItem('checkedItems')) || {};
 		setCheckedItems(storedCheckedItems);
@@ -170,6 +172,8 @@ export default function ClientHome() {
 		};
 	}, []);
 
+	const user = useSelector((state) => state.localData.usuario);
+
 	const pedidos = useSelector((state) => state.pedidos.pedidos);
 
 	const handleDelete = (e) => {
@@ -203,135 +207,146 @@ export default function ClientHome() {
 						<h2>Monitoreo del salon</h2>
 					</div>
 					{audioActive === true ? (
-						<button className="client-home-table-btn" onClick={handleQuitAudio}>Desactivar Audio</button>
+						<button className="client-home-table-btn" onClick={handleQuitAudio}>
+							Desactivar Audio
+						</button>
 					) : (
-						<button className="client-home-table-btn" onClick={handleAudio}>Activar audio</button>
+						<button className="client-home-table-btn" onClick={handleAudio}>
+							Activar audio
+						</button>
 					)}
 				</div>
-				
+				{user?.plan === 'basic' ? (<div>Actualice su plan para adminstrar los pedidos</div>) : <></>}
 				<div className="client-home">
-					<div className="client-home-table-container">
-						<table className="client-home-table">
-							<thead className="">
-								<tr>
-									<th>Mesa</th>
-									<th>Nombre</th>
-									<th>Pedido</th>
-									<th>Total</th>
-									<th>Alertas</th>
-									<th>En preparacion</th>
-									<th>-</th>
-								</tr>
-							</thead>
-							<tbody className="client-table-body">
-								{pedidos?.map((c) => {
-									console.log(c);
-									return (
-										<tr key={c.id}>
-											<td>{c.mesa}</td>
-											<td>{c.nombre}</td>
-											<td>
-												<button className='ver-btn' onClick={() => handleOpenPopUp(c.id)}>
-													Ver
-												</button>
-											</td>
-											<td>$ {c.total}</td>
-											<td className='alertas-iconos'>
-												{c.camarera === 1 && c.cuenta === 1 ? (
-													<button value={c.mesa} onClick={handleResetAlert}>
-														<PiCallBell className="bell-icon-2" />{' '}
-														<TbReportMoney className="pay-icon-2" />
+					{user?.plan === 'premium' ? (
+						<div className="client-home-table-container">
+							<table className="client-home-table">
+								<thead className="">
+									<tr>
+										<th>Mesa</th>
+										<th>Nombre</th>
+										<th>Pedido</th>
+										<th>Total</th>
+										<th>Alertas</th>
+										<th>En preparacion</th>
+										<th>-</th>
+									</tr>
+								</thead>
+								<tbody className="client-table-body">
+									{pedidos?.map((c) => {
+										return (
+											<tr key={c.id}>
+												<td>{c.mesa}</td>
+												<td>{c.nombre}</td>
+												<td>
+													<button
+														className="ver-btn"
+														onClick={() => handleOpenPopUp(c.id)}
+													>
+														Ver
 													</button>
-												) : c.camarera === 0 && c.cuenta === 1 ? (
-													<button value={c.mesa} onClick={handleResetAlert}>
-														<TbReportMoney className="pay-icon" />
-													</button>
-												) : c.camarera === 1 && c.cuenta === 0 ? (
-													<button value={c.mesa} onClick={handleResetAlert}>
-														<PiCallBell className="bell-icon" />
-													</button>
-												) : (
-													<p></p>
-												)}
-											</td>
-											<td>
-												<input
-													type="checkbox"
-													value={c.mesa}
-													onChange={handleChangePedidoState}
-													checked={checkedItems[c.mesa] || false}
-												/>
-												Preparando
-											</td>
+												</td>
+												<td>$ {c.total}</td>
+												<td className="alertas-iconos">
+													{c.camarera === 1 && c.cuenta === 1 ? (
+														<button value={c.mesa} onClick={handleResetAlert}>
+															<PiCallBell className="bell-icon-2" />{' '}
+															<TbReportMoney className="pay-icon-2" />
+														</button>
+													) : c.camarera === 0 && c.cuenta === 1 ? (
+														<button value={c.mesa} onClick={handleResetAlert}>
+															<TbReportMoney className="pay-icon" />
+														</button>
+													) : c.camarera === 1 && c.cuenta === 0 ? (
+														<button value={c.mesa} onClick={handleResetAlert}>
+															<PiCallBell className="bell-icon" />
+														</button>
+													) : (
+														<p></p>
+													)}
+												</td>
+												<td>
+													<input
+														type="checkbox"
+														value={c.mesa}
+														onChange={handleChangePedidoState}
+														checked={checkedItems[c.mesa] || false}
+													/>
+													Preparando
+												</td>
 
-											<td>
-												<button
-													name={c.mesa}
-													value={c.nombre}
-													className="client-home-table-btn"
-													onClick={handleDelete}
-												>
-													Liberar Pedido
-												</button>
-											</td>
-										</tr>
-									);
-								})}
-							</tbody>
-							{popUp && selectedPedidoId !== null && (
-								<div className="popup-background">
-									<div className="popup-container">
-										<span
-											className="popup-close"
-											onClick={() => handleOpenPopUp(null)}
-										>
-											&times;
-										</span>
-										<div className="popup-content">
-											<h3>Detalles del Pedido</h3>
-											<p>
-												Mesa:{' '}
-												{
-													pedidos.find((order) => order.id === selectedPedidoId)
-														.mesa
-												}
-											</p>
-											<p>
-												Nombre:{' '}
-												{
-													pedidos.find((order) => order.id === selectedPedidoId)
-														.nombre
-												}
-											</p>
-											<p>
-												Pedido:{' '}
-												{
-													pedidos.find((order) => order.id === selectedPedidoId)
-														.pedido
-												}
-											</p>
-											<p>
-												Comentarios:{' '}
-												{
-													pedidos.find((order) => order.id === selectedPedidoId)
-														.comentarios
-												}
-											</p>
+												<td>
+													<button
+														name={c.mesa}
+														value={c.nombre}
+														className="client-home-table-btn"
+														onClick={handleDelete}
+													>
+														Liberar Pedido
+													</button>
+												</td>
+											</tr>
+										);
+									})}
+								</tbody>
+								{popUp && selectedPedidoId !== null && (
+									<div className="popup-background">
+										<div className="popup-container">
+											<span
+												className="popup-close"
+												onClick={() => handleOpenPopUp(null)}
+											>
+												&times;
+											</span>
+											<div className="popup-content">
+												<h3>Detalles del Pedido</h3>
+												<p>
+													Mesa:{' '}
+													{
+														pedidos.find(
+															(order) => order.id === selectedPedidoId
+														).mesa
+													}
+												</p>
+												<p>
+													Nombre:{' '}
+													{
+														pedidos.find(
+															(order) => order.id === selectedPedidoId
+														).nombre
+													}
+												</p>
+												<p>
+													Pedido:{' '}
+													{
+														pedidos.find(
+															(order) => order.id === selectedPedidoId
+														).pedido
+													}
+												</p>
+												<p>
+													Comentarios:{' '}
+													{
+														pedidos.find(
+															(order) => order.id === selectedPedidoId
+														).comentarios
+													}
+												</p>
+											</div>
 										</div>
 									</div>
-								</div>
-							)}
-						</table>
-						
-					</div>
-					
+								)}
+							</table>
+						</div>
+					) : (
+						<div></div>
+					)}
+
 					<div
-					
 						className={
 							newAlert ? 'client-home-alerts-active' : 'client-home-alerts'
 						}
 					>
-						
 						<div>
 							<button className="alert-btn" onClick={handleCheckAlert}>
 								Alerta Vista
@@ -434,12 +449,9 @@ export default function ClientHome() {
 									</tr>
 								</tbody>
 							</table>
-						
 						</div>
-						
 					</div>
 				</div>
-				
 			</div>
 		</main>
 	);

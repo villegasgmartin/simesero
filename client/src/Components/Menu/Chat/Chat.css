@@ -49,10 +49,13 @@ input.chat-input{
     background-color: #ccc;
 }
 button.chat-btn{
-    background-color:#FFA101;
-    border-color:#FFA101;
-    color:#fff;
-    padding:10px 20px;
+    background-color: orange;
+    color: white;
+    font-weight: bold;
+    padding: 2px 2px;
+    border: solid 2px orange;
+    border-radius: 10px;
+    padding: 10px 10px;
     
 }
 div.col-4{

@@ -198,7 +198,7 @@ export default function Chat() {
 												<div className="col-4 text-right">
 													<button
 														type="submit"
-														className="btn btn-info btn-circle chat-btn"
+														className="btn btn-info btn-circle chat-btn "
 													>
 														{' '}
 														Enviar{' '}

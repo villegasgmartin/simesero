@@ -106,6 +106,7 @@ export default function ClientChat() {
 		socket.on('crearMensaje', (mensaje) => {
 			console.log('Servidor:', mensaje);
 			receiveMessage(mensaje);
+			
 			scrollBottom();
 		});
 		socket.on('listaPersona', (personas) => {
@@ -135,6 +136,7 @@ export default function ClientChat() {
 				txtMensaje.value = '';
 				txtMensaje.focus();
 				receiveMessage(mensaje);
+
 				scrollBottom();
 			}
 		);

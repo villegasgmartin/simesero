@@ -876,6 +876,11 @@ export function passwordEmail(payload) {
 		console.log(payload);
 		try {
 			axios.post(`${url}/save-password`, payload).then((response) => {
+				console.log('response', response.data.message);
+				if (response.data.message === 'Correo electrónico no encontrado.') {
+					alert(`No se ha encontrado el correo electronico `);
+					return;
+				}
 				alert(
 					`Se ha enviado un email a ${payload.email} con los pasos a seguir, revisar spam `
 				);

@@ -1,12 +1,13 @@
 import {
-	getPedidoState,
+	getLocalData,
+	
 	ordering,
 	removeFromMinicart
 } from '../../../redux/actions';
 import { useLocation } from 'react-router-dom';
 import './Cart.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import swal from 'sweetalert';
 
 export default function Cart() {
@@ -19,17 +20,11 @@ export default function Cart() {
 	const mesa = searchParams.get('mesa');
 	const nombresProductos = micart.map((producto) => producto.nombre).join(', ');
 
-	const pedidoState = useSelector((state) => state.pedidoState);
-	console.log(pedidoState, 'state');
 
-	const [stateOpen, setStateOpen] = useState(false);
-	const handleViewState = () => {
-		dispatch(getPedidoState(userEmail, mesa));
-		setStateOpen(true);
-		setTimeout(function () {
-			setStateOpen(false);
-		}, 5000);
-	};
+	useEffect(() => {
+		dispatch(getLocalData(userEmail));
+	}, []);
+	const user = useSelector((state) => state.localData.usuario);
 
 	// Calcular la suma de los precios
 	const totalPrice = micart.reduce(
@@ -82,77 +77,68 @@ export default function Cart() {
 		});
 	};
 
-	console.log("pedidos", pedidoState)
 	return (
-		<div className="cart-container">
-			<button className="estadopedido" onClick={handleViewState}>
-				Consultar estado de pedido
-			</button>
-			{pedidoState && pedidoState !== undefined && (
-				<>
-					{stateOpen === true && pedidoState.msg === 'true' ? (
-						<p className="pedido-state">Estamos preparando tu pedido </p>
-					) : pedidoState.msg === 'false' ? (
-						<p className="pedido-state">Su pedido aun no ha sido procesado</p>
-					) : (
-						<></>
-					)}
-				</>
-			)}
-
-			<div className="name-area-container">
-				<h4>Indique su nombre para realizar el pedido</h4>
-				<input
-					type="text"
-					name=""
-					id=""
-					value={userName}
-					onChange={handleUserName}
-				/>
-			</div>
-			{micart.map((product, index) => (
-				<div key={index}>
-					<div className="minicart-product">
-						<img src={product.img} alt="" className="minicart-prod-img" />
-						<h2 className="minicart-prod-name">{product.nombre}</h2>
-						<h2 className="minicart-prod-price">$ {product.precio}</h2>
-
-						<button
-							value={product.id}
-							onClick={handleQuit}
-							className="cart-quit-btn"
-						>
-							X
-						</button>
+		<>
+			{user?.plan === 'premium' ? (
+				<div className="cart-container">
+					
+					<div className="name-area-container">
+						<p>Indique su nombre para realizar el pedido</p>
+						<input
+							type="text"
+							name=""
+							id=""
+							value={userName}
+							onChange={handleUserName}
+						/>
 					</div>
-				</div>
-			))}
-			<div>
-				<div className="comment-area-container">
-					<h4>Desea dejar algun comentario?</h4>
-					<textarea
-						name="comentario"
-						id=""
-						cols="36"
-						rows="6"
-						className="comment-area"
-						value={comment}
-						onChange={handleComment}
-					></textarea>
-				</div>
-				<div className="submit-order-container">
-					{userName === '' ? (
-						<div>Ingrese su nombre</div>
-					) : micart.length === 0 ? (
-						<div>Seleccione un producto</div>
-					) : (
-						<div>
-							<button onClick={handleSubmit}>Enviar pedido</button>
+					{micart.map((product, index) => (
+						<div key={index}>
+							<div className="minicart-product">
+								<img src={product.img} alt="" className="minicart-prod-img" />
+								<h2 className="minicart-prod-name">{product.nombre}</h2>
+								<h2 className="minicart-prod-price">$ {product.precio}</h2>
+
+								<button
+									value={product.id}
+									onClick={handleQuit}
+									className="cart-quit-btn"
+								>
+									X
+								</button>
+							</div>
 						</div>
-					)}
+					))}
+					<div>
+						<div className="comment-area-container">
+							<p>Desea dejar algun comentario?</p>
+							<textarea
+								name="comentario"
+								id=""
+								cols="36"
+								rows="6"
+								className="comment-area"
+								value={comment}
+								onChange={handleComment}
+							></textarea>
+						</div>
+						<div className="submit-order-container">
+							{userName === '' ? (
+								<div>Ingrese su nombre</div>
+							) : micart.length === 0 ? (
+								<div>Seleccione un producto</div>
+							) : (
+								<div>
+									<button onClick={handleSubmit}>Enviar pedido</button>
+								</div>
+							)}
+						</div>
+					</div>
+					<h2 className="minicart-total-price">Total: $ {totalPrice}</h2>{' '}
 				</div>
-			</div>
-			<h2 className="minicart-total-price">Total: $ {totalPrice}</h2>{' '}
-		</div>
+			) : (
+				<p>Este usuario no dispone de carrito de compras</p>
+			)}
+		</>
 	);
 }

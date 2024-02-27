@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
 	addToMinicart,
+	getLocalData,
 	getMenuCategories,
 	getProducts
 } from '../../../redux/actions';
@@ -22,11 +23,12 @@ export default function Products() {
 
 		dispatch(getMenuCategories(email));
 		dispatch(getProducts(email));
+		dispatch(getLocalData(email));
 	}, []);
 
 	const categories = useSelector((state) => state.menuCategories.categorias);
 	const products = useSelector((state) => state.localProducts);
-
+	const user = useSelector((state) => state.localData.usuario);
 
 	// Funcion para mostrar solo los productos correspondientes a la categoria seleccionada
 	const handleCategorySelection = (categoryName) => {
@@ -85,9 +87,7 @@ export default function Products() {
 								<h2 className="category-title">{categoria.categoria}</h2>
 								{categoria.subcategorias.map((subcategoria, subIndex) => (
 									<div key={subcategoria.subcategoria_id + subIndex}>
-
 										<div className="subcategory-container">
-											{console.log(subcategoria)}
 											<img
 												src={subcategoria.imgsubcategoria}
 												alt=""
@@ -109,56 +109,58 @@ export default function Products() {
 													>
 														<div className="product-info">
 															<p className="product-name">{producto.nombre}</p>
-															
+
 															<p className="product-price">
 																${producto.precio}
 															</p>
 															{selectedProductToShow === producto ? (
-														<div className="menu-product-edit-popup">
-															<p className="product-description">
-																{producto.descripcion}
-															</p>
-														</div>
-													) : null}
+																<div className="menu-product-edit-popup">
+																	<p className="product-description">
+																		{producto.descripcion}
+																	</p>
+																</div>
+															) : null}
 															{selectedProductToShow === null ? (
 																<a
 																	onClick={() => handleEditPopUp(producto)}
-																	className='ver-desc'
+																	className="ver-desc"
 																>
 																	Ver descripcion
 																</a>
 															) : (
 																<a
 																	onClick={() => setselectedProductToShow(null)}
-																	className='ver-desc'
+																	className="ver-desc"
 																>
 																	Ocultar
 																</a>
 															)}
-															
-															
 														</div>
-														<div>
-															<img
-																src={producto.img}
-																alt={producto.nombre}
-																className="product-img"
-															/>
-														</div>
-														<div className="product-add">
-															<button
-																value={JSON.stringify(producto)}
-																onClick={(e) =>
-																	handleAddToMinicart(e, producto.id)
-																}
-															>
-																+
-															</button>
-														</div>
+														{user?.plan === 'premium' ? (
+															<div>
+																<div>
+																	<img
+																		src={producto.img}
+																		alt={producto.nombre}
+																		className="product-img"
+																	/>
+																</div>
+																<div className="product-add">
+																	<button
+																		value={JSON.stringify(producto)}
+																		onClick={(e) =>
+																			handleAddToMinicart(e, producto.id)
+																		}
+																	>
+																		+
+																	</button>
+																</div>{' '}
+															</div>
+														) : (
+															<></>
+														)}
 													</li>
-													
 												</div>
-
 											))}
 										</ul>
 									</div>

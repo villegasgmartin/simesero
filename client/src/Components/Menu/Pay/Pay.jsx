@@ -3,7 +3,7 @@ import './Pay.css';
 import { useLocation } from 'react-router-dom';
 import io from 'socket.io-client';
 import { useDispatch, useSelector } from 'react-redux';
-import { getPlanToMenu } from '../../../redux/actions';
+import { getLocalData, getPlanToMenu } from '../../../redux/actions';
 import swal from 'sweetalert';
 
 const socket = io();
@@ -65,7 +65,12 @@ export default function Pay() {
 				socket.emit(
 					'pedir-cuenta',
 					usuario,
-					{ nombre: nombre, metodo: payMethod, dividir:payType, comment: comment },
+					{
+						nombre: nombre,
+						metodo: payMethod,
+						dividir: payType,
+						comment: comment
+					},
 					payload
 				);
 				swal({
@@ -81,55 +86,64 @@ export default function Pay() {
 
 	useEffect(() => {
 		dispatch(getPlanToMenu(usuario.email));
+		dispatch(getLocalData(userEmail));
 	}, []);
 	const plan = useSelector((state) => state.planToMenu);
+	const user = useSelector((state) => state.localData.usuario);
 
 	return (
-		<div className="pay-container">
-			{plan === 'basic' ? (
-				<div>Funcionalidad sin acceso</div>
-			) : (
-				<div>
-					<div className="pay-username">
-						<label htmlFor="">Indique su nombre para continuar</label>
-						<input type="text" value={nombre} onChange={handleSetName} />
-					</div>
+		<>
+			{user?.plan === 'premium' ? (
+				<div className="pay-container">
+					{plan === 'basic' ? (
+						<div>Funcionalidad sin acceso</div>
+					) : (
+						<div>
+							<div className="pay-username">
+								<label htmlFor="">Indique su nombre para continuar</label>
+								<input type="text" value={nombre} onChange={handleSetName} />
+							</div>
 
-					<div className="payment-type-container">
-						<h3>Seleccione el metodo de pago</h3>
-						<select name="payment-type" id="" onClick={handleSetMethod}>
-							<option value="-">-</option>
-							<option value="efectivo">Efectivo</option>
-							<option value="debito">Debito</option>
-							<option value="credito">Credito</option>
-							<option value="Mercado Pago">Mercado Pago</option>
-							<option value="otro">Otro</option>
-						</select>
+							<div className="payment-type-container">
+								<p>Seleccione el metodo de pago</p>
+								<select name="payment-type" id="" onClick={handleSetMethod}>
+									<option value="-">-</option>
+									<option value="efectivo">Efectivo</option>
+									<option value="debito">Debito</option>
+									<option value="credito">Credito</option>
+									<option value="Mercado Pago">Mercado Pago</option>
+									<option value="otro">Otro</option>
+								</select>
 
-						<h3>Seleccione tipo de pago</h3>
-						<select name="payment-type" id="" onClick={handleSetPayType}>
-							<option value="-">-</option>
-							<option value="dividir">Quiero dividir la cuenta</option>
-							<option value="pagar-total">Quiero pagar el total</option>
-							<option value="pagar-parte">Quiero pagar una parte</option>
-						</select>
+								<p>Seleccione tipo de pago</p>
+								<select name="payment-type" id="" onClick={handleSetPayType}>
+									<option value="-">-</option>
+									<option value="dividir">Quiero dividir la cuenta</option>
+									<option value="pagar-total">Quiero pagar el total</option>
+									<option value="pagar-parte">Quiero pagar una parte</option>
+								</select>
 
-						<div className="payment-type-container">
-							<h3 htmlFor="">Comentario</h3>
-							<input
-								type="text"
-								value={comment}
-								onChange={handleComment}
-								placeholder="Deje aqui su comentario"
-							/>
+								<div className="payment-type-container">
+									<p htmlFor="">Comentario</p>
+									<input
+										type="text"
+										value={comment}
+										onChange={handleComment}
+										placeholder="Deje aqui su comentario"
+									/>
+								</div>
+
+								<button className="payment-btn" onClick={handleSubmit}>
+									Pedir la cuenta
+								</button>
+							</div>
 						</div>
 
-						<button className="payment-btn" onClick={handleSubmit}>
-							Pedir la cuenta
-						</button>
-					</div>
-				</div>
 			)}
 		</div>
+		) : (
+			<p>Este usuario no tiene disponible la opcion de solicitar la cuenta</p>
+			)}
+			</>
 	);
 }

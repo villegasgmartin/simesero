@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from 'react';
+import { lazy, Suspense } from 'react';
 
 // Importaciones dinámicas
 const AdminConfig = lazy(() => import('./AdminConfig/AdminConfig'));

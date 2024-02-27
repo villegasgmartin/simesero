@@ -22,14 +22,11 @@ export default function AdminConfig() {
 		(state) => state.clientsToConfirmPlan
 	);
 
-	const [planStandardInput, setPlanStandardInput] = useState('');
+	
 	const [planPremiumInput, setPlanPremiumInput] = useState('');
 	// eslint-disable-next-line no-unused-vars
 	const [pageLoaded, setPageLoaded] = useState(false);
 
-	const handleChangeStandard = (e) => {
-		setPlanStandardInput(e.target.value);
-	};
 	const handleChangePremium = (e) => {
 		setPlanPremiumInput(e.target.value);
 	};
@@ -38,14 +35,13 @@ export default function AdminConfig() {
 		e.preventDefault();
 		swal({
 			title: 'Activar',
-			text: `Esta seguro que los nuevos precios sean standard: $ ${planStandardInput} y premium: $ ${planPremiumInput}??`,
+			text: `Esta seguro que el nuevo precio sea $ ${planPremiumInput}??`,
 			icon: 'warning',
 			buttons: ['No', 'Si']
 		}).then((respuesta) => {
 			if (respuesta) {
 				dispatch(
 					planPrice({
-						standard: planStandardInput,
 						premium: planPremiumInput
 					})
 				);
@@ -98,7 +94,9 @@ export default function AdminConfig() {
 			buttons: ['No', 'Si']
 		}).then((respuesta) => {
 			if (respuesta) {
-				dispatch(confirmUserNewPlan({ email: e.target.value , plan:e.target.name}));
+				dispatch(
+					confirmUserNewPlan({ email: e.target.value, plan: e.target.name })
+				);
 				swal({
 					text: `Se ha confirmado el pago de ${e.target.value}`,
 					icon: 'success'
@@ -134,7 +132,7 @@ export default function AdminConfig() {
 	useEffect(() => {
 		if (plans) {
 			setPlanPremiumInput(plans.premium);
-			setPlanStandardInput(plans.standard);
+			
 		}
 	}, [plans]); // Actualiza cuando 'planes' cambie sus valores
 
@@ -199,10 +197,6 @@ export default function AdminConfig() {
 														( <td>Basico</td>) 
 														
 														}
-													
-													
-													
-
 													{c.pagoCambioPlan === 0 ? (
 														<td>
 															<button
@@ -227,15 +221,7 @@ export default function AdminConfig() {
 						<div className="admin-functions-panel">
 							<div className="admin-functions-panel-container">
 								<div className="admin-changedata">
-									<h3>Modificar precio de planes</h3>
-									<div>
-										<label>Estandar: </label>
-										<input
-											type="text"
-											value={planStandardInput}
-											onChange={handleChangeStandard}
-										/>
-									</div>
+								<h3>Modificar precio del plan</h3>
 									<div>
 										<label>Premium:</label>
 										<input

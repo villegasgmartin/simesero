@@ -108,11 +108,7 @@ export default function ClientConfig() {
 		}).then((respuesta) => {
 			if (respuesta) {
 				dispatch(changePlan({ plan: newPlan }));
-				if (newPlan === 'standard') {
-					window.location.assign(
-						'https://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=2c9380848ae746f0018af1220de80617'
-					);
-				} else if (newPlan === 'premium') {
+				if (newPlan === 'premium') {
 					window.location.assign(
 						'https://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=2c9380848af994d0018b02039da906a5'
 					);
@@ -264,66 +260,12 @@ export default function ClientConfig() {
 					<select name="plan" id="" onClick={handleChangePlan}>
 						<option value="">Actual: {user?.plan}</option>
 						<option value="basic">Basic</option>
-						<option value="standard">Standard</option>
 						<option value="premium">Premium</option>
 					</select>
 				</div>
 				<div className="subs-btn-container-plan">
-					{newPlan === 'standard' ? (
-						<div>
-							<div>
-								<button
-									onClick={handleSubmitNewPlan}
-									className="subs-btn-newPlan"
-								>
-									Actualizar plan
-								</button>
-							</div>
-							{/* <div>
-								<a
-								// eslint-disable-next-line react/no-unknown-property
-								mp-mode="dftl"
-								href="https://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=2c9380848ae746f0018af1220de80617"
-								name="MP-payButton"
-								className="subs-btn-newPlan"
-								>
-								Continuar a pago
-								</a>
-							</div> */}
-
-							<script type="text/javascript">
-								{(function () {
-									function $MPC_load() {
-										window.$MPC_loaded !== true &&
-											(function () {
-												var s = document.createElement('script');
-												s.type = 'text/javascript';
-												s.async = true;
-												s.src =
-													document.location.protocol +
-													'//secure.mlstatic.com/mptools/render.js';
-												var x = document.getElementsByTagName('script')[0];
-												x.parentNode.insertBefore(s, x);
-												window.$MPC_loaded = true;
-											})();
-									}
-									window.$MPC_loaded !== true
-										? window.attachEvent
-											? window.attachEvent('onload', $MPC_load)
-											: window.addEventListener('load', $MPC_load, false)
-										: null;
-								})()}
-								{/* ;  // to receive event with message when closing modal from
-									congrants back to site function $MPC_message(event){' '}
-									{
-										// onclose modal ->CALLBACK FUNCTION
-										// !!!!!!!!FUNCTION_CALLBACK HERE Received message: {event.data} preapproval_id !!!!!!!!
-									}
-									window.$MPC_loaded !== true ?
-								(window.addEventListener("message", $MPC_message)) : null;  */}
-							</script>
-						</div>
-					) : newPlan === 'basic' ? (
+					
+				{newPlan === 'basic' ? (
 						<div>
 							<button className="subs-btn" onClick={handleSubmitNewPlan}>
 								Básico
@@ -385,11 +327,7 @@ export default function ClientConfig() {
 					)}
 				</div>
 			</div>
-			{/* <div className="precios-planes">
-				<p>Basico: Gratuito</p>
-				<p>Estandar: ${plans.standard}</p>
-				<p>Premuim: ${plans.premium}</p>
-			</div> */}
+			
 		</main>
 	);
 }

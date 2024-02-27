@@ -6,7 +6,7 @@ import { IoRestaurantSharp } from 'react-icons/io5';
 import { BsFillArrowLeftCircleFill } from 'react-icons/bs';
 import { BsFillArrowRightCircleFill } from 'react-icons/bs';
 import BasicPlanImg from './BasicPlanImg.jsx';
-import StandardPlanImg from './StandardPlanImg.jsx';
+
 import PremiumPlanImg from './PremiumPlanImg.jsx';
 //Vista de imagen para comenzar la suscripcion al servicio
 export default function Subscription() {
@@ -24,10 +24,8 @@ export default function Subscription() {
 	const handleCloseSubscribe = () => {
 		setSubscribeOpen(false);
 	};
-	const plans = [
-		<BasicPlanImg key="1" handleOpenSubscribe={handleOpenSubscribe}/>,
-		<PremiumPlanImg key="3" handleOpenSubscribe={handleOpenSubscribe} />
-	];
+	
+	const plans = [<BasicPlanImg key="1" />, <PremiumPlanImg key="3" />];
 	const [index, setIndex] = useState(0);
 
 	// Funcion para el slider de imagenes mobile

@@ -544,7 +544,7 @@ const recuperarClave = async (req, res) => {
 		if (emailRecuperar[0].length === 0 && emailRecuperarAdmin[0].length === 0) {
 			return res
 				.status(404)
-				.json({ message: 'Correo electrónico no encontrado.' });
+				.json({ message: 'Correo electrónico no encontrado' });
 		}
 		if(emailRecuperar[0].length === 0 && emailRecuperarAdmin[0].length > 0){
 			const mail = emailRecuperarAdmin[0][0];

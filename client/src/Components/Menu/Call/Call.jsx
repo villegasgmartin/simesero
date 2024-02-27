@@ -4,17 +4,29 @@ import io from 'socket.io-client';
 import './Call.css';
 import { PiCallBellDuotone } from 'react-icons/pi';
 import swal from 'sweetalert';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getPedidoState } from '../../../redux/actions';
 
 const socket = io();
 
 export default function Call() {
 	const location = useLocation();
 	const searchParams = new URLSearchParams(location.search);
-	console.log('searchParams:', searchParams.toString()); // Verifica qué parámetros de consulta se están pasando
 
+	const dispatch = useDispatch();
 	const userEmail = searchParams.get('email');
 	const mesa = searchParams.get('mesa');
 
+	const [stateOpen, setStateOpen] = useState(false);
+	const handleViewState = () => {
+		dispatch(getPedidoState(userEmail, mesa));
+		setStateOpen(true);
+		setTimeout(function () {
+			setStateOpen(false);
+		}, 5000);
+	};
+	const pedidoState = useSelector((state) => state.pedidoState);
 	const payload = () => {
 		console.log('emitiendo');
 	};
@@ -49,10 +61,24 @@ export default function Call() {
 
 	return (
 		<div className="call-container">
+			<button className="estadopedido" onClick={handleViewState}>
+				Consultar estado de pedido realizado
+			</button>
+			{pedidoState && pedidoState !== undefined && (
+				<>
+					{stateOpen === true && pedidoState.msg === 'true' ? (
+						<p className="pedido-state">Estamos preparando tu pedido </p>
+					) : pedidoState.msg === 'false' ? (
+						<p className="pedido-state">Su pedido aun no ha sido procesado</p>
+					) : (
+						<></>
+					)}
+				</>
+			)}
 			<div>
-				<h2 className="call-text">
+				<p className="call-text">
 					Desea llamar al mesero/a? presione el siguiente boton
-				</h2>
+				</p>
 			</div>
 			<p>Llamar mesero/a</p>
 			<button onClick={handleSubmit} className="call-btn">
@@ -61,8 +87,3 @@ export default function Call() {
 		</div>
 	);
 }
-
-
-
-  
-

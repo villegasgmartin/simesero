@@ -1,14 +1,5 @@
 /*PERDIR PEDIDO ESTILO*/
 
-div.submit-order-container button{
-	margin: auto;
-   max-width: 150px;
-   border-color:#FFA003;
-   background-color: #FFA003;
-   color: #fff;
-   border-radius: 10px;
-   padding: 5px 10px;
-}
 
 
 
@@ -111,7 +102,7 @@ div.submit-order-container button{
    color: #000;
 }
 
-.name-area-container h4 {
+.name-area-container p {
    width: 280px;
    height: 110px;
    flex-shrink: 0;
@@ -142,11 +133,11 @@ div.submit-order-container button{
 }
 
 .estadopedido{
-   background-color: orange;
+   background-color: rgb(3, 177, 3);
 	color: white;
 	font-weight: bold;
 	padding: 2px 2px;
-	border: solid 2px orange;
+	border: solid 2px rgb(3, 177, 3);
 	border-radius: 10px;
 	padding: 10px 10px;
 	margin: 5px auto;

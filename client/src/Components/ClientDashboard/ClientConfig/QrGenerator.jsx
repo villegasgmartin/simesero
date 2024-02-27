@@ -104,13 +104,13 @@ export default function QrGenerator() {
 							type="number"
 							placeholder="Cantidad de codigos a imprimir"
 							onChange={handleChangeTotalCodes}
-							max={15}
+							
 						/>
 						<input
 							type="number"
 							placeholder="Numero de inicio"
 							onChange={handleChangeFirstCode}
-							max={15}
+							
 						/>
 					</div>
 					<button className="generate-qr-btn">Generar códigos</button>

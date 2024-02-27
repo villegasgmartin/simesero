@@ -116,9 +116,14 @@ export default function LoginModal({ handleCloseLogin, handleOpenSuscribe }) {
 					</h3>
 					<h4>Bienvenido/a de vuelta</h4>
 					{userType === 'suspendido' ? (
-						<p className='mensajes-error'> Usuario suspendido, contactese con el administrador</p>
+						<p className="mensajes-error">
+						{' '}
+						Usuario suspendido, contactese con el administrador
+					</p>
 					) : userType === 'pago' ? (
-						<p className='mensajes-error'>Error en el pago, contactese con el administrador</p>
+						<p className="mensajes-error">
+							Error en el pago, contactese con el administrador
+						</p>
 					) : (
 						<p></p>
 					)}

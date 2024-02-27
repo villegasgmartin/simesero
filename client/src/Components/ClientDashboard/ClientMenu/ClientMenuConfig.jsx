@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
 	deleteProduct,
 	getMenuCategories,
+	getLocalData,
 	getProducts,
 	modifyProduct
 } from '../../../redux/actions';
@@ -21,11 +22,13 @@ export default function ClientMenuConfig() {
 		const email = parsed.query.email;
 		dispatch(getMenuCategories(email));
 		dispatch(getProducts(email));
+		dispatch(getLocalData(email));
 	}, []);
 	const products = useSelector((state) => state.localProducts);
 	console.log(products);
 
 	const categories = useSelector((state) => state.menuCategories.categorias);
+	const user = useSelector((state) => state.localData.usuario);
 
 	const handleCategorySelection = (categoryName) => {
 		setSelectedCategory(categoryName);
@@ -163,13 +166,17 @@ export default function ClientMenuConfig() {
 													>
 														<div>
 															<div className="product-list-display">
-																<div>
-																	<img
-																		src={producto.img}
-																		alt={producto.nombre}
-																		className="product-img"
-																	/>
-																</div>
+															{user?.plan === 'premium' ? (
+																	<div>
+																		<img
+																			src={producto.img}
+																			alt={producto.nombre}
+																			className="product-img"
+																		/>
+																	</div>
+																) : (
+																	<></>
+																)}
 																<div className="product-info">
 																	<p className="product-name">
 																		{producto.nombre}
