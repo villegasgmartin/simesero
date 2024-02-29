@@ -220,6 +220,30 @@
     color:#000;
 }
 
+/*contenedores display*/
+.div-categoria{
+	display: none;
+	transition: all 1s ease-in-out;
+}
+.div-subcategoria{
+	display: none;
+	transition: all 1s ease-in-out;
+}
+.div-producto{
+	display: none;
+	transition: all 1s ease-in-out;
+}
+
+#contenedor-categoria{
+	cursor: pointer;
+}
+#contenedor-sub{
+	cursor: pointer;
+}
+#contenedor-producto{
+	cursor: pointer;
+}
+				
 
 @media only screen and (max-width: 768px) {
 	.client-create-menu-container{

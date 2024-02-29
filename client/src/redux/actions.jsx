@@ -15,6 +15,7 @@ export const VALIDATE_ADMIN = 'VALIDATE_ADMIN';
 export const GET_SUSPENDED_CLIENTS = 'GET_SUSPENDED_CLIENTS';
 export const VALIDATE_USER = 'VALIDATE_USER';
 export const GET_LOCAL_DATA = 'GET_LOCAL_DATA';
+export const GET_LOCAL_PLAN = 'GET_LOCAL_PLAN';
 export const CREATE_CATEGORY = 'CREATE_CATEGORY';
 export const LOG_OUT = 'LOG_OUT';
 export const GET_CATEGORIES = 'GET_CATEGORIES';
@@ -408,7 +409,7 @@ export function getLocalData(email) {
 	return async function (dispatch) {
 		try {
 			const token = localStorage.getItem('token'); // Obtén el token almacenado en localStorage
-
+			console.log(token, 'token');
 			const headers = {
 				'x-token': token
 			};
@@ -422,6 +423,23 @@ export function getLocalData(email) {
 						payload: response.data
 					});
 				});
+		} catch (error) {
+			console.log(error);
+		}
+	};
+}
+
+export function getLocalPlan(email) {
+	return async function (dispatch) {
+		console.log('entro 1');
+		try {
+			axios.get(`${url}/menu/plan?email=${email}`).then((response) => {
+				console.log(response.data, 'response');
+				return dispatch({
+					type: GET_LOCAL_PLAN,
+					payload: response.data
+				});
+			});
 		} catch (error) {
 			console.log(error);
 		}

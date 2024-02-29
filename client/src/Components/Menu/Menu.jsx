@@ -1,6 +1,6 @@
 import './Menu.css';
 
-import { IoRestaurantSharp } from 'react-icons/io5';
+// import { IoRestaurantSharp } from 'react-icons/io5';
 import { GiHotMeal } from 'react-icons/gi';
 import { BsFillChatDotsFill } from 'react-icons/bs';
 import { PiCallBell } from 'react-icons/pi';
@@ -16,24 +16,22 @@ import Pay from './Pay/Pay';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { getLocalData } from '../../redux/actions';
+import { getLocalPlan } from '../../redux/actions';
 
 export default function Menu() {
-	const dispatch = useDispatch();
 	const location = useLocation();
 	const searchParams = new URLSearchParams(location.search);
-
 	const userEmail = searchParams.get('email');
-
-	useEffect(() => {
-		dispatch(getLocalData(userEmail));
-	}, []);
-
-	const user = useSelector((state) => state.localData.usuario);
-	console.log(user);
+	const dispatch = useDispatch();
 	const [selectedSection, setSelectedSection] = useState('products');
 	const micart = useSelector((state) => state.productsAdeedToMinicart);
 	const qProducts = micart?.length;
+
+	useEffect(() => {
+		dispatch(getLocalPlan(userEmail));
+	}, []);
+	const plan = useSelector((state) => state.localPlan);
+	console.log(plan, 'plan');
 
 	const handleSectionClick = (sectionId) => {
 		setSelectedSection(sectionId);
@@ -42,7 +40,7 @@ export default function Menu() {
 	return (
 		<main className="menu-container">
 			<header className="menu-header-container">
-				<div className="menu-header">
+			{/* <div className="menu-header">
 					<div>
 						{user?.img === '' ? (
 							<IoRestaurantSharp className="menu-dec-logo" />
@@ -50,7 +48,7 @@ export default function Menu() {
 							<img src={user?.img} alt="" className="menu-dec-logo" />
 						)}
 					</div>
-				</div>
+				</div> */}
 			</header>{' '}
 			<main>
 				<section
@@ -59,7 +57,6 @@ export default function Menu() {
 				>
 					<Products />
 				</section>
-
 				<section
 					id="cart"
 					className={selectedSection === 'cart' ? '' : 'hidden-section'}
@@ -85,17 +82,16 @@ export default function Menu() {
 					<Pay />
 				</section>
 			</main>
-			<footer>
-				<div className="footer-container">
-					{console.log(user?.plan, 'plan')}
-					<a
-						href="#products"
-						onClick={() => handleSectionClick('products')}
-						className={selectedSection === 'products' ? 'selected' : ''}
-					>
-						<MdFoodBank className="footer-icon" />
-					</a>
-					{user?.plan === 'premium' ? (
+			{plan === 'premium' ? (
+				<footer>
+					<div className="footer-container">
+						<a
+							href="#products"
+							onClick={() => handleSectionClick('products')}
+							className={selectedSection === 'products' ? 'selected' : ''}
+						>
+							<MdFoodBank className="footer-icon" />
+						</a>
 						<a
 							href="#cart"
 							onClick={() => handleSectionClick('cart')}
@@ -108,10 +104,6 @@ export default function Menu() {
 								<h4 className="q-products-nav">{qProducts}</h4>
 							)}
 						</a>
-					) : (
-						<></>
-					)}
-					{user?.plan === 'premium' ? (
 						<a
 							href="#chat"
 							onClick={() => handleSectionClick('chat')}
@@ -119,18 +111,13 @@ export default function Menu() {
 						>
 							<BsFillChatDotsFill className="footer-icon" />
 						</a>
-					) : (
-						<></>
-					)}
-
-					<a
-						href="#profile"
-						onClick={() => handleSectionClick('call')}
-						className={selectedSection === 'call' ? 'selected' : ''}
-					>
-						<PiCallBell className="footer-icon" />
-					</a>
-					{user?.plan === 'premium' ? (
+						<a
+							href="#profile"
+							onClick={() => handleSectionClick('call')}
+							className={selectedSection === 'call' ? 'selected' : ''}
+						>
+							<PiCallBell className="footer-icon" />
+						</a>
 						<a
 							href="#pay"
 							onClick={() => handleSectionClick('pay')}
@@ -138,11 +125,31 @@ export default function Menu() {
 						>
 							<TbReportMoney className="footer-icon" />
 						</a>
-					) : (
-						<></>
-					)}
-				</div>
-			</footer>
+					</div>
+				</footer>
+			) : plan === 'basic' ? (
+				<footer>
+					<div className="footer-container">
+						<a
+							href="#products"
+							onClick={() => handleSectionClick('products')}
+							className={selectedSection === 'products' ? 'selected' : ''}
+						>
+							<MdFoodBank className="footer-icon" />
+						</a>
+
+						<a
+							href="#profile"
+							onClick={() => handleSectionClick('call')}
+							className={selectedSection === 'call' ? 'selected' : ''}
+						>
+							<PiCallBell className="footer-icon" />
+						</a>
+					</div>
+				</footer>
+			) : (
+				<div></div>
+			)}
 		</main>
 	);
 }

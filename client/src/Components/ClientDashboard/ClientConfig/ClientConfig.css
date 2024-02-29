@@ -140,7 +140,6 @@ button {
     max-width: 400px;
     margin: 10px;
 	height: auto;
-    max-height: 700px;
 	position: absolute;
 	top: 0;
 	bottom: 0;
@@ -154,6 +153,15 @@ button {
 		0.5
 	); /* Cambia el color y la opacidad según tus preferencias */
 	backdrop-filter: blur(10px);
+}
+
+.client-data-popup{
+    overflow-y: scroll;
+    max-height: 550px;
+    padding:30px 0; 
+}
+.client-data-popup:-webkit-scrollbar{
+    visibility: hidden;
 }
 .client-data-popup-btn button{
     background: #FFA500;

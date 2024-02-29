@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
 	addToMinicart,
-	getLocalData,
+	getLocalPlan,
 	getMenuCategories,
 	getProducts
 } from '../../../redux/actions';
@@ -20,15 +20,14 @@ export default function Products() {
 		const url = window.location.href;
 		const parsed = queryString.parseUrl(url);
 		const email = parsed.query.email;
-
+		dispatch(getLocalPlan(email));
 		dispatch(getMenuCategories(email));
 		dispatch(getProducts(email));
-		dispatch(getLocalData(email));
 	}, []);
 
 	const categories = useSelector((state) => state.menuCategories.categorias);
 	const products = useSelector((state) => state.localProducts);
-	const user = useSelector((state) => state.localData.usuario);
+	const plan = useSelector((state) => state.localPlan);
 
 	// Funcion para mostrar solo los productos correspondientes a la categoria seleccionada
 	const handleCategorySelection = (categoryName) => {
@@ -88,6 +87,7 @@ export default function Products() {
 								{categoria.subcategorias.map((subcategoria, subIndex) => (
 									<div key={subcategoria.subcategoria_id + subIndex}>
 										<div className="subcategory-container">
+											{console.log(subcategoria)}
 											<img
 												src={subcategoria.imgsubcategoria}
 												alt=""
@@ -110,9 +110,7 @@ export default function Products() {
 														<div className="product-info">
 															<p className="product-name">{producto.nombre}</p>
 
-															<p className="product-price">
-																${producto.precio}
-															</p>
+															
 															{selectedProductToShow === producto ? (
 																<div className="menu-product-edit-popup">
 																	<p className="product-description">
@@ -135,26 +133,31 @@ export default function Products() {
 																	Ocultar
 																</a>
 															)}
+															<p className="product-price">
+																${producto.precio}
+															</p>
 														</div>
-														{user?.plan === 'premium' ? (
+														{plan === 'premium' ? (
 															<div>
-																<div>
-																	<img
-																		src={producto.img}
-																		alt={producto.nombre}
-																		className="product-img"
-																	/>
-																</div>
-																<div className="product-add">
-																	<button
-																		value={JSON.stringify(producto)}
-																		onClick={(e) =>
-																			handleAddToMinicart(e, producto.id)
-																		}
-																	>
-																		+
-																	</button>
-																</div>{' '}
+																<img
+																	src={producto.img}
+																	alt={producto.nombre}
+																	className="product-img"
+																/>
+															</div>
+														) : (
+															<></>
+														)}
+														{plan === 'premium' ? (
+															<div className="product-add">
+																<button
+																	value={JSON.stringify(producto)}
+																	onClick={(e) =>
+																		handleAddToMinicart(e, producto.id)
+																	}
+																>
+																	+
+																</button>
 															</div>
 														) : (
 															<></>

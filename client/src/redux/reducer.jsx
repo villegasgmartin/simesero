@@ -19,7 +19,8 @@ import {
 	GET_CLIENTS_TO_CONFIRM,
 	GET_CLIENTS_TO_CONFIRM_PLAN,
 	GET_PLAN_TO_MENU,
-	GET_PEDIDO_STATE
+	GET_PEDIDO_STATE,
+	GET_LOCAL_PLAN
 } from './actions';
 
 let initialState = {
@@ -42,7 +43,8 @@ let initialState = {
 	clientsToConfirm: [],
 	clientsToConfirmPlan: [],
 	planToMenu: '',
-	pedidoState: ''
+	pedidoState: '',
+	localPlan: ''
 };
 
 function rootReducer(state = initialState, action) {
@@ -67,6 +69,11 @@ function rootReducer(state = initialState, action) {
 			return {
 				...state,
 				plans: action.payload
+			};
+		case GET_LOCAL_PLAN:
+			return {
+				...state,
+				localPlan: action.payload.plan
 			};
 
 		case GET_ALL_CLIENTS:

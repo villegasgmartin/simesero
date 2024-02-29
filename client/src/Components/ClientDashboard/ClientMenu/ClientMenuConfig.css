@@ -32,7 +32,7 @@
 /* Estilo para la página principal */
 .client-menu-product-container {
 	font-family: Arial, sans-serif;
-	background-color: #f0f0f0;
+	background-color: #f1f1f1;
 	margin: 0;
 	border: #000 solid 2px;
 	display: flex;
@@ -41,13 +41,14 @@
 	margin-bottom: 20px;
 	margin-left: 10px;
 	margin-right: 10px;
+	padding: 10px;
 }
 
 /* Estilo para cada categoría */
 
 .category-title {
 	color: #000;
-	font-family: Outfit;
+	
 	font-size: 16px;
 	font-style: normal;
 	font-weight: 700;
@@ -58,7 +59,6 @@
 /* Estilo para cada subcategoría */
 .subcategory-title {
 	color: #000;
-	font-family: Outfit;
 	font-size: 14px;
 	font-style: normal;
 	line-height: normal;
@@ -212,8 +212,8 @@ h2.category-title, h2.subcategory-title{
 .product-info .product-name{
     text-transform: uppercase;
 	color: #000;
-	font-family: Outfit;
-	font-size: 14px;
+	
+	font-size: 12px;
 	font-style: normal;
 	font-weight: 400;
 	line-height: normal;

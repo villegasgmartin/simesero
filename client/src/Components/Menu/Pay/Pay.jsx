@@ -3,7 +3,7 @@ import './Pay.css';
 import { useLocation } from 'react-router-dom';
 import io from 'socket.io-client';
 import { useDispatch, useSelector } from 'react-redux';
-import { getLocalData, getPlanToMenu } from '../../../redux/actions';
+import { getLocalPlan, getPlanToMenu } from '../../../redux/actions';
 import swal from 'sweetalert';
 
 const socket = io();
@@ -54,6 +54,14 @@ export default function Pay() {
 	};
 	// Enviar el pedido de cuenta al dashboard del cliente
 	const handleSubmit = () => {
+		// Validar que todos los campos estén llenos
+		if (!nombre || !payMethod || !payType || !comment) {
+			swal({
+			text: 'Por favor, complete todos los campos del formulario.',
+			icon: 'error'
+			});
+			return;
+		}
 
 		swal({
 			title: 'Pedir cuenta',
@@ -86,26 +94,26 @@ export default function Pay() {
 
 	useEffect(() => {
 		dispatch(getPlanToMenu(usuario.email));
-		dispatch(getLocalData(userEmail));
+		dispatch(getLocalPlan(userEmail));
 	}, []);
 	const plan = useSelector((state) => state.planToMenu);
-	const user = useSelector((state) => state.localData.usuario);
+	const planActual = useSelector((state) => state.localPlan);
 
 	return (
 		<>
-			{user?.plan === 'premium' ? (
+			{planActual === 'premium' ? (
 				<div className="pay-container">
 					{plan === 'basic' ? (
 						<div>Funcionalidad sin acceso</div>
 					) : (
 						<div>
 							<div className="pay-username">
-								<label htmlFor="">Indique su nombre para continuar</label>
-								<input type="text" value={nombre} onChange={handleSetName} />
+								<p>Su Nombre*</p>
+								<input type="text" value={nombre} onChange={handleSetName} placeholder='Indique aqui su nombre'/>
 							</div>
 
 							<div className="payment-type-container">
-								<p>Seleccione el metodo de pago</p>
+								<p>Seleccione el metodo de pago*</p>
 								<select name="payment-type" id="" onClick={handleSetMethod}>
 									<option value="-">-</option>
 									<option value="efectivo">Efectivo</option>
@@ -115,7 +123,7 @@ export default function Pay() {
 									<option value="otro">Otro</option>
 								</select>
 
-								<p>Seleccione tipo de pago</p>
+								<p>Seleccione tipo de pago*</p>
 								<select name="payment-type" id="" onClick={handleSetPayType}>
 									<option value="-">-</option>
 									<option value="dividir">Quiero dividir la cuenta</option>
@@ -124,7 +132,7 @@ export default function Pay() {
 								</select>
 
 								<div className="payment-type-container">
-									<p htmlFor="">Comentario</p>
+									<p htmlFor="">Comentario*</p>
 									<input
 										type="text"
 										value={comment}

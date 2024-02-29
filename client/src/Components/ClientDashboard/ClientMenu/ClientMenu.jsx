@@ -41,8 +41,13 @@ export default function ClientMenu() {
 
 	const handleCreateCateg = (e) => {
 		const inputCategory = document.querySelector('.input-category');
+		
 		if (inputCategory.value === '') {
-			return alert('Debe ingresar una categoria');
+			swal({
+				text: 'Debe ingresr una categoria',
+				icon: 'error'
+				});
+				return;
 		}
 		e.preventDefault();
 		swal({
@@ -114,6 +119,14 @@ export default function ClientMenu() {
 	};
 
 	const handleChangeSubcategImg = (e) => {
+		if (!categorySelected || !subCategorySelected || newSubcategImg) {
+			// Si la subcategoría o la categoría están vacías, muestra una alerta
+			swal({
+				text: 'Por favor, complete todos los campos',
+				icon: 'error'
+				});
+				return;
+		}
 		swal({
 			title: 'Modificar',
 			text: `Esta seguro que desea cambiar/agregar una nueva imagen`,
@@ -149,6 +162,14 @@ export default function ClientMenu() {
 	};
 
 	const handleCreateSubCategory = () => {
+		if (!newSubCategory || !categorySelected) {
+			// Si la subcategoría o la categoría están vacías, muestra una alerta
+			swal({
+				text: 'Por favor, complete categoria y subcategoria',
+				icon: 'error'
+				});
+				return;
+		}
 		const formData = new FormData();
 		formData.append('subcategoria', newSubCategory);
 		formData.append('categoria', categorySelected);
@@ -280,12 +301,49 @@ export default function ClientMenu() {
 		});
 	};
 
+	const handleViewContainer = (e) => {
+		console.log(e.target.id);
+	
+		const id = e.target.id;
+	
+		// div de cada sección
+		const divContenedorCategoria = document.querySelector('.div-categoria');
+		const divContenedorSub = document.querySelector('.div-subcategoria');
+		const divContenedorProducto = document.querySelector('.div-producto');
+	
+		switch (id) {
+			case "contenedor-categoria":
+				toggleDisplayStyle(divContenedorCategoria);
+				divContenedorSub.style.display = 'none';
+				divContenedorProducto.style.display = 'none';
+				break;
+			case "contenedor-sub":
+				divContenedorCategoria.style.display = 'none';
+				toggleDisplayStyle(divContenedorSub);
+				divContenedorProducto.style.display = 'none';
+				break;
+			case "contenedor-producto":
+				divContenedorCategoria.style.display = 'none';
+				divContenedorSub.style.display = 'none';
+				toggleDisplayStyle(divContenedorProducto);
+				break;
+			default:
+				break;
+		}
+	}
+	
+	// Función para alternar entre 'block' y 'none'
+	const toggleDisplayStyle = (element) => {
+		const currentDisplayStyle = window.getComputedStyle(element).getPropertyValue('display');
+		element.style.display = (currentDisplayStyle === 'none') ? 'block' : 'none';
+	}
+
 	return (
 		<main className="client-create-menu-container">
 			<div className="create-menu-container">
 				<h2 className="create-menu-tittle">Menu</h2>
-				<div>
-					<h4 className="h4-menu">Nueva Categoria</h4>
+					<h4 id='contenedor-categoria' className="h4-menu" onClick={handleViewContainer}>Nueva Categoria</h4>
+				<div className='div-categoria'>
 					<div className="create-menu-input">
 						<label htmlFor="">Titulo de la categoria: </label>
 						<div className="section-form">
@@ -326,8 +384,8 @@ export default function ClientMenu() {
 						</button>
 					</div>
 				</div>
-				<h4 className="h4-menu">Nueva Subcategoria</h4>
-				<div>
+				<h4 id='contenedor-sub' className="h4-menu" onClick={handleViewContainer}>Nueva Subcategoria</h4>
+				<div className='div-subcategoria'>
 					<div className="create-menu-input">
 						<label htmlFor="">Titulo de la categoria: </label>
 						<select name="" id="" onChange={handleselectCategoryToSub}>
@@ -444,8 +502,8 @@ export default function ClientMenu() {
 						</button>
 					</div>
 				</div>
-				<h4 className="h4-menu">Agregar Producto</h4>
-				<div>
+				<h4 id='contenedor-producto' className="h4-menu" onClick={handleViewContainer}>Agregar Producto</h4>
+				<div className='div-producto'>
 					<div className="create-menu-input">
 						<label htmlFor="">Categoria: </label>
 						<select

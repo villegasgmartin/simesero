@@ -4,7 +4,7 @@
 
 
 .cart-container {
-   padding-top: 80px;
+   padding-top: 40px;
    padding-bottom: 100px;
    text-align: center;
 }
@@ -44,8 +44,29 @@
 }
 
 .minicart-total-price {
-   text-align: center;
-   color: orange;
+   color: #ffa101;
+	text-align: center;
+	padding: 5px 10px;
+	font-size: 12px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
+	border: 2px solid #ffa101;
+	border-radius: 10px;
+   max-width: 170px;
+   margin: 10px auto 0;
+}
+.minicart-total-price:before{
+   content:'';
+   background-image:url('https://res.cloudinary.com/dj3akdhb9/image/upload/v1709179927/icons8-carrito-de-compras-50_kkarke.png');
+   width:15px;
+   height: 15px;
+   background-size: contain;
+   background-repeat: no-repeat;
+   margin: auto;
+   display: inline-block;
+   padding-right: 5px;
+   
 }
 
 .cart-quit-btn {
@@ -82,11 +103,7 @@
    margin-bottom: 30px;
 }
 
-.comment-area {
-   background-color: #f1f1f1;
-   color: #000;
-   border-radius: 10px;
-}
+
 
 .submit-order-container {
    color: #000;
@@ -102,34 +119,28 @@
    color: #000;
 }
 
-.name-area-container p {
-   width: 280px;
-   height: 110px;
-   flex-shrink: 0;
-   border-radius: 15px;
-   background: #f4eeee;
-   box-shadow: 0px 2.76726px 2.21381px 0px rgba(0, 0, 0, 0.02),
-	   0px 6.6501px 5.32008px 0px rgba(0, 0, 0, 0.03),
-	   0px 12.52155px 10.01724px 0px rgba(0, 0, 0, 0.04),
-	   0px 22.33631px 17.86905px 0px rgba(0, 0, 0, 0.04),
-	   0px 41.77761px 33.42209px 0px rgba(0, 0, 0, 0.05),
-	   0px 100px 80px 0px rgba(0, 0, 0, 0.07);
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   justify-content: center;
-   margin-bottom: 30px;
-   text-align: center;
-}
 
-.name-area-container input {
-   background-color: #f1f1f1;
-   margin-bottom: 30px;
-   height: 30px;
-   border: 1px solid #000;
-   border-radius: 10px;
-   width: 250px;
-   color: #000;
+
+.name-area-container input, .comment-area {
+   width: 310px;
+	height: 49px;
+	flex-shrink: 0;
+	border-radius: 15px;
+	background: #f4eeee;
+	box-shadow: 0px 2.76726px 2.21381px 0px rgba(0, 0, 0, 0.02),
+		0px 6.6501px 5.32008px 0px rgba(0, 0, 0, 0.03),
+		0px 12.52155px 10.01724px 0px rgba(0, 0, 0, 0.04),
+		0px 22.33631px 17.86905px 0px rgba(0, 0, 0, 0.04),
+		0px 41.77761px 33.42209px 0px rgba(0, 0, 0, 0.05),
+		0px 100px 80px 0px rgba(0, 0, 0, 0.07);
+	color: #000;
+	text-align: center;
+	font-family: Outfit;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 300;
+	line-height: normal;
+   border-color:transparent
 }
 
 .estadopedido{
@@ -149,7 +160,8 @@
 .minicart-product{
    align-items: center;
    border-bottom: 1px solid #FFA003;
-   padding-bottom:21px;
+   padding: 10px 0;
+   margin-bottom: 10x;
 }
 .minicart-product button{
    background-color: rgb(49,192,49);

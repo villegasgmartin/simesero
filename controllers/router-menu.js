@@ -100,6 +100,7 @@ const agregarProducto = async (req, res) => {
 		console.log(nombre, categoria, subcategoria, precio, descripcion);
 		let id_producto = uuidv4();
 
+		
 		//agregar imagen a cloudinary para obterner url
 
 		if (req.files) {
@@ -188,6 +189,7 @@ const agregarProducto = async (req, res) => {
 const crearCategoria = async (req, res) => {
 	const emailUsuario = req.email;
 	const { nombre_categoria } = req.body;
+	const categoriaLower = nombre_categoria.toLowerCase();
 	try {
 		if(!nombre_categoria){
 			return res.status(404).json({
@@ -212,7 +214,7 @@ const crearCategoria = async (req, res) => {
 		//creo la categoria
 		const query =
 			'INSERT INTO categorias (nombre_categoria, emailusuario) VALUES (?, ?)';
-		const values = [nombre_categoria, emailUsuario];
+		const values = [categoriaLower, emailUsuario];
 
 		await pool.query(query, values);
 		res.status(201).json({
@@ -342,6 +344,7 @@ const borrarSubCategoria = async (req, res) => {
 const crearSubCategoria = async (req, res) => {
 	const emailUsuario = req.email;
 	const { subcategoria, categoria } = req.body;
+	const subcategoriaLower = subcategoria.toLowerCase();
 
 	try {
 		// Verifica si la categoría especificada existe para el usuario
@@ -388,7 +391,7 @@ const crearSubCategoria = async (req, res) => {
 		// Inserta la nueva subcategoría en la base de datos
 		const insertQuery =
 			'INSERT INTO subcategorias (nombre_subcategoria, id_categoria, emailusuario,img_subcategoria) VALUES (?, ?, ?, ?)';
-		const insertValues = [subcategoria, idCategoria, emailUsuario, img_url];
+		const insertValues = [subcategoriaLower, idCategoria, emailUsuario, img_url];
 
 		await pool.query(insertQuery, insertValues);
 		res.status(201).json({
@@ -829,6 +832,28 @@ try {
 
 }
 
+const planGet = async (req, res = response) => {
+	
+	const emailquery = req.query.email;
+
+	const query = 'SELECT plan FROM usuarios WHERE email = ?';
+
+	try {
+		const result = await pool.query(query, [emailquery]);
+		console.log(result);
+		if (result.length === 0) {
+			return res.status(404).json({ message: 'Usuario no encontrado' });
+		} else {
+			res.status(200).json({
+				plan: result[0][0].plan
+			});
+		}
+	} catch (error) {
+		console.log(error);
+		res.status(400).send('error en la peticion');
+	}
+};
+
 
 module.exports = {
 	mostrarMenu,
@@ -851,5 +876,6 @@ module.exports = {
 	actualizarEstadoPedido,
 	estadoPedido,
 	estadosAlertas,
-	actualizarImgSub
+	actualizarImgSub,
+	planGet
 };

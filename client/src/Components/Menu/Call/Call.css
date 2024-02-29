@@ -7,33 +7,14 @@
 	justify-content: center;
 }
 
-.call-container div {
-	width: 280px;
-	height: 157px;
-	flex-shrink: 0;
-	border-radius: 15px;
-	background: #f4eeee;
-	box-shadow: 0px 2.76726px 2.21381px 0px rgba(0, 0, 0, 0.02),
-		0px 6.6501px 5.32008px 0px rgba(0, 0, 0, 0.03),
-		0px 12.52155px 10.01724px 0px rgba(0, 0, 0, 0.04),
-		0px 22.33631px 17.86905px 0px rgba(0, 0, 0, 0.04),
-		0px 41.77761px 33.42209px 0px rgba(0, 0, 0, 0.05),
-		0px 100px 80px 0px rgba(0, 0, 0, 0.07);
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	margin-bottom: 30px;
-}
-
 .call-text {
 	color: #000;
 	text-align: center;
-	font-family: Outfit;
 	font-size: 16px;
 	font-style: normal;
-	font-weight: 100;
+	font-weight: 700;
 	line-height: normal;
+	text-transform: initial;
 }
 
 .call-logo {
@@ -62,6 +43,24 @@
 	}
 }
 
+.mesero-call{
+    width: 90%;
+    text-align: center;
+    height: 100%;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #f1f1f1;
+    border-radius: 10px;
+    margin-top: 20px;
+    
+
+}
+.mesero-call p{
+    text-align: center;
+}
 .call-btn {
 	background: none;
 	border: none;

@@ -180,21 +180,21 @@ export default function ClientHome() {
 		e.preventDefault();
 		swal({
 			title: 'Eliminar',
-			text: 'Esta seguro que desea liberar la mesa?',
+			text: 'Esta seguro que desea liberar el pedido?',
 			icon: 'warning',
 			buttons: ['No', 'Si']
 		}).then((respuesta) => {
 			if (respuesta) {
 				dispatch(deletePedido(e.target.name, e.target.value));
 				swal({
-					text: `Se ha liberado la mesa`,
+					text: `Se ha liberado el pedido`,
 					icon: 'success'
 				});
 				setTimeout(function () {
 					window.location.reload(true);
 				}, 2000);
 			} else {
-				swal({ text: 'no se ha liberado la mesa', icon: 'info' });
+				swal({ text: 'no se ha liberado el pedido', icon: 'info' });
 			}
 		});
 	};

@@ -1,5 +1,5 @@
 import {
-	getLocalData,
+	getLocalPlan,
 	
 	ordering,
 	removeFromMinicart
@@ -22,9 +22,9 @@ export default function Cart() {
 
 
 	useEffect(() => {
-		dispatch(getLocalData(userEmail));
+		dispatch(getLocalPlan(userEmail));
 	}, []);
-	const user = useSelector((state) => state.localData.usuario);
+	const plan = useSelector((state) => state.localPlan);
 
 	// Calcular la suma de los precios
 	const totalPrice = micart.reduce(
@@ -79,17 +79,18 @@ export default function Cart() {
 
 	return (
 		<>
-			{user?.plan === 'premium' ? (
+			{plan === 'premium' ? (
 				<div className="cart-container">
 					
 					<div className="name-area-container">
-						<p>Indique su nombre para realizar el pedido</p>
+						<p>Su Nombre*</p>
 						<input
 							type="text"
 							name=""
 							id=""
 							value={userName}
 							onChange={handleUserName}
+							placeholder='Indique aqui su nombre'
 						/>
 					</div>
 					{micart.map((product, index) => (
@@ -111,7 +112,7 @@ export default function Cart() {
 					))}
 					<div>
 						<div className="comment-area-container">
-							<p>Desea dejar algun comentario?</p>
+							<p>¿Desea dejar algun comentario?</p>
 							<textarea
 								name="comentario"
 								id=""
@@ -122,6 +123,7 @@ export default function Cart() {
 								onChange={handleComment}
 							></textarea>
 						</div>
+						<h2 className="minicart-total-price">Total: $ {totalPrice}</h2>{' '}
 						<div className="submit-order-container">
 							{userName === '' ? (
 								<div>Ingrese su nombre</div>
@@ -129,12 +131,12 @@ export default function Cart() {
 								<div>Seleccione un producto</div>
 							) : (
 								<div>
-									<button onClick={handleSubmit}>Enviar pedido</button>
+									<button className="payment-btn" onClick={handleSubmit}>Enviar pedido</button>
 								</div>
 							)}
 						</div>
 					</div>
-					<h2 className="minicart-total-price">Total: $ {totalPrice}</h2>{' '}
+					
 				</div>
 			) : (
 				<p>Este usuario no dispone de carrito de compras</p>

@@ -36,8 +36,11 @@
 
 .menu-dec-logo {
 	position: absolute;
-	width: 30px;
-	height: 30px;
+	width: 100%;
+	height: auto;
+	max-width: 150px;
+	max-height: 30px;
+	object-fit: cover;
 	flex-shrink: 0;
 	top: 23px;
 	left: 20px;
@@ -95,4 +98,35 @@ a.selected{
 }
 a.selected path{
 	filter:invert(0)
+}
+
+div.menu-mobile-admin-categories button:before{
+    content:'';
+    background-image:url('https://res.cloudinary.com/dj3akdhb9/image/upload/v1709178690/icons8-tenedor-91_lkzh5p.png');
+    display: block;
+    width:40px;
+    height: 40px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin: auto;
+	opacity: 0.5;
+    
+}
+div.menu-mobile-admin-categories button{
+    min-width: 100px;
+    margin: 0 5px;
+    padding: 5px 5px;
+    border: none;
+    font-size: 12px;
+    font-weight: bold;
+    background: transparent;
+    text-align: center;
+    text-transform: capitalize;
+}
+div.menu-mobile-admin-categories button.selected-category{
+    background:#FFA101; 
+}
+div.menu-mobile-admin-categories button.selected-category:before{
+    filter:invert(1);
+	opacity: 1;
 }

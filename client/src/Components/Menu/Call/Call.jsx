@@ -75,15 +75,18 @@ export default function Call() {
 					)}
 				</>
 			)}
-			<div>
-				<p className="call-text">
-					Desea llamar al mesero/a? presione el siguiente boton
-				</p>
+			<div className='mesero-call'>
+				<div>
+					<h4 className="call-text">
+						Desea llamar al mesero/a? presione el siguiente boton
+					</h4>
+				</div>
+				<p>Llamar mesero/a</p>
+				<button onClick={handleSubmit} className="call-btn">
+					<PiCallBellDuotone className="call-logo" />
+				</button>
 			</div>
-			<p>Llamar mesero/a</p>
-			<button onClick={handleSubmit} className="call-btn">
-				<PiCallBellDuotone className="call-logo" />
-			</button>
+			
 		</div>
 	);
 }

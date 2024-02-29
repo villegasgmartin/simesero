@@ -107,7 +107,7 @@ export default function ClientSideMenu() {
 							<img src={dataLocal?.img} alt="" />
 
 							<button className="cambiarimg-btn" onClick={handleOpenInput}>
-								Cambiar imagen
+								Cambiar logo
 							</button>
 							{imgInput ? (
 								<div className="admin-side-img-change">

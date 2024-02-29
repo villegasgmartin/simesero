@@ -136,7 +136,7 @@ footer{
 }
 
 .product-price {
-	color: #000;
+	color: #ffa101;
 	text-align: center;
 	padding: 5px 10px;
 	font-size: 12px;
@@ -145,8 +145,20 @@ footer{
 	line-height: normal;
 	border: 2px solid #ffa101;
 	border-radius: 10px;
+	
 }
-
+p.product-price:before{
+    content:'';
+    background-image:url('https://res.cloudinary.com/dj3akdhb9/image/upload/v1709179927/icons8-carrito-de-compras-50_kkarke.png');
+    width:15px;
+    height: 15px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin: auto;
+    display: inline-block;
+    padding-right: 5px;
+    
+}
 .ver-desc{
     color:#000;
     font-size:11px;
@@ -155,6 +167,7 @@ footer{
     padding-top: 5px;
     text-decoration: underline;
     text-decoration-color: rgba(0,0,0,0.4);
+	margin-bottom: 5px;
     
     
 }
@@ -245,7 +258,7 @@ div.subcategory-container img.subcategory-img{
 	top: 0;
 	left: 0;
 	z-index: 0;
-	filter: brightness(65%);
+	filter: brightness(75%);
 }
 
 h2.subcategory-title{
