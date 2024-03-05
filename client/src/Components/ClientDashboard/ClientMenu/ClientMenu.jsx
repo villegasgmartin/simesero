@@ -351,6 +351,7 @@ export default function ClientMenu() {
 								type="text"
 								value={newCategory}
 								onChange={handleChangeCategory}
+								maxLength={40}
 								className="input-category"
 							/>
 							<button className="btn-agregar" onClick={handleCreateCateg}>
@@ -409,6 +410,7 @@ export default function ClientMenu() {
 							className="add-subC-input"
 							value={newSubCategory}
 							onChange={handleChangeSubCategory}
+							maxLength={40}
 						/>
 
 						<label htmlFor="">Imagen de nueva sub categoria:</label>
@@ -572,7 +574,7 @@ export default function ClientMenu() {
 							name="descripcion"
 							value={input.descripcion}
 							onChange={handleChange}
-							maxLength={50}
+							maxLength={100}
 						/>
 					</div>
 					{user?.plan === 'premium' ? (

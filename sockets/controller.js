@@ -9,15 +9,40 @@ const usuarios = new Usuarios();
 const ticketControl = new TicketControl();
 
 const socketController = (socket, io) => {
-	socket.on('connect', ({ room }) => {
+
+
+	socket.on('connect',  ({ room }) => {
 		socket.to(room).emit('estado-actual', ticketControl.ultimos4);
 		socket.emit('tickets-pendientes', ticketControl.mesas.length);
 		socket.to(room).emit('tickets-pendientes', ticketControl.mesas.length);
+		
 	});
 
-	socket.on('join-room', ({ room }) => {
+	socket.on('join-room',async ({ room }) => {
 		socket.join(room); // Unir el socket a la sala especificada
 		console.log('sala', room);
+	
+		if(!socket.recovered){
+			try {
+				const result = await pool.query('SELECT * FROM mensajes WHERE id>=? AND usuario_email = ?',
+				 [socket.handshake.auth.serverOffset ?? 0, room])
+				
+				 
+
+				 result[0].forEach( row =>{
+					mensaje = {
+						mesa: row.mensaje,
+						mensaje: row.mesa,
+						fecha: row.hora,
+					}
+					socket.emit('crearMensaje', mensaje,row.id.toString() );
+					
+				 })
+
+			} catch (error) {
+				console.error(error);
+			}
+		}
 	});
 
 	//socket llamar camarera
@@ -153,23 +178,27 @@ const socketController = (socket, io) => {
 			callback(usuarios.getPersonasPorSala(data.email));
 		});
 
-		socket.on('crearMensaje', (data, callback) => {
+		socket.on('crearMensaje', async(data, callback) => {
 			console.log('data', data);
+			
 			let persona = usuarios.getPersona(socket.id);
 			console.log('persona', persona);
 			let mensaje = crearMensaje(data.mesa, data.mensaje);
-			socket.to(data.email).emit('crearMensaje', mensaje);
+
+			try {
+				const query = 'INSERT INTO mensajes (usuario_email, mensaje, mesa, hora) VALUES ( ?, ?, ?,?)';
+				result = await pool.query(query, [data.email, data.mesa, data.mensaje, mensaje.fecha])
+				console.log('result', result);
+			} catch (error) {
+				return console.error('error', error);
+			}
+			console.log('result1', result[0].insertId.toString());
+
+			socket.to(data.email).emit('crearMensaje', mensaje,result[0].insertId.toString() );
 			console.log(mensaje);
 			callback(mensaje);
 		});
-		// socket.on('disconnect', (usuario) => {
-		// 	console.log('datadesconect', usuario);
-		// 	let personaBorrada = usuarios.borrarPersona(usuario.id);
-		// 	console.log('personaBorrada', personaBorrada);
-		// 	if (personaBorrada) {
-		// 		io.to(personaBorrada.email).emit('listaPersona', usuarios.getPersonasPorSala(personaBorrada.email));
-		// 	}
-		//  });
+		
 		 
 		socket.on('disconnect', () => {
 			let personaBorrada = usuarios.borrarPersona(socket.id);
@@ -177,13 +206,14 @@ const socketController = (socket, io) => {
 			
 		});
 
-	// 	// Mensajes privados
-	// 	socket.on('mensajePrivado', (data) => {
-	// 		let persona = usuarios.getPersona(socket.id);
-	// 		socket
-	// 			.to(data.para)
-	// 			.emit('mensajePrivado', crearMensaje(persona.mesa, data.mensaje));
-	// 	});
+		socket.on('borrar-alertas', ({userEmail}, callback) => {
+			console.log(userEmail);
+			ticketControl.borrarAlertasPorEmail(userEmail);
+			
+		})
+
+		
+	
 };
 
 module.exports = {

@@ -70,6 +70,24 @@ class TicketControl {
 
     }
 
+    borrarAlertasPorEmail(email) {
+        const dbPath = path.join(__dirname, '../db/data.json');
+
+        // Lee el archivo JSON y carga su contenido
+        const jsonData = JSON.parse(fs.readFileSync(dbPath, 'utf-8'));
+
+        // Verifica si el correo electrónico existe en ultimos4
+        if (jsonData.ultimos4.hasOwnProperty(email)) {
+            // Elimina el array asociado al correo electrónico proporcionado
+            delete jsonData.ultimos4[email];
+
+            // Guarda el JSON actualizado en el archivo
+            fs.writeFileSync(dbPath, JSON.stringify(jsonData));
+            console.log(`Alertas eliminadas para el correo electrónico: ${email}`);
+        } else {
+            console.log(`No se encontraron alertas para el correo electrónico: ${email}`);
+        }
+    }
    
    
 

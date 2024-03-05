@@ -7,7 +7,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import io from 'socket.io-client';
 import { getLocalData } from '../../../redux/actions';
-const socket = io();
+const socket = io({
+	auth:{
+		serverOffset: 0
+	}
+});
 //const socket = io('https://menu-didactico.up.railway.app/');
 
 export default function ClientChat() {
@@ -103,10 +107,11 @@ export default function ClientChat() {
 
 			
 		});
-		socket.on('crearMensaje', (mensaje) => {
+		socket.on('crearMensaje', (mensaje, serverOffset) => {
+		
 			console.log('Servidor:', mensaje);
 			receiveMessage(mensaje);
-			
+			socket.auth.serverOffset = serverOffset;
 			scrollBottom();
 		});
 		socket.on('listaPersona', (personas) => {
@@ -187,7 +192,7 @@ export default function ClientChat() {
 										{mensaje.slice().reverse().map((mensaje, index) => (
 											<li
 												key={index}
-												className={`${mensaje.mesa === 'Mesa:Local' ? 'chat-local' : 'chat-mesa'}`}
+												className={`${mensaje.mesa === 'Local' ? 'chat-local' : 'chat-mesa'}`}
 											>
 												<b>{mensaje.mesa}</b> <br />{mensaje.mensaje}
 												<br /> <span className='hora-chat'>{mensaje.fecha}</span>

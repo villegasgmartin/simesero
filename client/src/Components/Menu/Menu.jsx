@@ -1,6 +1,6 @@
 import './Menu.css';
 
-// import { IoRestaurantSharp } from 'react-icons/io5';
+import { IoRestaurantSharp } from 'react-icons/io5';
 import { GiHotMeal } from 'react-icons/gi';
 import { BsFillChatDotsFill } from 'react-icons/bs';
 import { PiCallBell } from 'react-icons/pi';
@@ -40,15 +40,15 @@ export default function Menu() {
 	return (
 		<main className="menu-container">
 			<header className="menu-header-container">
-			{/* <div className="menu-header">
+			<div className="menu-header">
 					<div>
-						{user?.img === '' ? (
+						{plan?.img === '' ? (
 							<IoRestaurantSharp className="menu-dec-logo" />
 						) : (
-							<img src={user?.img} alt="" className="menu-dec-logo" />
+							<img src={plan?.img} alt="" className="menu-dec-logo" />
 						)}
 					</div>
-				</div> */}
+				</div>
 			</header>{' '}
 			<main>
 				<section

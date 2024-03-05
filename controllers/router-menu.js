@@ -855,6 +855,19 @@ const planGet = async (req, res = response) => {
 };
 
 
+const deleteMessages = async (req, res = response) => {
+	const email= req.query.email;
+
+	try {
+		const result = await pool.query('DELETE FROM mensajes WHERE usuario_email = ?',[email]);
+		res.status(200).json({ message: ' mensajes borrados'});
+	} catch (error) {
+		res.status(500).json({
+			error
+		})
+	}
+}
+
 module.exports = {
 	mostrarMenu,
 	agregarProducto,
@@ -877,5 +890,6 @@ module.exports = {
 	estadoPedido,
 	estadosAlertas,
 	actualizarImgSub,
-	planGet
+	planGet,
+	deleteMessages
 };

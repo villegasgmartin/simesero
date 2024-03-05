@@ -109,7 +109,11 @@ CREATE TABLE pedidos (
 ALTER TABLE pedidos
 ADD estado_pedido BOOLEAN NOT NULL DEFAULT FALSE;
 
-DESCRIBE planes;
-
-DESCRIBE usuarios;
+CREATE TABLE mensajes(
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  usuario_email VARCHAR(100) NOT NULL,
+  mensaje VARCHAR(100) NOT NULL,
+  mesa VARCHAR(50) NOT NULL,
+  mesa DATE NOT NULL,
+)
 

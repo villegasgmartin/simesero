@@ -202,6 +202,19 @@ td.alertas-iconos button:hover{
 td.alertas-iconos button:hover svg{
     filter: invert(0);
 }
+
+/*estilo btn alertas*/
+div.btn-alertas{
+	margin-left: 40px;
+	}
+	@media only screen and (max-width:768px){
+		div.btn-alertas{
+			margin:30px auto;
+			text-align: center;
+		}
+	}
+
+	
 @media only screen and (max-width:1000px){
     .client-home-table-container{
         overflow-x: scroll;
