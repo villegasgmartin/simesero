@@ -83,7 +83,7 @@ export default function Cart() {
 				<div className="cart-container">
 					
 					<div className="name-area-container">
-						<p>Su Nombre*</p>
+						<p className='cart-name'>Su Nombre*</p>
 						<input
 							type="text"
 							name=""

@@ -50,8 +50,8 @@ export default function QrGenerator() {
 		const pdf = new jsPDF('landscape', 'mm', 'a4');
 		const qrCodeWidth = 70;
 		const qrCodeHeight = 80;
-		const columnSpacing = 0;
-		const rowSpacing = 0;
+		const columnSpacing = 20;
+		const rowSpacing = 20;
 
 		let codesPrinted = 0;
 

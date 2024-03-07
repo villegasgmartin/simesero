@@ -31,8 +31,8 @@ const socketController = (socket, io) => {
 
 				 result[0].forEach( row =>{
 					mensaje = {
-						mesa: row.mensaje,
-						mensaje: row.mesa,
+						mesa: "Mesa : " + row.mensaje,
+						mensaje:  row.mesa,
 						fecha: row.hora,
 					}
 					socket.emit('crearMensaje', mensaje,row.id.toString() );
@@ -193,7 +193,7 @@ const socketController = (socket, io) => {
 				return console.error('error', error);
 			}
 			console.log('result1', result[0].insertId.toString());
-
+			console.log('mensaje emit', mensaje);
 			socket.to(data.email).emit('crearMensaje', mensaje,result[0].insertId.toString() );
 			console.log(mensaje);
 			callback(mensaje);

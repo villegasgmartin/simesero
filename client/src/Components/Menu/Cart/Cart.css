@@ -8,7 +8,9 @@
    padding-bottom: 100px;
    text-align: center;
 }
-
+.cart-name{
+   font-weight: 700;
+}
 .minicart-product {
    display: flex;
    justify-content: space-evenly;
@@ -44,30 +46,19 @@
 }
 
 .minicart-total-price {
-   color: #ffa101;
+   color: #000;
 	text-align: center;
 	padding: 5px 10px;
 	font-size: 12px;
 	font-style: normal;
 	font-weight: 400;
 	line-height: normal;
-	border: 2px solid #ffa101;
+	border: 1px solid #000;
 	border-radius: 10px;
    max-width: 170px;
    margin: 10px auto 0;
 }
-.minicart-total-price:before{
-   content:'';
-   background-image:url('https://res.cloudinary.com/dj3akdhb9/image/upload/v1709179927/icons8-carrito-de-compras-50_kkarke.png');
-   width:15px;
-   height: 15px;
-   background-size: contain;
-   background-repeat: no-repeat;
-   margin: auto;
-   display: inline-block;
-   padding-right: 5px;
-   
-}
+
 
 .cart-quit-btn {
    display: flex;

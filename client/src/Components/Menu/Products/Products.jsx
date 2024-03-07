@@ -138,7 +138,7 @@ export default function Products() {
 															</p>
 														</div>
 														{plan === 'premium' ? (
-															<div>
+															<div className='product-image'>
 																<img
 																	src={producto.img}
 																	alt={producto.nombre}

@@ -192,7 +192,7 @@ export default function ClientChat() {
 										{mensaje.slice().reverse().map((mensaje, index) => (
 											<li
 												key={index}
-												className={`${mensaje.mesa === 'Local' ? 'chat-local' : 'chat-mesa'}`}
+												className={`${mensaje.mesa === 'Local' || mensaje.mesa === 'Mesa : Local' ? 'chat-local' : 'chat-mesa'}`}
 											>
 												<b>{mensaje.mesa}</b> <br />{mensaje.mensaje}
 												<br /> <span className='hora-chat'>{mensaje.fecha}</span>

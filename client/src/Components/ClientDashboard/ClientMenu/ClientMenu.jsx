@@ -119,7 +119,7 @@ export default function ClientMenu() {
 	};
 
 	const handleChangeSubcategImg = (e) => {
-		if (!categorySelected || !subCategorySelected || newSubcategImg) {
+		if (!categorySelected || !subCategorySelected || !newSubcategImg) {
 			// Si la subcategoría o la categoría están vacías, muestra una alerta
 			swal({
 				text: 'Por favor, complete todos los campos',
@@ -464,7 +464,7 @@ export default function ClientMenu() {
 								</select>
 							</div>
 							<label htmlFor="">Nueva imagen de subcategoria:</label>
-							<p className="max-length-input">*Formato .jpg/.png</p>
+							
 							<input
 								type="file"
 								id="newImg"
@@ -485,6 +485,21 @@ export default function ClientMenu() {
 					<h4 className="h4-menu-borrar">Borrar Subcategoria</h4>
 
 					<div className="create-menu-input create-menu-select">
+					<div>
+								<label htmlFor="">Titulo de la categoria: </label>
+								<select name="" id="" onChange={handleselectCategoryToSub}>
+									<option value="">-</option>
+									{categories?.map((a, index) => (
+										<option
+											value={a.nombre_categoria}
+											key={a.nombre_categoria + index}
+										>
+											{' '}
+											{a.nombre_categoria}
+										</option>
+									))}
+								</select>{' '}
+							</div>
 						<div>
 							<label htmlFor="">Subcategorias existentes: </label>
 							<select name="" id="" onChange={handleselectSubCategory}>
@@ -568,13 +583,13 @@ export default function ClientMenu() {
 					</div>
 					<div className="create-menu-input">
 						<label htmlFor="">Descripcion: </label>
-						<p className="max-length-input">*Maximo 50 caracteres</p>
+						<p className="max-length-input">*Maximo 250 caracteres</p>
 						<input
 							type="text"
 							name="descripcion"
 							value={input.descripcion}
 							onChange={handleChange}
-							maxLength={100}
+							maxLength={250}
 						/>
 					</div>
 					{user?.plan === 'premium' ? (

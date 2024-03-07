@@ -55,7 +55,7 @@ export default function Pay() {
 	// Enviar el pedido de cuenta al dashboard del cliente
 	const handleSubmit = () => {
 		// Validar que todos los campos estén llenos
-		if (!nombre || !payMethod || !payType || !comment) {
+		if (!nombre) {
 			swal({
 			text: 'Por favor, complete todos los campos del formulario.',
 			icon: 'error'
@@ -108,12 +108,12 @@ export default function Pay() {
 					) : (
 						<div>
 							<div className="pay-username">
-								<p>Su Nombre*</p>
+								<p className='pay-name'>Su Nombre*</p>
 								<input type="text" value={nombre} onChange={handleSetName} placeholder='Indique aqui su nombre'/>
 							</div>
 
 							<div className="payment-type-container">
-								<p>Seleccione el metodo de pago*</p>
+								<p>Seleccione el metodo de pago</p>
 								<select name="payment-type" id="" onClick={handleSetMethod}>
 									<option value="-">-</option>
 									<option value="efectivo">Efectivo</option>
@@ -123,7 +123,7 @@ export default function Pay() {
 									<option value="otro">Otro</option>
 								</select>
 
-								<p>Seleccione tipo de pago*</p>
+								<p>Seleccione tipo de pago</p>
 								<select name="payment-type" id="" onClick={handleSetPayType}>
 									<option value="-">-</option>
 									<option value="dividir">Quiero dividir la cuenta</option>
@@ -132,7 +132,7 @@ export default function Pay() {
 								</select>
 
 								<div className="payment-type-container">
-									<p htmlFor="">Comentario*</p>
+									<p htmlFor="">Comentario</p>
 									<input
 										type="text"
 										value={comment}

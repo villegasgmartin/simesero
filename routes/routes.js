@@ -61,7 +61,8 @@ const {
 	estadosAlertas,
 	actualizarImgSub,
 	planGet,
-	deleteMessages
+	deleteMessages,
+	ImageGet
 } = require('../controllers/router-menu');
 const {path, join} = require('path');
 const router = Router();
@@ -209,6 +210,7 @@ router.get('/menu/categorias', mostrarCategoriasMenu);
 router.get('/menu', mostrarPlan);
 router.get('/menu/chat', getChatMenu);
 router.get('/menu/plan', planGet);
+router.get('/menu/img', ImageGet)
 router.delete('/menu/chat', deleteMessages);
 
 /****** alertas de pedido en preparacion******/

@@ -853,6 +853,27 @@ const planGet = async (req, res = response) => {
 		res.status(400).send('error en la peticion');
 	}
 };
+const ImageGet = async (req, res = response) => {
+	
+	const emailquery = req.query.email;
+
+	const query = 'SELECT img FROM usuarios WHERE email = ?';
+
+	try {
+		const result = await pool.query(query, [emailquery]);
+		console.log(result);
+		if (result.length === 0) {
+			return res.status(404).json({ message: 'Usuario no encontrado' });
+		} else {
+			res.status(200).json({
+				img: result[0][0].img
+			});
+		}
+	} catch (error) {
+		console.log(error);
+		res.status(400).send('error en la peticion');
+	}
+};
 
 
 const deleteMessages = async (req, res = response) => {
@@ -891,5 +912,6 @@ module.exports = {
 	estadosAlertas,
 	actualizarImgSub,
 	planGet,
-	deleteMessages
+	deleteMessages,
+	ImageGet
 };

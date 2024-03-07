@@ -4,7 +4,7 @@ const crearMensaje = (mesa, mensaje) => {
     const hora = `${dia.getHours()}:${dia.getMinutes()}`
 
     return {
-        mesa: "Mesa:" + mesa,
+        mesa: "Mesa : " + mesa,
         mensaje,
         fecha: hora,
     };
