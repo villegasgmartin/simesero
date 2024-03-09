@@ -65,7 +65,7 @@ CREATE TABLE items (
   nombre VARCHAR(60) NOT NULL,
   id_categoria INT NOT NULL,
   id_subcategoria INT NULL,
-  precio INT NOT NULL,
+  precio DECIMAL(10,2) NOT NULL;
   emailusuario VARCHAR(100) NOT NULL,
   id_producto varchar(100) NOT NULL;
   FOREIGN KEY (id_categoria) REFERENCES categorias(id_categoria),
@@ -74,6 +74,9 @@ CREATE TABLE items (
 
 ALTER TABLE items
 ADD descripcion varchar(100) NULL
+
+ALTER TABLE items
+MODIFY COLUMN precio DECIMAL(10,2) NOT NULL;
 
 CREATE TABLE categorias (
     id_categoria INT PRIMARY KEY AUTO_INCREMENT,
@@ -114,6 +117,6 @@ CREATE TABLE mensajes(
   usuario_email VARCHAR(100) NOT NULL,
   mensaje VARCHAR(100) NOT NULL,
   mesa VARCHAR(50) NOT NULL,
-  mesa DATE NOT NULL,
+  hora VARCHAR(50) NOT NULL,
 )
 

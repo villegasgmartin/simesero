@@ -114,7 +114,7 @@ export default function Pay() {
 
 							<div className="payment-type-container">
 								<p>Seleccione el metodo de pago</p>
-								<select name="payment-type" id="" onClick={handleSetMethod}>
+								<select name="payment-type" id="" onChange={handleSetMethod}>
 									<option value="-">-</option>
 									<option value="efectivo">Efectivo</option>
 									<option value="debito">Debito</option>
@@ -124,7 +124,7 @@ export default function Pay() {
 								</select>
 
 								<p>Seleccione tipo de pago</p>
-								<select name="payment-type" id="" onClick={handleSetPayType}>
+								<select name="payment-type" id="" onChange={handleSetPayType}>
 									<option value="-">-</option>
 									<option value="dividir">Quiero dividir la cuenta</option>
 									<option value="pagar-total">Quiero pagar el total</option>

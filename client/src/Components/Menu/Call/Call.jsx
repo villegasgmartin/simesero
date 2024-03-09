@@ -97,11 +97,11 @@ export default function Call() {
 			<div className='mesero-call'>
 				<div>
 					<h4 className="call-text">
-					¿Desea llamar al mesero/a? presione el siguiente boton
+					¿Desea llamar al mesero/a?
 					</h4>
 				</div>
 			
-				<button onClick={handleSubmit} className="btn btn-info btn-circle chat-btn ">
+				<button onClick={handleSubmit} className="payment-btn">
 					Llamar Al mesero/a
 					
 				</button>

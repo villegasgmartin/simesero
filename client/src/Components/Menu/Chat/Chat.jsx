@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 
 import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-
+import { IoSend } from "react-icons/io5";
 import io from 'socket.io-client';
 import { getPlanToMenu } from '../../../redux/actions';
 const socket = io({
@@ -206,13 +206,12 @@ export default function Chat() {
 														className="btn btn-info btn-circle chat-btn "
 													>
 														{' '}
-														Enviar{' '}
+														<IoSend />
+
 													</button>
 												</div>
 											</div>
 										</form>
-										{/* {renderizarUsuarios()}
-										{renderizarMensajes()} */}
 									</div>
 								</div>
 							</div>

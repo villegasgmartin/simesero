@@ -6,12 +6,20 @@ ul#divChatbox li{
     
     column-gap: 15px;
 }
+.chat-right-aside{
+    position: relative;
+}
 ul#divChatbox{
     padding-bottom: 110px;
     padding-left: 0px;
     height: 100%;
-    max-height:45vh;
+    
     overflow-y: scroll;
+}
+.chat-rbox{
+    height: 100%;
+    min-height: 300px;
+    padding-bottom: 50px;
 }
 h5{
     margin:0px;
@@ -19,18 +27,15 @@ h5{
     text-transform: uppercase;
     
 }
-form#formEnviar{
-    position: absolute;
-    max-height: 110px;
-    bottom: 53px;
+.card-body {
+    position: fixed;
     left: 0;
     right: 0;
+    bottom: 53px;
+    
     background-color: #fff;
 }
-div.container-fluid{
-    position: relative;
-    margin: 0 20px;
-}
+
 div.card{
     min-height: 60vh;
 }
@@ -74,11 +79,13 @@ button.chat-btn{
     border: solid 2px orange;
     border-radius: 10px;
     padding: 10px 10px;
+    width: 49px;
+    height: 49px;
     
 }
 div.col-4{
     text-align: center;
-    padding-bottom: 30px;
+    padding-bottom: 20px;
 }
 div.col-8{
     text-align: center;

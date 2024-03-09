@@ -28,7 +28,7 @@ export default function Cart() {
 
 	// Calcular la suma de los precios
 	const totalPrice = micart.reduce(
-		(total, product) => total + product.precio,
+		(total, product) => parseFloat(total) + parseFloat(product.precio),
 		0
 	);
 	// Quitar un producto del carrito
@@ -123,7 +123,7 @@ export default function Cart() {
 								onChange={handleComment}
 							></textarea>
 						</div>
-						<h2 className="minicart-total-price">Total: $ {totalPrice}</h2>{' '}
+						<h2 className="minicart-total-price">Total: ${totalPrice}</h2>{' '}
 						<div className="submit-order-container">
 							{userName === '' ? (
 								<div>Ingrese su nombre</div>

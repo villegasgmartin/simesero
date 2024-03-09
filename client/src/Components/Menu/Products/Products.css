@@ -18,6 +18,7 @@
     background-color: rgb(49,192,49);
     border:1px solid rgb(49,192,49);
     color:#fff;
+	font-size: 20px;
 }
 
 .footer-container{
@@ -36,6 +37,7 @@ footer{
 }
 .products-container{
     background-color: #fff;
+	position: relative;
 }
 
 .products-container {
@@ -140,11 +142,10 @@ footer{
 	color: #000;
 	text-align: center;
 	padding: 5px 10px;
-	font-size: 12px;
+	font-size: 16px;
 	font-style: normal;
-	font-weight: 400;
+	font-weight: 700;
 	line-height: normal;
-	border: 1px solid #000;
 	border-radius: 10px;
 	
 }
@@ -191,9 +192,11 @@ li.product-container {
 	width: 24px;
 	height: 24px;
 	flex-shrink: 0;
-	margin-top: 30px;
 }
-
+div.add-container{
+	flex-direction: column;
+	justify-content: center;
+}
 .selected-category {
 	border-radius: 5px;
 	background: #ffa101;
