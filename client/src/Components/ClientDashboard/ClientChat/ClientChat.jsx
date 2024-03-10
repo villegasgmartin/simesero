@@ -6,9 +6,16 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import io from 'socket.io-client';
-import { getLocalData } from '../../../redux/actions';
+import {
+	changeChatState,
+	deleteMensajes,
+	getChatState,
+	getLocalData,
+	verMensaje
+} from '../../../redux/actions';
+import swal from 'sweetalert';
 const socket = io({
-	auth:{
+	auth: {
 		serverOffset: 0
 	}
 });
@@ -23,14 +30,10 @@ export default function ClientChat() {
 		mesa: 'Local'
 	};
 
-	
-
-
 	const userEmail = searchParams.get('email');
-	
 
 	const [mensaje, setMessages] = useState([]);
-	
+
 	const divUsuarios = document.querySelector('#divUsuarios');
 	const formEnviar = document.querySelector('#formEnviar');
 	const txtMensaje = document.querySelector('#txtMensaje');
@@ -58,16 +61,32 @@ export default function ClientChat() {
 		});
 
 		// if (divUsuarios) {
-        //     divUsuarios.innerHTML = html;
-        // }
+		//     divUsuarios.innerHTML = html;
+		// }
 	}
-	
 
-	
-		
-	
-		
-	
+	const handleDeleteChat = (e) => {
+		e.preventDefault();
+		swal({
+			title: 'Activar',
+			text: 'Esta seguro que desea eliminar el historial de chat?',
+			icon: 'warning',
+			buttons: ['No', 'Si']
+		}).then((respuesta) => {
+			if (respuesta) {
+				dispatch(deleteMensajes(userEmail));
+				swal({
+					text: `Se ha eliminado el historial`,
+					icon: 'success'
+				});
+				setTimeout(function () {
+					window.location.reload(true);
+				}, 2000);
+			} else {
+				swal({ text: 'no se ha eliminado el historial', icon: 'info' });
+			}
+		});
+	};
 
 	function scrollBottom() {
 		// Verificar si divChatbox es null o undefined
@@ -76,23 +95,23 @@ export default function ClientChat() {
 		}
 		const newMessage = divChatbox.querySelector('li:last-child');
 		if (newMessage) {
-		const clientHeight = divChatbox.clientHeight;
-		const scrollTop = divChatbox.scrollTop;
-		const scrollHeight = divChatbox.scrollHeight;
-		const newMessageHeight = newMessage.clientHeight;
-		const lastMessageHeight =
-			(newMessage.previousElementSibling &&
-				newMessage.previousElementSibling.clientHeight) ||
-			0;
+			const clientHeight = divChatbox.clientHeight;
+			const scrollTop = divChatbox.scrollTop;
+			const scrollHeight = divChatbox.scrollHeight;
+			const newMessageHeight = newMessage.clientHeight;
+			const lastMessageHeight =
+				(newMessage.previousElementSibling &&
+					newMessage.previousElementSibling.clientHeight) ||
+				0;
 
-		if (
-			clientHeight + scrollTop + newMessageHeight + lastMessageHeight >=
-			scrollHeight
-		) {
-			divChatbox.scrollTop = scrollHeight;
+			if (
+				clientHeight + scrollTop + newMessageHeight + lastMessageHeight >=
+				scrollHeight
+			) {
+				divChatbox.scrollTop = scrollHeight;
+			}
 		}
 	}
-}
 
 	useEffect(() => {
 		socket.on('connect', () => {
@@ -104,12 +123,10 @@ export default function ClientChat() {
 				// console.log('Usuarios conectados', resp);
 				renderizarUsuarios(resp);
 			});
-
-			
 		});
 		socket.on('crearMensaje', (mensaje, serverOffset) => {
-		
 			console.log('Servidor:', mensaje);
+			dispatch(changeChatState(userEmail));
 			receiveMessage(mensaje);
 			socket.auth.serverOffset = serverOffset;
 			scrollBottom();
@@ -117,7 +134,6 @@ export default function ClientChat() {
 		socket.on('listaPersona', (personas) => {
 			console.log('personas:', personas);
 			renderizarUsuarios(personas);
-
 		});
 		socket.on('disconnect', () => {
 			console.log('desconectado');
@@ -133,7 +149,7 @@ export default function ClientChat() {
 		socket.emit(
 			'crearMensaje',
 			{
-				email:usuario.email,
+				email: usuario.email,
 				mesa: usuario.mesa,
 				mensaje: txtMensaje.value
 			},
@@ -148,12 +164,13 @@ export default function ClientChat() {
 	};
 
 	const receiveMessage = (mensaje) =>
-    setMessages(state => [mensaje, ...state]);
+		setMessages((state) => [mensaje, ...state]);
 
-	
 	useEffect(() => {
 		dispatch(getLocalData(userEmail));
+		dispatch(verMensaje(userEmail));
 	}, []);
+	const newChat = useSelector((state) => state.newChat);
 	const user = useSelector((state) => state.localData.usuario);
 	return (
 		<div className="container-fluid">
@@ -175,7 +192,7 @@ export default function ClientChat() {
 									</div>
 									<div className="chat-left-inner">
 										<ul className="chatonline style-none" id="divUsuarios">
-										{' '}
+											{' '}
 										</ul>
 									</div>
 								</div>
@@ -185,19 +202,30 @@ export default function ClientChat() {
 										<div className="p-20 b-b">
 											<h3 className="box-title">Sala de Chat </h3>
 										</div>
+										<button onClick={handleDeleteChat}>Borrar chat</button>
 									</div>
 
 									<div className="chat-rbox">
 										<ul className="chat-list p-20" id="divChatbox">
-										{mensaje.slice().reverse().map((mensaje, index) => (
-											<li
-												key={index}
-												className={`${mensaje.mesa === 'Local' || mensaje.mesa === 'Mesa : Local' ? 'chat-local' : 'chat-mesa'}`}
-											>
-												<b>{mensaje.mesa}</b> <br />{mensaje.mensaje}
-												<br /> <span className='hora-chat'>{mensaje.fecha}</span>
-											</li>
-										))}
+											{mensaje
+												.slice()
+												.reverse()
+												.map((mensaje, index) => (
+													<li
+														key={index}
+														className={`${
+															mensaje.mesa === 'Local' ||
+															mensaje.mesa === 'Mesa : Local'
+																? 'chat-local'
+																: 'chat-mesa'
+														}`}
+													>
+														<b>{mensaje.mesa}</b> <br />
+														{mensaje.mensaje}
+														<br />{' '}
+														<span className="hora-chat">{mensaje.fecha}</span>
+													</li>
+												))}
 										</ul>
 									</div>
 									<div className="card-body b-t">
@@ -215,7 +243,7 @@ export default function ClientChat() {
 												<div className="col-4 text-right">
 													<button
 														type="submit"
-														className='login-btn chat-btn'
+														className="login-btn chat-btn"
 														onClick={handleSubmit}
 													>
 														Enviar

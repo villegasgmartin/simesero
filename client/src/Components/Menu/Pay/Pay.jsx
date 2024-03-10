@@ -29,7 +29,6 @@ export default function Pay() {
 		setPayType(e.target.value);
 	};
 
-
 	const handleComment = (e) => {
 		setComment(e.target.value);
 	};
@@ -37,7 +36,7 @@ export default function Pay() {
 	const location = useLocation();
 	const searchParams = new URLSearchParams(location.search);
 
-	const userEmail = searchParams.get('email');
+	const userEmail = atob(searchParams.get('email'));
 	const mesa = searchParams.get('mesa');
 
 	const payload = () => {
@@ -57,8 +56,8 @@ export default function Pay() {
 		// Validar que todos los campos estén llenos
 		if (!nombre) {
 			swal({
-			text: 'Por favor, complete todos los campos del formulario.',
-			icon: 'error'
+				text: 'Por favor, complete todos los campos del formulario.',
+				icon: 'error'
 			});
 			return;
 		}
@@ -89,7 +88,6 @@ export default function Pay() {
 				swal({ text: 'No se pedido la cuenta', icon: 'info' });
 			}
 		});
-
 	};
 
 	useEffect(() => {
@@ -108,8 +106,13 @@ export default function Pay() {
 					) : (
 						<div>
 							<div className="pay-username">
-								<p className='pay-name'>Su Nombre*</p>
-								<input type="text" value={nombre} onChange={handleSetName} placeholder='Indique aqui su nombre'/>
+								<p className="pay-name">Su Nombre*</p>
+								<input
+									type="text"
+									value={nombre}
+									onChange={handleSetName}
+									placeholder="Indique aqui su nombre"
+								/>
 							</div>
 
 							<div className="payment-type-container">
@@ -146,12 +149,11 @@ export default function Pay() {
 								</button>
 							</div>
 						</div>
-
+					)}
+				</div>
+			) : (
+				<p>Este usuario no tiene disponible la opcion de solicitar la cuenta</p>
 			)}
-		</div>
-		) : (
-			<p>Este usuario no tiene disponible la opcion de solicitar la cuenta</p>
-			)}
-			</>
+		</>
 	);
 }

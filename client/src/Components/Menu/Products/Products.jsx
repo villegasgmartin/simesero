@@ -19,7 +19,7 @@ export default function Products() {
 	useEffect(() => {
 		const url = window.location.href;
 		const parsed = queryString.parseUrl(url);
-		const email = parsed.query.email;
+		const email = atob(parsed.query.email);
 		dispatch(getLocalPlan(email));
 		dispatch(getMenuCategories(email));
 		dispatch(getProducts(email));
@@ -110,7 +110,6 @@ export default function Products() {
 														<div className="product-info">
 															<p className="product-name">{producto.nombre}</p>
 
-															
 															{selectedProductToShow === producto ? (
 																<div className="menu-product-edit-popup">
 																	<p className="product-description">
@@ -138,7 +137,7 @@ export default function Products() {
 															</p>
 														</div>
 														{plan === 'premium' ? (
-															<div className='product-image'>
+															<div className="product-image">
 																<img
 																	src={producto.img}
 																	alt={producto.nombre}

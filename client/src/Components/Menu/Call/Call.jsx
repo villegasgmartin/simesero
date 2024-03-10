@@ -8,7 +8,6 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getPedidoState, getLocalPlan } from '../../../redux/actions';
 
-
 const socket = io();
 
 export default function Call() {
@@ -16,7 +15,7 @@ export default function Call() {
 	const searchParams = new URLSearchParams(location.search);
 
 	const dispatch = useDispatch();
-	const userEmail = searchParams.get('email');
+	const userEmail = atob(searchParams.get('email'));
 	const mesa = searchParams.get('mesa');
 
 	const [stateOpen, setStateOpen] = useState(false);
@@ -60,53 +59,52 @@ export default function Call() {
 		});
 	};
 	useEffect(() => {
-		
 		dispatch(getLocalPlan(userEmail));
 	}, []);
-	
-	const planActual = useSelector((state) => state.localPlan);
 
+	const planActual = useSelector((state) => state.localPlan);
 
 	return (
 		<div className="call-container">
 			<></>
 			{planActual === 'premium' ? (
-					<div>
-						<h4 className="call-text">
-						¿Desea consultar el pedido realizado?
-						</h4>
-						<button className="estadopedido" onClick={handleViewState}>
+				<div>
+					<h4 className="call-text">¿Desea consultar el pedido realizado?</h4>
+					<button className="estadopedido" onClick={handleViewState}>
 						Consultar estado de pedido realizado
-						</button>
-						{pedidoState && pedidoState !== undefined && (
+					</button>
+					{pedidoState && pedidoState !== undefined && (
 						<>
 							{stateOpen === true && pedidoState.msg === 'true' ? (
-							<p className="pedido-state">Estamos preparando tu pedido</p>
+								<p className="pedido-state">Estamos preparando tu pedido</p>
 							) : pedidoState.msg === 'false' ? (
-							<p className="pedido-state">Su pedido aún no ha sido procesado</p>
+								<p className="pedido-state">
+									Su pedido aún no ha sido procesado
+								</p>
 							) : (
-							<></>
+								<></>
 							)}
 						</>
-						)}
-					</div>
-					) : (
-					<></>
 					)}
+				</div>
+			) : (
+				<></>
+			)}
 
-			<div className='mesero-call'>
+			<div className="mesero-call">
 				<div>
 					<h4 className="call-text">
-					¿Desea llamar al mesero/a? presione el siguiente boton
+						¿Desea llamar al mesero/a? presione el siguiente boton
 					</h4>
 				</div>
-			
-				<button onClick={handleSubmit} className="btn btn-info btn-circle chat-btn ">
+
+				<button
+					onClick={handleSubmit}
+					className="btn btn-info btn-circle chat-btn "
+				>
 					Llamar Al mesero/a
-					
 				</button>
 			</div>
-			
 		</div>
 	);
 }

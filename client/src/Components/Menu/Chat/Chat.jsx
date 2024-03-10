@@ -7,9 +7,10 @@ import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import io from 'socket.io-client';
-import { getPlanToMenu } from '../../../redux/actions';
+import { deleteMensajes, getPlanToMenu } from '../../../redux/actions';
+import swal from 'sweetalert';
 const socket = io({
-	auth:{
+	auth: {
 		serverOffset: 0
 	}
 });
@@ -22,7 +23,7 @@ export default function Chat() {
 
 	const usuario = {
 		mesa: searchParams.get('mesa'),
-		email: searchParams.get('email')
+		email: atob(searchParams.get('email'))
 	};
 
 	const [mensaje, setMessages] = useState([]);
@@ -57,10 +58,6 @@ export default function Chat() {
 		// divUsuarios.innerHTML = html;
 	}
 
-
-	
-	
-
 	function scrollBottom() {
 		// Verificar si divChatbox es null o undefined
 		if (!divChatbox) {
@@ -68,23 +65,23 @@ export default function Chat() {
 		}
 		const newMessage = divChatbox.querySelector('li:last-child');
 		if (newMessage) {
-		const clientHeight = divChatbox.clientHeight;
-		const scrollTop = divChatbox.scrollTop;
-		const scrollHeight = divChatbox.scrollHeight;
-		const newMessageHeight = newMessage.clientHeight;
-		const lastMessageHeight =
-			(newMessage.previousElementSibling &&
-				newMessage.previousElementSibling.clientHeight) ||
-			0;
+			const clientHeight = divChatbox.clientHeight;
+			const scrollTop = divChatbox.scrollTop;
+			const scrollHeight = divChatbox.scrollHeight;
+			const newMessageHeight = newMessage.clientHeight;
+			const lastMessageHeight =
+				(newMessage.previousElementSibling &&
+					newMessage.previousElementSibling.clientHeight) ||
+				0;
 
-		if (
-			clientHeight + scrollTop + newMessageHeight + lastMessageHeight >=
-			scrollHeight
-		) {
-			divChatbox.scrollTop = scrollHeight;
+			if (
+				clientHeight + scrollTop + newMessageHeight + lastMessageHeight >=
+				scrollHeight
+			) {
+				divChatbox.scrollTop = scrollHeight;
+			}
 		}
 	}
-}
 
 	useEffect(() => {
 		socket.on('connect', () => {
@@ -96,8 +93,6 @@ export default function Chat() {
 				// console.log('Usuarios conectados', resp);
 				renderizarUsuarios(resp);
 			});
-			
-			
 		});
 		socket.on('crearMensaje', (mensaje, serverOffset) => {
 			console.log('menu:', mensaje);
@@ -115,10 +110,7 @@ export default function Chat() {
 		});
 	}, []);
 
-
-
-	
-		const handleSubmit = (e) => {
+	const handleSubmit = (e) => {
 		e.preventDefault();
 		if (txtMensaje.value.trim().length === 0) {
 			return;
@@ -127,7 +119,7 @@ export default function Chat() {
 		socket.emit(
 			'crearMensaje',
 			{
-				email:usuario.email,
+				email: usuario.email,
 				mesa: usuario.mesa,
 				mensaje: txtMensaje.value
 			},
@@ -141,8 +133,8 @@ export default function Chat() {
 	};
 
 	const receiveMessage = (mensaje) =>
-    setMessages(state => [mensaje, ...state]);
-	
+		setMessages((state) => [mensaje, ...state]);
+
 	useEffect(() => {
 		dispatch(getPlanToMenu(usuario.email));
 	}, []);
@@ -177,15 +169,25 @@ export default function Chat() {
 
 									<div className="chat-rbox">
 										<ul className="chat-list p-20" id="divChatbox">
-										{mensaje.slice().reverse().map((mensaje, index) => (
-												<li
-													key={index}
-													className={`${mensaje.mesa === 'Local' || mensaje.mesa === 'Mesa : Local' ? 'chat-local' : 'chat-mesa'}`}
-												>
-													<b>{mensaje.mesa}</b> <br />{mensaje.mensaje}
-													<br /> <span className='hora-chat'>{mensaje.fecha}</span>
-												</li>
-											))}
+											{mensaje
+												.slice()
+												.reverse()
+												.map((mensaje, index) => (
+													<li
+														key={index}
+														className={`${
+															mensaje.mesa === 'Local' ||
+															mensaje.mesa === 'Mesa : Local'
+																? 'chat-local'
+																: 'chat-mesa'
+														}`}
+													>
+														<b>{mensaje.mesa}</b> <br />
+														{mensaje.mensaje}
+														<br />{' '}
+														<span className="hora-chat">{mensaje.fecha}</span>
+													</li>
+												))}
 										</ul>
 									</div>
 									<div className="card-body b-t">

@@ -20,7 +20,9 @@ import {
 	GET_CLIENTS_TO_CONFIRM_PLAN,
 	GET_PLAN_TO_MENU,
 	GET_PEDIDO_STATE,
-	GET_LOCAL_PLAN
+	GET_LOCAL_PLAN,
+	GET_LOCAL_IMG,
+	GET_CHAT_STATE
 } from './actions';
 
 let initialState = {
@@ -44,7 +46,9 @@ let initialState = {
 	clientsToConfirmPlan: [],
 	planToMenu: '',
 	pedidoState: '',
-	localPlan: ''
+	localPlan: '',
+	localImg: '',
+	newChat: { msg: 'false' }
 };
 
 function rootReducer(state = initialState, action) {
@@ -74,6 +78,11 @@ function rootReducer(state = initialState, action) {
 			return {
 				...state,
 				localPlan: action.payload.plan
+			};
+		case GET_LOCAL_IMG:
+			return {
+				...state,
+				localImg: action.payload.img
 			};
 
 		case GET_ALL_CLIENTS:
@@ -167,6 +176,11 @@ function rootReducer(state = initialState, action) {
 			return {
 				...state,
 				pedidoState: action.payload
+			};
+		case GET_CHAT_STATE:
+			return {
+				...state,
+				newChat: action.payload
 			};
 		default:
 			return state;

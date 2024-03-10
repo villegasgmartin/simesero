@@ -34,7 +34,11 @@ const {
 
 const { check } = require('express-validator');
 
-const { validarJWT, logout, validarJWTPassword } = require('../middlerwares/validar-jwt');
+const {
+	validarJWT,
+	logout,
+	validarJWTPassword
+} = require('../middlerwares/validar-jwt');
 const adminRol = require('../middlerwares/validad-roles');
 
 //controllers y middlerwares del menu
@@ -62,21 +66,21 @@ const {
 	actualizarImgSub,
 	planGet,
 	deleteMessages,
-	ImageGet
+	ImageGet,
+	estadosMensajes,
+	actualizarEstadoMsj,
+	mensajeVisto
 } = require('../controllers/router-menu');
-const {path, join} = require('path');
+const { path, join } = require('path');
 const router = Router();
 
 //rutas get
 router.get('/', homeGet);
 router.get('/dashboard/config', [validarJWT], configGet);
-router.get('/client',[validarJWT], dashboardLocal);
+router.get('/client', [validarJWT], dashboardLocal);
 router.get('/administrador', [validarJWT, adminRol], adminGet);
 
 router.put('/admin/confirmar-pago', [validarJWT, adminRol], confimarPago);
-
-
-
 
 //mostrar usuario a confirmar
 router.get('/confirmar', mostrarUsuarioConfirmar);
@@ -84,13 +88,16 @@ router.get('/confirmar', mostrarUsuarioConfirmar);
 router.get('/confimar-plan', mostrarUsuarioConfirmarPlan);
 
 //post comprobar emails antes del post de nuevo usuario
-router.post('/validar-email-admin',[
-	check('email', 'correo no valido').isEmail(),	
-],postEmailExistenteAdmin );
-router.post('/validar-email-local',[
-	check('email', 'correo no valido').isEmail(),	
-],postEmailExistentelocal );
-
+router.post(
+	'/validar-email-admin',
+	[check('email', 'correo no valido').isEmail()],
+	postEmailExistenteAdmin
+);
+router.post(
+	'/validar-email-local',
+	[check('email', 'correo no valido').isEmail()],
+	postEmailExistentelocal
+);
 
 //ruta get para crear administrador
 
@@ -139,7 +146,7 @@ router.post(
 
 //ruta actualizacion clave
 router.post('/save-password', recuperarClave);
-router.put('/new-password',[validarJWTPassword], newPassword);
+router.put('/new-password', [validarJWTPassword], newPassword);
 //actualizacion de datos
 router.put('/actualizar', [validarJWT], actualizarDatos);
 
@@ -177,7 +184,7 @@ router.delete(
 
 	borrarSubCategoria
 );
-router.put('/new-subimg', [validarJWT], actualizarImgSub)
+router.put('/new-subimg', [validarJWT], actualizarImgSub);
 
 //actualizar los planes desde el usuario
 router.put('/dashboard/actulizar-plan', [validarJWT], mejorarPlan);
@@ -192,16 +199,13 @@ router.post('/dashboard/newsubcategoria', [validarJWT], crearSubCategoria);
 
 router.get('/dashboard/pedidos', [validarJWT], mostrarPedidos);
 router.delete('/liberar-pedido', [validarJWT], liberarPedido);
-router.put('/reset-alertas', estadosAlertas)
+router.put('/reset-alertas', estadosAlertas);
 
 //chat local
 router.get('/client/chat', getChatLocal);
 
 //cancerlar cuenta
 router.get('/dashboard/cancelar', [validarJWT], cancelarPlan);
-
-
-
 
 //****************RUTAS DEL MENU******************
 router.post('/pedido', realizarPedidos);
@@ -210,17 +214,20 @@ router.get('/menu/categorias', mostrarCategoriasMenu);
 router.get('/menu', mostrarPlan);
 router.get('/menu/chat', getChatMenu);
 router.get('/menu/plan', planGet);
-router.get('/menu/img', ImageGet)
+router.get('/menu/img', ImageGet);
 router.delete('/menu/chat', deleteMessages);
+router.get('/menu/estado-mensaje', estadosMensajes);
+router.put('/menu/estado-mensaje', actualizarEstadoMsj);
+router.put('/menu/ver-mensaje', mensajeVisto);
 
 /****** alertas de pedido en preparacion******/
 
-router.put('/dashboard-local', actualizarEstadoPedido );
-router.get('/menu-local' , estadoPedido);
+router.put('/dashboard-local', actualizarEstadoPedido);
+router.get('/menu-local', estadoPedido);
 
 // Configuraci贸n para manejar rutas espec铆ficas del cliente
 router.get(['*'], function (req, res) {
 	res.sendFile(join(__dirname, '../client/dist', 'index.html'));
-  });
+});
 
 module.exports = router;

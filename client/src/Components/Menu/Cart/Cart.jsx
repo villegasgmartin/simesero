@@ -1,6 +1,5 @@
 import {
 	getLocalPlan,
-	
 	ordering,
 	removeFromMinicart
 } from '../../../redux/actions';
@@ -16,10 +15,9 @@ export default function Cart() {
 	const location = useLocation();
 	const searchParams = new URLSearchParams(location.search);
 	const dispatch = useDispatch();
-	const userEmail = searchParams.get('email');
+	const userEmail = atob(searchParams.get('email'));
 	const mesa = searchParams.get('mesa');
 	const nombresProductos = micart.map((producto) => producto.nombre).join(', ');
-
 
 	useEffect(() => {
 		dispatch(getLocalPlan(userEmail));
@@ -81,16 +79,15 @@ export default function Cart() {
 		<>
 			{plan === 'premium' ? (
 				<div className="cart-container">
-					
 					<div className="name-area-container">
-						<p className='cart-name'>Su Nombre*</p>
+						<p className="cart-name">Su Nombre*</p>
 						<input
 							type="text"
 							name=""
 							id=""
 							value={userName}
 							onChange={handleUserName}
-							placeholder='Indique aqui su nombre'
+							placeholder="Indique aqui su nombre"
 						/>
 					</div>
 					{micart.map((product, index) => (
@@ -131,12 +128,13 @@ export default function Cart() {
 								<div>Seleccione un producto</div>
 							) : (
 								<div>
-									<button className="payment-btn" onClick={handleSubmit}>Enviar pedido</button>
+									<button className="payment-btn" onClick={handleSubmit}>
+										Enviar pedido
+									</button>
 								</div>
 							)}
 						</div>
 					</div>
-					
 				</div>
 			) : (
 				<p>Este usuario no dispone de carrito de compras</p>

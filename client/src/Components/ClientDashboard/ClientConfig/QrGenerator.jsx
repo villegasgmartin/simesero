@@ -9,6 +9,7 @@ export default function QrGenerator() {
 	const location = useLocation();
 	const searchParams = new URLSearchParams(location.search);
 	const email = searchParams.get('email');
+	const encodedEmail = btoa(email);
 	const [totalCodes, setTotalCodes] = useState(0);
 	const [firstCode, setFirstCode] = useState(0);
 	const [generate, setGenerate] = useState(false);
@@ -25,7 +26,9 @@ export default function QrGenerator() {
 			i < parseInt(firstCode, 10) + parseInt(totalCodes, 10);
 			i++
 		) {
-			codes.push(`http://localhost:5173/menulocal?email=${email}&mesa=${i}`);
+			codes.push(
+				`http://localhost:5173/menulocal?email=${encodedEmail}&mesa=${i}`
+			);
 		}
 		return codes;
 	};
@@ -98,19 +101,17 @@ export default function QrGenerator() {
 			</button>
 			<div className="qr-amount-container">
 				<form action="" onSubmit={handleSubmit} className="qr-amount-form">
-					<h3 className='titleqr'>Generador de QR</h3>
+					<h3 className="titleqr">Generador de QR</h3>
 					<div>
 						<input
 							type="number"
 							placeholder="Cantidad de codigos a imprimir"
 							onChange={handleChangeTotalCodes}
-							
 						/>
 						<input
 							type="number"
 							placeholder="Numero de inicio"
 							onChange={handleChangeFirstCode}
-							
 						/>
 					</div>
 					<button className="generate-qr-btn">Generar códigos</button>

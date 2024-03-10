@@ -52,7 +52,7 @@ export default function ClientHome() {
 
 	const handleOpenPopUp = (orderId) => {
 		setSelectedPedidoId(orderId);
-		console.log(pedidos)
+		console.log(pedidos);
 		setPopUp(!popUp);
 	};
 
@@ -92,6 +92,7 @@ export default function ClientHome() {
 	useEffect(() => {
 		dispatch(getPedidos());
 		dispatch(getLocalData(userEmail));
+
 		const storedCheckedItems =
 			JSON.parse(localStorage.getItem('checkedItems')) || {};
 		setCheckedItems(storedCheckedItems);
@@ -202,12 +203,12 @@ export default function ClientHome() {
 
 	//handle para borrar alertas
 
-	const deleteAlertas = ()=>{
-			socket.emit('borrar-alertas', {userEmail}, (playload)=>{
-				console.log(playload);
-			})
-			window.location.reload();
-	}
+	const deleteAlertas = () => {
+		socket.emit('borrar-alertas', { userEmail }, (playload) => {
+			console.log(playload);
+		});
+		window.location.reload();
+	};
 	return (
 		<main>
 			<div className="client-home-container">
@@ -215,9 +216,12 @@ export default function ClientHome() {
 					<div>
 						<h2>Monitoreo del salon</h2>
 					</div>
-					
 				</div>
-				{user?.plan === 'basic' ? (<div>Actualice su plan para adminstrar los pedidos</div>) : <></>}
+				{user?.plan === 'basic' ? (
+					<div>Actualice su plan para adminstrar los pedidos</div>
+				) : (
+					<></>
+				)}
 				<div className="client-home">
 					{user?.plan === 'premium' ? (
 						<div className="client-home-table-container">
@@ -319,13 +323,12 @@ export default function ClientHome() {
 												</p>
 												<p>
 													<ul>
-														{
-															pedidos.find(
-																(order) => order.id === selectedPedidoId
-															).pedido.split(',').map((producto, index) => (
+														{pedidos
+															.find((order) => order.id === selectedPedidoId)
+															.pedido.split(',')
+															.map((producto, index) => (
 																<li key={index}>{producto.trim()}</li>
-															))
-														}
+															))}
 													</ul>
 												</p>
 												<p>
@@ -453,22 +456,23 @@ export default function ClientHome() {
 									</tr>
 								</tbody>
 							</table>
-							
 						</div>
 					</div>
 				</div>
 			</div>
-			<div className='btn-alertas'>
-					{audioActive === true ? (
-						<button className="client-home-table-btn" onClick={handleQuitAudio}>
-							Desactivar Audio
-						</button>
-					) : (
-						<button className="client-home-table-btn" onClick={handleAudio}>
-							Activar audio
-						</button>
-					)}
-					<button className="client-home-table-btn" onClick={deleteAlertas}>Borrar Alertas</button>
+			<div className="btn-alertas">
+				{audioActive === true ? (
+					<button className="client-home-table-btn" onClick={handleQuitAudio}>
+						Desactivar Audio
+					</button>
+				) : (
+					<button className="client-home-table-btn" onClick={handleAudio}>
+						Activar audio
+					</button>
+				)}
+				<button className="client-home-table-btn" onClick={deleteAlertas}>
+					Borrar Alertas
+				</button>
 			</div>
 		</main>
 	);

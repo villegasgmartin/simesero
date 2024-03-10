@@ -100,7 +100,6 @@ const agregarProducto = async (req, res) => {
 		console.log(nombre, categoria, subcategoria, precio, descripcion);
 		let id_producto = uuidv4();
 
-		
 		//agregar imagen a cloudinary para obterner url
 
 		if (req.files) {
@@ -114,11 +113,10 @@ const agregarProducto = async (req, res) => {
 				'https://res.cloudinary.com/dj3akdhb9/image/upload/v1695261911/samples/default-product-image_gqztb6.png';
 		}
 
-		if(!descripcion){
+		if (!descripcion) {
 			descripcion = '';
 		}
 		console.log(nombre, categoria, subcategoria, precio, descripcion);
-
 
 		const queryCategoria =
 			'SELECT id_categoria FROM categorias WHERE nombre_categoria = ? AND emailusuario = ?';
@@ -191,10 +189,10 @@ const crearCategoria = async (req, res) => {
 	const { nombre_categoria } = req.body;
 	const categoriaLower = nombre_categoria.toLowerCase();
 	try {
-		if(!nombre_categoria){
+		if (!nombre_categoria) {
 			return res.status(404).json({
-				msg:'debe ingresar categoria'
-			})
+				msg: 'debe ingresar categoria'
+			});
 		}
 		// Primero, verifica si ya existe una categoría con el mismo nombre para el usuario dado
 		const categoriaExistente =
@@ -365,18 +363,22 @@ const crearSubCategoria = async (req, res) => {
 
 		//validar que no exista la misma subcategoria para ese usuario
 
-		const subcategoriaExistente = 'SELECT id_subcategoria FROM subcategorias WHERE id_categoria = ? AND emailusuario = ? AND nombre_subcategoria = ?'  ;
-		const resultsubExistente = await pool.query(subcategoriaExistente, [idCategoria, emailUsuario, subcategoria]);
-		console.log(resultsubExistente)
+		const subcategoriaExistente =
+			'SELECT id_subcategoria FROM subcategorias WHERE id_categoria = ? AND emailusuario = ? AND nombre_subcategoria = ?';
+		const resultsubExistente = await pool.query(subcategoriaExistente, [
+			idCategoria,
+			emailUsuario,
+			subcategoria
+		]);
+		console.log(resultsubExistente);
 		const validSubcategoria = resultsubExistente[0].length;
-		console.log("lenght", validSubcategoria);
-		if(validSubcategoria != 0){
+		console.log('lenght', validSubcategoria);
+		if (validSubcategoria != 0) {
 			return res.json({
-				msg:'La subcategoria ya existe'
-			})
+				msg: 'La subcategoria ya existe'
+			});
 		}
 
-		
 		if (req.files) {
 			const { tempFilePath } = req.files.img;
 
@@ -391,7 +393,12 @@ const crearSubCategoria = async (req, res) => {
 		// Inserta la nueva subcategoría en la base de datos
 		const insertQuery =
 			'INSERT INTO subcategorias (nombre_subcategoria, id_categoria, emailusuario,img_subcategoria) VALUES (?, ?, ?, ?)';
-		const insertValues = [subcategoriaLower, idCategoria, emailUsuario, img_url];
+		const insertValues = [
+			subcategoriaLower,
+			idCategoria,
+			emailUsuario,
+			img_url
+		];
 
 		await pool.query(insertQuery, insertValues);
 		res.status(201).json({
@@ -405,32 +412,33 @@ const crearSubCategoria = async (req, res) => {
 
 //ruta actualizar img subcategoria
 const actualizarImgSub = async (req, res) => {
-	
-	const {categoria, subcategoria} = req.body;
+	const { categoria, subcategoria } = req.body;
 	const usuario = req.email;
 
 	try {
 		//sacar el id de la caregoria seleccionada
-		const idCategoria = await pool.query('SELECT id_categoria FROM categorias WHERE emailUsuario = ? AND nombre_categoria = ?', [usuario,categoria] )
+		const idCategoria = await pool.query(
+			'SELECT id_categoria FROM categorias WHERE emailUsuario = ? AND nombre_categoria = ?',
+			[usuario, categoria]
+		);
 		const id = idCategoria[0][0].id_categoria;
-		
+
 		console.log(id, usuario, categoria);
 		// Verificar que el elemento pertenezca al usuario autenticado antes de actualizar
 		const itemRows = await pool.query(
 			'SELECT * FROM subcategorias WHERE id_categoria = ? AND emailusuario = ? AND nombre_subcategoria = ?',
-			[id, usuario, subcategoria ]
+			[id, usuario, subcategoria]
 		);
 
 		//verificar si la subcategoría tiene imagen o no
 		const img_sub = itemRows[0][0].img_subcategoria;
 		console.log(img_sub);
 
-		if(img_sub == null || img_sub == undefined){
+		if (img_sub == null || img_sub == undefined) {
 			const { tempFilePath } = req.files.img;
 			const { secure_url } = await cloudinary.uploader.upload(tempFilePath);
 			img_url = secure_url;
-		}
-		else{
+		} else {
 			const urlImagenVIeja = itemRows[0][0].img_subcategoria;
 			const [public_id] = urlImagenVIeja.split('.');
 			cloudinary.uploader.destroy(public_id);
@@ -439,26 +447,26 @@ const actualizarImgSub = async (req, res) => {
 			img_url = secure_url;
 		}
 		// //BORRAR LA IMAGEN DE CLOUDINARY Y REEMPLEZARLA CON LA NUEVA
-		
-			
-		
 
-		const query = 'UPDATE subcategorias SET img_subcategoria = ? WHERE id_categoria = ? AND emailusuario = ? AND nombre_subcategoria = ?';
+		const query =
+			'UPDATE subcategorias SET img_subcategoria = ? WHERE id_categoria = ? AND emailusuario = ? AND nombre_subcategoria = ?';
 
-		const result = await pool.query(query, [img_url, id, usuario, subcategoria ]);
+		const result = await pool.query(query, [
+			img_url,
+			id,
+			usuario,
+			subcategoria
+		]);
 
 		res.status(200).json({
 			result,
 			msg: 'Imagen actualizada'
-		})
-
-
-
+		});
 	} catch (error) {
 		console.log(error);
-		res.status(500).json({ error: error})
+		res.status(500).json({ error: error });
 	}
-}
+};
 
 // Ruta para actualizar un elemento
 const actualizarMenu = async (req, res) => {
@@ -490,7 +498,7 @@ const actualizarMenu = async (req, res) => {
 
 			img_url = secure_url;
 		} else {
-			img_url = itemRows[0][0].img;;
+			img_url = itemRows[0][0].img;
 		}
 
 		let sql = `UPDATE items SET`;
@@ -740,100 +748,99 @@ const actualizarEstadoPedido = async (req, res) => {
 	const mesa = req.body.mesa;
 
 	try {
-		const queryEstado ='SELECT estado_pedido FROM pedidos WHERE usuario_email = ? AND mesa = ?';
+		const queryEstado =
+			'SELECT estado_pedido FROM pedidos WHERE usuario_email = ? AND mesa = ?';
 		const resultEstado = await pool.query(queryEstado, [email, mesa]);
 		const pedido = resultEstado[0][0].estado_pedido;
-		if(pedido === 0){
-			const query ='UPDATE pedidos SET estado_pedido = 1 WHERE usuario_email = ? AND mesa = ?';
-			const result = await pool.query(query, [email, mesa])
-			 return res.status(200).json({
+		if (pedido === 0) {
+			const query =
+				'UPDATE pedidos SET estado_pedido = 1 WHERE usuario_email = ? AND mesa = ?';
+			const result = await pool.query(query, [email, mesa]);
+			return res.status(200).json({
 				result,
 				msg: 'en preparacion'
-			})
-		}else{
-			const query ='UPDATE pedidos SET estado_pedido = 0 WHERE usuario_email = ? AND mesa = ?';
-			const result = await pool.query(query, [email, mesa])
-			 return res.status(200).json({
+			});
+		} else {
+			const query =
+				'UPDATE pedidos SET estado_pedido = 0 WHERE usuario_email = ? AND mesa = ?';
+			const result = await pool.query(query, [email, mesa]);
+			return res.status(200).json({
 				result,
 				msg: 'sin preparar'
-			})
+			});
 		}
 	} catch (error) {
 		res.status(500).json({
 			error,
 			msg: 'error al actualizar estado del pedido'
-		})
+		});
 	}
-}
+};
 const estadoPedido = async (req, res) => {
-    const email = req.query.email;
-    const mesa = req.query.mesa;
-    console.log("email y mesa", email, mesa);
+	const email = req.query.email;
+	const mesa = req.query.mesa;
+	console.log('email y mesa', email, mesa);
 
-    try {
-        const query = 'SELECT estado_pedido FROM pedidos WHERE usuario_email = ? AND mesa = ?';
-        const result = await pool.query(query, [email, mesa]);
+	try {
+		const query =
+			'SELECT estado_pedido FROM pedidos WHERE usuario_email = ? AND mesa = ?';
+		const result = await pool.query(query, [email, mesa]);
 
-        // Verificar si result[0] existe y tiene elementos
-        if (!result || result[0].length === 0) {
-            return res.status(200).json({
-                msg: 'false'
-            });
-        }
+		// Verificar si result[0] existe y tiene elementos
+		if (!result || result[0].length === 0) {
+			return res.status(200).json({
+				msg: 'false'
+			});
+		}
 
-        const pedido = result[0][0].estado_pedido;
+		const pedido = result[0][0].estado_pedido;
 
-        if (pedido === 0) {
-            return res.status(200).json({
-                msg: 'false'
-            });
-        } else {
-            return res.status(200).json({
-                msg: 'true'
-            });
-        }
-    } catch (error) {
-        res.status(500).json({
-            error,
-            msg: 'error al actualizar estado del pedido'
-        });
-    }
+		if (pedido === 0) {
+			return res.status(200).json({
+				msg: 'false'
+			});
+		} else {
+			return res.status(200).json({
+				msg: 'true'
+			});
+		}
+	} catch (error) {
+		res.status(500).json({
+			error,
+			msg: 'error al actualizar estado del pedido'
+		});
+	}
 };
 
-
 const estadosAlertas = async (req, res) => {
-	const  {mesa} = req.body;
-	const email = req.query.email
-	
-try {
-	const camarera = await pool.query(
-		'UPDATE pedidos SET camarera = 0 WHERE usuario_email = ? AND mesa = ?',
-		[email, mesa]
-	);
-	console.log(camarera)
-	const cuenta = await pool.query(
-		'UPDATE pedidos SET cuenta = 0 WHERE usuario_email = ? AND mesa = ?',
-		[email, mesa]
-	);
-	console.log(cuenta)
-	res.status(200).json({
-		camarera,
-		cuenta,
-		msg:'alertas reseteadas a false'
-	});
+	const { mesa } = req.body;
+	const email = req.query.email;
 
-} catch (error) {
-	res.status(500).json({
-		msg: error
-	});
-	console.error(error)
-}
-
-
-}
+	try {
+		const camarera = await pool.query(
+			'UPDATE pedidos SET camarera = 0 WHERE usuario_email = ? AND mesa = ?',
+			[email, mesa]
+		);
+		console.log(camarera);
+		const cuenta = await pool.query(
+			'UPDATE pedidos SET cuenta = 0 WHERE usuario_email = ? AND mesa = ?',
+			[email, mesa]
+		);
+		console.log(cuenta);
+		res.status(200).json({
+			camarera,
+			cuenta,
+			msg: 'alertas reseteadas a false'
+		});
+	} catch (error) {
+		res.status(500).json({
+			msg: error
+		});
+		console.error(error);
+	}
+};
 
 const planGet = async (req, res = response) => {
-	
 	const emailquery = req.query.email;
 
 	const query = 'SELECT plan FROM usuarios WHERE email = ?';
@@ -854,7 +861,6 @@ const planGet = async (req, res = response) => {
 	}
 };
 const ImageGet = async (req, res = response) => {
-	
 	const emailquery = req.query.email;
 
 	const query = 'SELECT img FROM usuarios WHERE email = ?';
@@ -875,19 +881,84 @@ const ImageGet = async (req, res = response) => {
 	}
 };
 
-
 const deleteMessages = async (req, res = response) => {
-	const email= req.query.email;
+	const email = req.query.email;
 
 	try {
-		const result = await pool.query('DELETE FROM mensajes WHERE usuario_email = ?',[email]);
-		res.status(200).json({ message: ' mensajes borrados'});
+		const result = await pool.query(
+			'DELETE FROM mensajes WHERE usuario_email = ?',
+			[email]
+		);
+		res.status(200).json({ message: ' mensajes borrados' });
 	} catch (error) {
 		res.status(500).json({
 			error
-		})
+		});
 	}
-}
+};
+
+const estadosMensajes = async (req, res) => {
+	const email = req.query.email;
+	try {
+		const result = await pool.query(
+			'SELECT * FROM mensajes WHERE usuario_email = ? AND estado=?',
+			[email, 0]
+		);
+
+		const mensajes = result[0].length;
+		if (mensajes > 0) {
+			return res.status(200).json({
+				msg: 'false',
+				mensaje: mensajes
+			});
+		}
+		res.status(200).json({
+			msg: 'todos los mensajes leidos'
+		});
+	} catch (error) {
+		res.status(500).json({
+			msg: error
+		});
+	}
+};
+
+const actualizarEstadoMsj = async (req, res) => {
+	const email = req.query.email;
+
+	try {
+		const result = await pool.query(
+			'UPDATE mensajes SET estado = 1  WHERE usuario_email = ?',
+			[email]
+		);
+
+		res.status(200).json({
+			msg: 'true'
+		});
+	} catch (error) {
+		res.status(500).json({
+			msg: error
+		});
+	}
+};
+
+const mensajeVisto = async (req, res) => {
+	const email = req.query.email;
+
+	try {
+		const result = await pool.query(
+			'UPDATE mensajes SET estado = 0  WHERE usuario_email = ?',
+			[email]
+		);
+
+		res.status(200).json({
+			msg: 'false'
+		});
+	} catch (error) {
+		res.status(500).json({
+			msg: error
+		});
+	}
+};
 
 module.exports = {
 	mostrarMenu,
@@ -913,5 +984,8 @@ module.exports = {
 	actualizarImgSub,
 	planGet,
 	deleteMessages,
-	ImageGet
+	ImageGet,
+	estadosMensajes,
+	actualizarEstadoMsj,
+	mensajeVisto
 };
