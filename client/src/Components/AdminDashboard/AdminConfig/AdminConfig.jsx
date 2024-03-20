@@ -150,6 +150,8 @@ export default function AdminConfig() {
 									<thead className="">
 										<tr>
 											<th>Mail</th>
+											<th>Nombre</th>
+											<th>Alta</th>
 											<th>Activar</th>
 										</tr>
 									</thead>
@@ -158,6 +160,8 @@ export default function AdminConfig() {
 											return (
 												<tr key={c.id}>
 													<td>{c.email}</td>
+													<td>{c.storeName}</td>
+													<td>{c.date}</td>
 
 													{c.pagoConfirmado === 0 ? (
 														<td>

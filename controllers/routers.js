@@ -330,9 +330,9 @@ const postUsuario = async (req, res = response) => {
 			tipo,
 			comentario
 		]);
-		// if(plan === "basic"){
-		// 				const planBasic = await pool.query('UPDATE usuarios SET pagoConfirmado = 1 WHERE email = ?', [email])
-		// 			}
+		if(plan === "basic"){
+						const planBasic = await pool.query('UPDATE usuarios SET pagoConfirmado = 1 WHERE email = ?', [email])
+					}
 		
 		res.status(200).json('usuario creado');
 
@@ -645,7 +645,7 @@ const mejorarPlan = async (req, res) => {
 	const email = req.email;
 	console.log("email actualice", email);
 	const query2 = 'UPDATE usuarios SET pagoCambioPlan = 0 WHERE email = ?';
-
+	
 	try {		
 		const result2 = await pool.query(query2, [email]);
 		console.log(result2)

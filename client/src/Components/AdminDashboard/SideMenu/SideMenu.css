@@ -148,12 +148,7 @@
 .menu-admin-container{
     background-color: #FFA101;
 }
-@media screen and (min-width:850px){
-	.menu-admin-container{
-		height: 100vh;
-	}
 
-}
 @media screen and (max-width: 850px) {
 	.sideMenuClosed {
 		display: none;

@@ -24,9 +24,11 @@ export default function ClientHome() {
 	const [audioActive, setAudioActive] = useState(false);
 	const handleAudio = () => {
 		setAudioActive(true);
+		
 	};
 	const handleQuitAudio = () => {
 		setAudioActive(false);
+		
 	};
 
 	const playAlertSound = () => {
@@ -215,8 +217,20 @@ export default function ClientHome() {
 					<div>
 						<h2>Monitoreo del salon</h2>
 					</div>
-					
+					<div className='btn-alertas'>
+						{audioActive === true ? (
+							<button className="client-home-table-btn" onClick={handleQuitAudio}>
+								Desactivar Audio
+							</button>
+						) : (
+							<button className="client-home-table-btn" onClick={handleAudio}>
+								Activar audio
+							</button>
+						)}
+						<button className="client-home-table-btn" onClick={deleteAlertas}>Borrar Alertas</button>
+					</div>
 				</div>
+				
 				{user?.plan === 'basic' ? (<div>Actualice su plan para adminstrar los pedidos</div>) : <></>}
 				<div className="client-home">
 					{user?.plan === 'premium' ? (
@@ -458,18 +472,7 @@ export default function ClientHome() {
 					</div>
 				</div>
 			</div>
-			<div className='btn-alertas'>
-					{audioActive === true ? (
-						<button className="client-home-table-btn" onClick={handleQuitAudio}>
-							Desactivar Audio
-						</button>
-					) : (
-						<button className="client-home-table-btn" onClick={handleAudio}>
-							Activar audio
-						</button>
-					)}
-					<button className="client-home-table-btn" onClick={deleteAlertas}>Borrar Alertas</button>
-			</div>
+			
 		</main>
 	);
 }

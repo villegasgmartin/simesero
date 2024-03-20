@@ -132,9 +132,7 @@ const socketController = (socket, io) => {
 	}
   );
 
-  setTimeout(() => {
-	console.log('pasaron 10 seg')
-  }, 10000);
+ 
 
 		callback(respuesta);
 

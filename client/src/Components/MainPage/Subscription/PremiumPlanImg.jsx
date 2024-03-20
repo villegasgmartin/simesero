@@ -11,10 +11,19 @@ export default function PremiumPlanImg({ handleOpenSubscribe }) {
 	}, []);
 	const plans = useSelector((state) => state.plans);
 
+	// Función para formatear el número con separadores de miles
+	const formatNumberWithSeparator = (number) => {
+        if (typeof number === 'number' && !isNaN(number)) {
+            return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        }
+        return ''; // Retorna un string vacío si el número no está definido o no es válido
+    };
+
 	return (
 		<div className="subscription-img">
 			<IoRestaurantSharp className="icon" />
-			<h3>$ {plans.premium} <span>(mensual)</span></h3>
+			<h3>Plan Premium</h3>
+			<span>$ {formatNumberWithSeparator(plans?.premium)}</span>
 			
 			<ul className="subs-list">
 				<li>1. Carta digital autoadministrable </li>
@@ -28,10 +37,10 @@ export default function PremiumPlanImg({ handleOpenSubscribe }) {
 			
 
 			<button className="subs-btn" onClick={handleOpenSubscribe}>
-				Comprar ahora
+			Suscribirme
 			</button>
 			<br />
-			<span>*15 dias gratis</span>
+			
 		</div>
 	);
 }

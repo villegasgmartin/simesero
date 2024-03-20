@@ -889,6 +889,48 @@ const deleteMessages = async (req, res = response) => {
 	}
 }
 
+const estadosMensajes = async (req, res) => {
+	const email = req.query.email;
+	
+	
+	try {
+		const result = await pool.query('SELECT * FROM mensajes WHERE usuario_email = ? AND estado=?',[email, 0]);
+		const mensajes = result[0].length;
+		if(mensajes > 0) {
+			res.status(200).json({
+				msg:'false',
+				mensaje: mensajes
+			})
+
+		}
+		res.status(200).json({
+			msg:'todos los mensajes leidos'
+		});
+	} catch (error) {
+		res.status(500).json({
+			msg: error
+		})
+	}
+}
+
+const actualizarEstadoMsj = async (req, res) => {
+	const email = req.query.email;
+	
+	
+	try {
+		const result = await pool.query('UPDATE mensajes SET estado = 1  WHERE usuario_email = ?',[email]);
+		
+		res.status(200).json({
+			msg:'true',
+			
+		})
+	} catch (error) {
+		res.status(500).json({
+			msg: error
+		})
+	}
+}
+
 module.exports = {
 	mostrarMenu,
 	agregarProducto,
@@ -913,5 +955,7 @@ module.exports = {
 	actualizarImgSub,
 	planGet,
 	deleteMessages,
-	ImageGet
+	ImageGet,
+	estadosMensajes,
+	actualizarEstadoMsj
 };
