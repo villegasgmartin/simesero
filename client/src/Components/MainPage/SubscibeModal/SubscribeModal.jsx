@@ -7,6 +7,8 @@ import { createUser } from '../../../redux/actions';
 import img from '../../../assets/restaurant.jpg';
 import logo from '../../../assets/logos/Logo2.png';
 
+import swal from 'sweetalert';
+
 // eslint-disable-next-line react/prop-types
 export default function SubscribeModal({
 	handleCloseSubscribe,
@@ -106,11 +108,24 @@ export default function SubscribeModal({
 			tipo: ''
 		});
 		setRepeatPass('');
-		dispatch(handleCloseSubscribe);
-		window.open(
-			'https://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=2c9380848af994d0018b02039da906a5',
-			'_blank'
-		);
+		swal({
+			title: 'Usuario Premium',
+			text: `Después que realice el pago y sea confirmado por la administración, aguarde y revise su casilla de correo para poder ingresar al panel`,
+			icon: 'warning',
+			buttons: ['Salir', 'Ir a Pagar']
+		}).then((respuesta) => {
+			if (respuesta) {
+				dispatch(handleCloseSubscribe);
+				window.open(
+					'https://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=2c9380848af994d0018b02039da906a5',
+					'_blank'
+				);
+			} else {
+				swal({ text: 'Usuario no creado' });
+			}
+		});
+		
+		
 	};
 
 	

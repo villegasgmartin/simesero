@@ -14,7 +14,7 @@ export default function Products() {
   useEffect(() => {
     const url = window.location.href;
     const parsed = queryString.parseUrl(url);
-    const email = parsed.query.email;
+    const email = atob(parsed.query.email);
     dispatch(getLocalPlan(email));
     dispatch(getMenuCategories(email));
     dispatch(getProducts(email));

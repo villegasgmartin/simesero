@@ -907,6 +907,7 @@ const estadosMensajes = async (req, res) => {
 			msg:'todos los mensajes leidos'
 		});
 	} catch (error) {
+		console.log(error);
 		res.status(500).json({
 			msg: error
 		})

@@ -643,6 +643,7 @@ const actualizarDatos = async (req, res) => {
 
 const mejorarPlan = async (req, res) => {
 	const email = req.email;
+
 	console.log("email actualice", email);
 	const query2 = 'UPDATE usuarios SET pagoCambioPlan = 0 WHERE email = ?';
 	

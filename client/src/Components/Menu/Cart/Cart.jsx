@@ -16,7 +16,7 @@ export default function Cart() {
 	const location = useLocation();
 	const searchParams = new URLSearchParams(location.search);
 	const dispatch = useDispatch();
-	const userEmail = searchParams.get('email');
+	const userEmail = atob(searchParams.get('email'));
 	const mesa = searchParams.get('mesa');
 	const nombresProductos = micart.map((producto) => producto.nombre).join(', ');
 

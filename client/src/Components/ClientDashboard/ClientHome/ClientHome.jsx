@@ -20,8 +20,8 @@ const socket = io();
 export default function ClientHome() {
 	const [popUp, setPopUp] = useState(false);
 	const [selectedPedidoId, setSelectedPedidoId] = useState(null);
-
-	const [audioActive, setAudioActive] = useState(false);
+const audio = new Audio(alertSound);
+	const [audioActive, setAudioActive] = useState(true);
 	const handleAudio = () => {
 		setAudioActive(true);
 		
@@ -31,19 +31,18 @@ export default function ClientHome() {
 		
 	};
 
-	const playAlertSound = () => {
-		const audio = new Audio(alertSound);
-		audio.play();
-	};
+
 
 	// Funcion para cuando llega una nueva notificacion
 	const [newAlert, setNewAlert] = useState(false);
 	const handleNewAlert = () => {
+		console.log(audioActive, 'audio');
 		if (audioActive === true) {
-			setNewAlert(true);
-			playAlertSound();
+			setNewAlert(true);		
+		audio.play();
 		} else {
-			setNewAlert(true);
+			setNewAlert(false);
+			console.log('handle if');
 		}
 	};
 

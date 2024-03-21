@@ -26,6 +26,7 @@ export default function AdminConfig() {
 	const [planPremiumInput, setPlanPremiumInput] = useState('');
 	// eslint-disable-next-line no-unused-vars
 	const [pageLoaded, setPageLoaded] = useState(false);
+	const [clientsToConfirmPlanState, setClientsToConfirmPlanState] = useState(clientsToConfirmPlan);
 
 	const handleChangePremium = (e) => {
 		setPlanPremiumInput(e.target.value);
@@ -84,6 +85,8 @@ export default function AdminConfig() {
 		});
 	};
 
+
+	
 	const handleConfirmPlanChange = (e) => {
 
 		e.preventDefault();
@@ -109,6 +112,14 @@ export default function AdminConfig() {
 			}
 		});
 	};
+
+	const handleBorrarFila = (id) => {
+		
+		const updatedClients = clientsToConfirmPlanState.filter(client => client.id !== id);
+		console.log(updatedClients, clientsToConfirmPlanState)
+		setClientsToConfirmPlanState(updatedClients);
+	};
+	
 
 	useEffect(() => {
 		dispatch(getAllClients());
@@ -189,6 +200,7 @@ export default function AdminConfig() {
 											<th>Mail</th>
 											<th>Nuevo Plan</th>
 											<th>Activar</th>
+											<th>Cancelar</th>
 										</tr>
 									</thead>
 									<tbody className="act-table-body">
@@ -214,6 +226,14 @@ export default function AdminConfig() {
 													) : (
 														<td>Confirmado</td>
 													)}
+													<td className='borrar'>
+															<button
+																onClick={() => handleBorrarFila(c.id)}
+																className='borar-fila'
+															>
+																X
+															</button>
+													</td>
 												</tr>
 											);
 										})}

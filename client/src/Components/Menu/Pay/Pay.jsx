@@ -37,7 +37,7 @@ export default function Pay() {
 	const location = useLocation();
 	const searchParams = new URLSearchParams(location.search);
 
-	const userEmail = searchParams.get('email');
+	const userEmail = atob(searchParams.get('email'));
 	const mesa = searchParams.get('mesa');
 
 	const payload = () => {

@@ -16,12 +16,12 @@ import Pay from './Pay/Pay';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { getLocalPlan } from '../../redux/actions';
+import { getLocalImg, getLocalPlan } from '../../redux/actions';
 
 export default function Menu() {
 	const location = useLocation();
 	const searchParams = new URLSearchParams(location.search);
-	const userEmail = searchParams.get('email');
+	const userEmail = atob(searchParams.get('email'));
 	const dispatch = useDispatch();
 	const [selectedSection, setSelectedSection] = useState('products');
 	const micart = useSelector((state) => state.productsAdeedToMinicart);
@@ -29,9 +29,12 @@ export default function Menu() {
 
 	useEffect(() => {
 		dispatch(getLocalPlan(userEmail));
+		dispatch(getLocalImg(userEmail));
 	}, []);
 	const plan = useSelector((state) => state.localPlan);
 	console.log(plan, 'plan');
+	const img = useSelector((state) => state.localImg);
+	console.log(img, 'imagen del local');
 
 	const handleSectionClick = (sectionId) => {
 		setSelectedSection(sectionId);
@@ -45,7 +48,7 @@ export default function Menu() {
 						{plan?.img === '' ? (
 							<IoRestaurantSharp className="menu-dec-logo" />
 						) : (
-							<img src={plan?.img} alt="" className="menu-dec-logo" />
+							<img src={img} alt="" className="menu-dec-logo" />
 						)}
 					</div>
 				</div>

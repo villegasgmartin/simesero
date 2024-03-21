@@ -6,7 +6,8 @@ import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { getLocalData } from '../../../redux/actions';
+import { getChatState, getLocalData } from '../../../redux/actions';
+import { IoChatbubbleEllipsesOutline } from 'react-icons/io5';
 import io from 'socket.io-client';
 
 const socket = io();
@@ -95,13 +96,19 @@ export default function ClientProfile() {
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(getLocalData(userEmail));
+		// dispatch(getChatState(userEmail));
 	}, []);
 	const dataLocal = useSelector((state) => state.localData.usuario);
+	const newChat = useSelector((state) => state.newChat.msg);
+	console.log(newChat, 'newww');
 
 	return (
 		<nav className="client-menu">
 			<div className="client-menu-container">
 				<div className="client-menu-panel">
+				<IoChatbubbleEllipsesOutline
+						className={newChat === 'false' ? '' : 'client-menu-notification-on'}
+					/>
 					<IoNotifications
 						className={
 							newAlert === false

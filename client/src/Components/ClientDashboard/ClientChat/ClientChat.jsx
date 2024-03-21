@@ -6,7 +6,14 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import io from 'socket.io-client';
-import { getLocalData } from '../../../redux/actions';
+import {
+	changeChatState,
+	deleteMensajes,
+	getChatState,
+	getLocalData,
+	verMensaje
+} from '../../../redux/actions';
+import swal from 'sweetalert';
 const socket = io({
 	auth:{
 		serverOffset: 0
@@ -63,7 +70,28 @@ export default function ClientChat() {
 	}
 	
 
-	
+	const handleDeleteChat = (e) => {
+		e.preventDefault();
+		swal({
+			title: 'Activar',
+			text: 'Esta seguro que desea eliminar el historial de chat?',
+			icon: 'warning',
+			buttons: ['No', 'Si']
+		}).then((respuesta) => {
+			if (respuesta) {
+				dispatch(deleteMensajes(userEmail));
+				swal({
+					text: `Se ha eliminado el historial`,
+					icon: 'success'
+				});
+				setTimeout(function () {
+					window.location.reload(true);
+				}, 2000);
+			} else {
+				swal({ text: 'no se ha eliminado el historial', icon: 'info' });
+			}
+		});
+	};
 		
 	
 		
@@ -76,21 +104,21 @@ export default function ClientChat() {
 		}
 		const newMessage = divChatbox.querySelector('li:last-child');
 		if (newMessage) {
-		const clientHeight = divChatbox.clientHeight;
-		const scrollTop = divChatbox.scrollTop;
-		const scrollHeight = divChatbox.scrollHeight;
-		const newMessageHeight = newMessage.clientHeight;
-		const lastMessageHeight =
-			(newMessage.previousElementSibling &&
-				newMessage.previousElementSibling.clientHeight) ||
-			0;
+			const clientHeight = divChatbox.clientHeight;
+			const scrollTop = divChatbox.scrollTop;
+			const scrollHeight = divChatbox.scrollHeight;
+			const newMessageHeight = newMessage.clientHeight;
+			const lastMessageHeight =
+				(newMessage.previousElementSibling &&
+					newMessage.previousElementSibling.clientHeight) ||
+				0;
 
-		if (
-			clientHeight + scrollTop + newMessageHeight + lastMessageHeight >=
-			scrollHeight
-		) {
-			divChatbox.scrollTop = scrollHeight;
-		}
+			if (
+				clientHeight + scrollTop + newMessageHeight + lastMessageHeight >=
+				scrollHeight
+			) {
+				divChatbox.scrollTop = scrollHeight;
+			}
 	}
 }
 
@@ -110,6 +138,7 @@ export default function ClientChat() {
 		socket.on('crearMensaje', (mensaje, serverOffset) => {
 		
 			console.log('Servidor:', mensaje);
+			dispatch(changeChatState(userEmail));
 			receiveMessage(mensaje);
 			socket.auth.serverOffset = serverOffset;
 			scrollBottom();
@@ -134,7 +163,7 @@ export default function ClientChat() {
 			'crearMensaje',
 			{
 				email:usuario.email,
-				mesa: usuario.mesa,
+				mesa:usuario.mesa,
 				mensaje: txtMensaje.value
 			},
 			(mensaje) => {
@@ -153,7 +182,9 @@ export default function ClientChat() {
 	
 	useEffect(() => {
 		dispatch(getLocalData(userEmail));
+		dispatch(verMensaje(userEmail));
 	}, []);
+	const newChat = useSelector((state) => state.newChat);
 	const user = useSelector((state) => state.localData.usuario);
 	return (
 		<div className="container-fluid">
@@ -185,19 +216,31 @@ export default function ClientChat() {
 										<div className="p-20 b-b">
 											<h3 className="box-title">Sala de Chat </h3>
 										</div>
+										<button onClick={handleDeleteChat}>Borrar chat</button>
 									</div>
 
 									<div className="chat-rbox">
 										<ul className="chat-list p-20" id="divChatbox">
-										{mensaje.slice().reverse().map((mensaje, index) => (
-											<li
-												key={index}
-												className={`${mensaje.mesa === 'Local' || mensaje.mesa === 'Mesa : Local' ? 'chat-local' : 'chat-mesa'}`}
-											>
-												<b>{mensaje.mesa}</b> <br />{mensaje.mensaje}
-												<br /> <span className='hora-chat'>{mensaje.fecha}</span>
-											</li>
-										))}
+
+										{mensaje
+												.slice()
+												.reverse()
+												.map((mensaje, index) => (
+													<li
+														key={index}
+														className={`${
+															mensaje.mesa === 'Local' ||
+															mensaje.mesa === 'Mesa : Local'
+																? 'chat-local'
+																: 'chat-mesa'
+														}`}
+													>
+														<b>{mensaje.mesa}</b> <br />
+														{mensaje.mensaje}
+														<br />{' '}
+														<span className="hora-chat">{mensaje.fecha}</span>
+													</li>
+												))}
 										</ul>
 									</div>
 									<div className="card-body b-t">

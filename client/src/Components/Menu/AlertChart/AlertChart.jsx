@@ -8,7 +8,7 @@ const socket = io();
 export default function AlertChart() {
 	const location = useLocation();
 	const searchParams = new URLSearchParams(location.search);
-	const userEmail = searchParams.get('email');
+	const userEmail = atob(searchParams.get('email'));
 	// Funcion para emitir las alertas al dashboard del bar
 	useEffect(() => {
 		socket.on('connect', () => {

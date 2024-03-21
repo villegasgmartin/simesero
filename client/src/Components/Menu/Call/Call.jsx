@@ -16,7 +16,7 @@ export default function Call() {
 	const searchParams = new URLSearchParams(location.search);
 
 	const dispatch = useDispatch();
-	const userEmail = searchParams.get('email');
+	const userEmail = atob(searchParams.get('email'));
 	const mesa = searchParams.get('mesa');
 
 	const [stateOpen, setStateOpen] = useState(false);

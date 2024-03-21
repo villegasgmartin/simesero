@@ -7,7 +7,8 @@ import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { IoSend } from "react-icons/io5";
 import io from 'socket.io-client';
-import { getPlanToMenu } from '../../../redux/actions';
+import { deleteMensajes, getPlanToMenu } from '../../../redux/actions';
+import swal from 'sweetalert';
 const socket = io({
 	auth:{
 		serverOffset: 0
@@ -22,7 +23,7 @@ export default function Chat() {
 
 	const usuario = {
 		mesa: searchParams.get('mesa'),
-		email: searchParams.get('email')
+		email: atob(searchParams.get('email'))
 	};
 
 	const [mensaje, setMessages] = useState([]);
@@ -68,21 +69,21 @@ export default function Chat() {
 		}
 		const newMessage = divChatbox.querySelector('li:last-child');
 		if (newMessage) {
-		const clientHeight = divChatbox.clientHeight;
-		const scrollTop = divChatbox.scrollTop;
-		const scrollHeight = divChatbox.scrollHeight;
-		const newMessageHeight = newMessage.clientHeight;
-		const lastMessageHeight =
-			(newMessage.previousElementSibling &&
-				newMessage.previousElementSibling.clientHeight) ||
-			0;
+			const clientHeight = divChatbox.clientHeight;
+			const scrollTop = divChatbox.scrollTop;
+			const scrollHeight = divChatbox.scrollHeight;
+			const newMessageHeight = newMessage.clientHeight;
+			const lastMessageHeight =
+				(newMessage.previousElementSibling &&
+					newMessage.previousElementSibling.clientHeight) ||
+				0;
 
-		if (
-			clientHeight + scrollTop + newMessageHeight + lastMessageHeight >=
-			scrollHeight
-		) {
-			divChatbox.scrollTop = scrollHeight;
-		}
+			if (
+				clientHeight + scrollTop + newMessageHeight + lastMessageHeight >=
+				scrollHeight
+			) {
+				divChatbox.scrollTop = scrollHeight;
+			}
 	}
 }
 

@@ -259,8 +259,7 @@ export default function ClientConfig() {
 				<div className="client-plan-select">
 					<select name="plan" id="" onClick={handleChangePlan}>
 						<option value="">Actual: {user?.plan}</option>
-						<option value="basic">Basic</option>
-						<option value="premium">Premium</option>
+						{user?.plan === 'basic' ? <option value="premium">Premium</option> : <option value="basic">Basic</option>}
 					</select>
 				</div>
 				<div className="subs-btn-container-plan">
@@ -268,7 +267,7 @@ export default function ClientConfig() {
 				{newPlan === 'basic' ? (
 						<div>
 							<button className="subs-btn" onClick={handleSubmitNewPlan}>
-								Básico
+							Actualizar plan
 							</button>
 						</div>
 					) : newPlan === 'premium' ? (

@@ -5,10 +5,12 @@ import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import { useLocation } from 'react-router-dom';
 
+
 export default function QrGenerator() {
 	const location = useLocation();
 	const searchParams = new URLSearchParams(location.search);
 	const email = searchParams.get('email');
+	const encodedEmail = btoa(email);
 	const [totalCodes, setTotalCodes] = useState(0);
 	const [firstCode, setFirstCode] = useState(0);
 	const [generate, setGenerate] = useState(false);
@@ -25,7 +27,7 @@ export default function QrGenerator() {
 			i < parseInt(firstCode, 10) + parseInt(totalCodes, 10);
 			i++
 		) {
-			codes.push(`http://localhost:5173/menulocal?email=${email}&mesa=${i}`);
+			codes.push(`http://localhost:5173/menulocal?email=${encodedEmail}&mesa=${i}`);
 		}
 		return codes;
 	};

@@ -16,6 +16,7 @@ export const GET_SUSPENDED_CLIENTS = 'GET_SUSPENDED_CLIENTS';
 export const VALIDATE_USER = 'VALIDATE_USER';
 export const GET_LOCAL_DATA = 'GET_LOCAL_DATA';
 export const GET_LOCAL_PLAN = 'GET_LOCAL_PLAN';
+export const GET_LOCAL_IMG = 'GET_LOCAL_IMG';
 export const CREATE_CATEGORY = 'CREATE_CATEGORY';
 export const LOG_OUT = 'LOG_OUT';
 export const GET_CATEGORIES = 'GET_CATEGORIES';
@@ -50,6 +51,9 @@ export const GET_PEDIDO_STATE = 'GET_PEDIDO_STATE';
 export const CHANGE_PEDIDO_STATE = 'CHANGE_PEDIDO_STATE';
 export const RESET_ALERTS = 'RESET_ALERTS';
 export const CHANGE_SUBCATEGORY_IMG = 'CHANGE_SUBCATEGORY_IMG';
+export const GET_CHAT_STATE = ' GET_CHAT_STATE';
+export const PUT_CHAT_STATE = ' PUT_CHAT_STATE';
+export const VER_MENSAJE = 'VER_MENSAJE';
 //https://menu-didactico.up.railway.app
 //FUNCIONALIDADES DE LA PAGINA PRINCIPAL
 
@@ -437,6 +441,23 @@ export function getLocalPlan(email) {
 				console.log(response.data, 'response');
 				return dispatch({
 					type: GET_LOCAL_PLAN,
+					payload: response.data
+				});
+			});
+		} catch (error) {
+			console.log(error);
+		}
+	};
+}
+
+export function getLocalImg(email) {
+	return async function (dispatch) {
+		console.log('entro 1');
+		try {
+			axios.get(`${url}/menu/img?email=${email}`).then((response) => {
+				console.log(response.data, 'response');
+				return dispatch({
+					type: GET_LOCAL_IMG,
 					payload: response.data
 				});
 			});
@@ -980,6 +1001,74 @@ export function resetAlerts(email, mesa) {
 						payload: response.data
 					});
 				});
+		} catch (error) {
+			console.log(error);
+		}
+	};
+}
+
+export function getChatState(email) {
+	return async function (dispatch) {
+		try {
+			axios
+				.get(`${url}/menu/estado-mensaje?email=${email}`)
+				.then((response) => {
+					console.log(response, 'response get chat');
+					return dispatch({
+						type: GET_CHAT_STATE,
+						payload: response.data
+					});
+				});
+		} catch (error) {
+			console.log(error);
+		}
+	};
+}
+
+export function changeChatState(email) {
+	return async function (dispatch) {
+		try {
+			axios
+				.put(`${url}/menu/estado-mensaje?email=${email}`)
+				.then((response) => {
+					console.log(response, 'put mensaje');
+					return dispatch({
+						type: PUT_CHAT_STATE,
+						payload: response.data
+					});
+				});
+		} catch (error) {
+			console.log(error);
+		}
+	};
+}
+
+export function deleteMensajes(email) {
+	return async function (dispatch) {
+		try {
+			axios.delete(`${url}/menu/chat?email=${email}`).then((response) => {
+				console.log(response, 'put mensaje');
+				return dispatch({
+					type: PUT_CHAT_STATE,
+					payload: response.data
+				});
+			});
+		} catch (error) {
+			console.log(error);
+		}
+	};
+}
+
+export function verMensaje(email) {
+	return async function (dispatch) {
+		try {
+			axios.put(`${url}/menu/ver-mensaje?email=${email}`).then((response) => {
+				console.log(response, 'put mensaje');
+				return dispatch({
+					type: VER_MENSAJE,
+					payload: response.data
+				});
+			});
 		} catch (error) {
 			console.log(error);
 		}
