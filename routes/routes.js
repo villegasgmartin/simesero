@@ -29,7 +29,8 @@ const {
 	getChatLocal,
 	cancelarPlan,
 	postEmailExistenteAdmin,
-	postEmailExistentelocal
+	postEmailExistentelocal,
+	borrarUsuarioLista
 } = require('../controllers/routers');
 
 const { check } = require('express-validator');
@@ -183,6 +184,7 @@ router.put('/new-subimg', [validarJWT], actualizarImgSub)
 
 //actualizar los planes desde el usuario
 router.put('/dashboard/actulizar-plan', [validarJWT], mejorarPlan);
+router.put('/dashboard/borar-lista', [validarJWT], 	borrarUsuarioLista);
 //mostar categorias por local
 
 router.get('/dashboard/categorias', [validarJWT], mostrarCategorias);

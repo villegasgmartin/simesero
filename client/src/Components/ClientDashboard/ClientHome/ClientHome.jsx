@@ -41,7 +41,7 @@ const audio = new Audio(alertSound);
 			setNewAlert(true);		
 		audio.play();
 		} else {
-			setNewAlert(false);
+			setNewAlert(true);
 			console.log('handle if');
 		}
 	};

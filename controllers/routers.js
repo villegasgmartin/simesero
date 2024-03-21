@@ -668,7 +668,7 @@ const confimarPagoPlan = async (req, res) => {
 
 	console.log("email:", email, "plan:", plan)
 	
-	const queryPlan = 'UPDATE usuarios SET plan = ? WHERE email =?';
+const queryPlan = 'UPDATE usuarios SET plan = ? WHERE email =?';
 	const query = 'UPDATE usuarios SET pagoCambioPlan = 1 WHERE email = ?';
 	try {
 		const result = await pool.query(query, [email]);
@@ -678,6 +678,25 @@ const confimarPagoPlan = async (req, res) => {
 		confirmarPlan(email);
 		res.status(200).json({
 			msg: ' Confirmacion de cambio de plan realizada, mail mandado al cliente'
+		});
+	} catch (error) {
+		console.log(error, 'error en obtener datos');
+	}
+};
+
+//borrar usuario de lista de cambiar plan
+const borrarUsuarioLista = async (req, res) => {
+	const emailAdmin = req.email;
+	const {email} = req.body;
+
+	console.log("email:", email)
+	
+	
+	const query = 'UPDATE usuarios SET pagoCambioPlan = 1 WHERE email = ?';
+	try {
+		const result = await pool.query(query, [email]);
+		res.status(200).json({
+			msg: ' usuario eliminado de tabla'
 		});
 	} catch (error) {
 		console.log(error, 'error en obtener datos');
@@ -924,5 +943,6 @@ module.exports = {
 	getChatLocal,
 	cancelarPlan,
 	postEmailExistenteAdmin,
-	postEmailExistentelocal
+	postEmailExistentelocal,
+	borrarUsuarioLista
 };
