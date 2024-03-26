@@ -96,7 +96,7 @@ export default function ClientProfile() {
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(getLocalData(userEmail));
-		// dispatch(getChatState(userEmail));
+		dispatch(getChatState(userEmail));
 	}, []);
 	const dataLocal = useSelector((state) => state.localData.usuario);
 	const newChat = useSelector((state) => state.newChat.msg);

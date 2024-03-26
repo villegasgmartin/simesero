@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import './AdminConfig.css';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+	cancelUserNewPlan,
 	confirmUserNewPlan,
 	confirmUserPayment,
 	getAllClients,
@@ -26,7 +27,7 @@ export default function AdminConfig() {
 	const [planPremiumInput, setPlanPremiumInput] = useState('');
 	// eslint-disable-next-line no-unused-vars
 	const [pageLoaded, setPageLoaded] = useState(false);
-	const [clientsToConfirmPlanState, setClientsToConfirmPlanState] = useState(clientsToConfirmPlan);
+
 
 	const handleChangePremium = (e) => {
 		setPlanPremiumInput(e.target.value);
@@ -112,13 +113,33 @@ export default function AdminConfig() {
 			}
 		});
 	};
+		const handleCancelPlanChange = (e) => {
+			e.preventDefault();
+			swal({
+				title: 'Activar',
+				text: `Esta seguro que desea cancelar el cambio de plan de ${e.target.value} ?`,
+				icon: 'warning',
+				buttons: ['No', 'Si']
+			}).then((respuesta) => {
+				if (respuesta) {
+					dispatch(
+						cancelUserNewPlan({ email: e.target.value, plan: e.target.name })
+					);
+					swal({
+						text: `Se ha cancelado el cambio de plan de ${e.target.value}`,
+						icon: 'success'
+					});
+					setTimeout(function () {
+						window.location.reload(true);
+					}, 2000);
+				} else {
+					swal({ text: 'no se ha cancelado el cambio de plan', icon: 'info' });
+				}
+			});
+		};
+	
 
-	const handleBorrarFila = (id) => {
-		
-		const updatedClients = clientsToConfirmPlanState.filter(client => client.id !== id);
-		console.log(updatedClients, clientsToConfirmPlanState)
-		setClientsToConfirmPlanState(updatedClients);
-	};
+
 	
 
 	useEffect(() => {
@@ -209,10 +230,10 @@ export default function AdminConfig() {
 												<tr key={c.id}>
 													<td>{c.email}</td>
 													{c.plan === 'basic' ? (
-													<td>Premium</td> ) : 
-														( <td>Basico</td>) 
-														
-														}
+														<td>Premium</td>
+													) : (
+														<td>Basico</td>
+													)}
 													{c.pagoCambioPlan === 0 ? (
 														<td>
 															<button
@@ -226,13 +247,15 @@ export default function AdminConfig() {
 													) : (
 														<td>Confirmado</td>
 													)}
-													<td className='borrar'>
-															<button
-																onClick={() => handleBorrarFila(c.id)}
-																className='borar-fila'
-															>
-																X
-															</button>
+													<td className="borrar">
+														<button
+															value={c.email}
+															name={c.plan === 'basic' ? 'premium' : 'basic'}
+															onClick={handleCancelPlanChange}	
+															className="borar-fila"
+														>
+															X
+														</button>
 													</td>
 												</tr>
 											);

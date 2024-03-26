@@ -213,10 +213,11 @@ export default function ClientChat() {
 
 								<div className="chat-right-aside">
 									<div className="chat-main-header">
-										<div className="p-20 b-b">
+										<div className="chat-header">
 											<h3 className="box-title">Sala de Chat </h3>
+											<button className="btn-chat" onClick={handleDeleteChat}>Borrar chat</button>
 										</div>
-										<button onClick={handleDeleteChat}>Borrar chat</button>
+										
 									</div>
 
 									<div className="chat-rbox">

@@ -19,6 +19,7 @@ export default function Subscription() {
 	};
 	const [subscribeOpen, setSubscribeOpen] = useState(false);
 	const handleOpenSubscribe = () => {
+		console.log('subscribe')
 		setSubscribeOpen(true);
 	};
 	const handleCloseSubscribe = () => {

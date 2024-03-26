@@ -45,6 +45,7 @@ export const MODIFY_PRODUCT = 'MODIFY_PRODUCT';
 export const CONFIRM_USER_PAYMENT = 'CONFIRM_USER_PAYMENT';
 export const GET_CLIENTS_TO_CONFIRM_PLAN = 'GET_CLIENTS_TO_CONFIRM_PLAN';
 export const CONFIRM_USER_NEW_PLAN = 'CONFIRM_USER_NEW_PLAN';
+export const CANCEL_USER_NEW_PLAN = 'CANCEL_USER_NEW_PLAN';
 export const SET_PRICE = 'SET_PRICE';
 export const GET_PLAN_TO_MENU = 'GET_PLAN_TO_MENU';
 export const GET_PEDIDO_STATE = 'GET_PEDIDO_STATE';
@@ -237,6 +238,31 @@ export function confirmUserNewPlan(payload) {
 					console.log(payload);
 					return dispatch({
 						type: CONFIRM_USER_NEW_PLAN,
+						payload: response.data
+					});
+				});
+		} catch (error) {
+			console.log(error);
+		}
+	};
+}
+
+export function cancelUserNewPlan(payload) {
+	return async function (dispatch) {
+		try {
+			const token = localStorage.getItem('token'); // Obtén el token almacenado en localStorage
+
+			const headers = {
+				'x-token': token
+			};
+			axios
+				.put(`${url}/admin/borrar-lista`, payload, {
+					headers
+				})
+				.then((response) => {
+					console.log(payload);
+					return dispatch({
+						type: CANCEL_USER_NEW_PLAN,
 						payload: response.data
 					});
 				});

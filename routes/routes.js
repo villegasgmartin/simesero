@@ -109,7 +109,7 @@ router.put('/actualizar-imagen', [validarJWT], cambiarImagenAdmin);
 
 //confirmacion de pago nuevos plan
 router.put('/admin/confirmar-plan', [validarJWT, adminRol], confimarPagoPlan);
-
+router.put('/admin/borrar-lista', [validarJWT], 	borrarUsuarioLista);
 //mostrar planes get
 router.get('/planes', mostrarPlanes);
 
@@ -184,7 +184,7 @@ router.put('/new-subimg', [validarJWT], actualizarImgSub)
 
 //actualizar los planes desde el usuario
 router.put('/dashboard/actulizar-plan', [validarJWT], mejorarPlan);
-router.put('/dashboard/borar-lista', [validarJWT], 	borrarUsuarioLista);
+
 //mostar categorias por local
 
 router.get('/dashboard/categorias', [validarJWT], mostrarCategorias);

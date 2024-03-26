@@ -142,14 +142,14 @@ div.circle a {
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		width: 120px;
+		width: 250px;
 		height: 40px;
 		border: solid orange;
 		background-color: orange;
 		color: #fff;
 		padding: 5px 15px;
 		font-weight: bold;
-
+		margin: 10px 0;
 		border-radius: 10px;
 	}
 

@@ -897,13 +897,13 @@ const estadosMensajes = async (req, res) => {
 		const result = await pool.query('SELECT * FROM mensajes WHERE usuario_email = ? AND estado=?',[email, 0]);
 		const mensajes = result[0].length;
 		if(mensajes > 0) {
-			res.status(200).json({
+			return res.status(200).json({
 				msg:'false',
 				mensaje: mensajes
 			})
 
 		}
-		res.status(200).json({
+		return res.status(200).json({
 			msg:'todos los mensajes leidos'
 		});
 	} catch (error) {
